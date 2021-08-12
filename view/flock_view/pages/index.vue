@@ -1,48 +1,47 @@
 <template>
   <div>
-    <div class=bg>aaaaaa</div>
     <v-row>
       <v-col cols="3">
         <Menu />
       </v-col>
       <v-col cols="9">
+      <div v-for="post in posts" :key="post.id">
         <v-row align="center" class="justify-center">
           <v-col cols="12" sm="8" md="6">
-            <v-card class="logo py-4 d-flex justify-center" color="white">
-              <v-card-title>あそびのタイトル</v-card-title>
-            </v-card>
-            <br>
-            <v-card class="logo py-4 d-flex justify-center" color="white">
-              <v-card-title>あそびのタイトル</v-card-title>
-            </v-card>
-            <br>
-            <v-card class="logo py-4 d-flex justify-center" color="white">
-              <v-card-title>あそびのタイトル</v-card-title>
-            </v-card>
-            <br>
-            <v-card class="logo py-4 d-flex justify-center" color="white">
-              <v-card-title>あそびのタイトル</v-card-title>
-            </v-card>
-            <br>
-            <v-card class="logo py-4 d-flex justify-center" color="white">
-              <v-card-title>あそびのタイトル</v-card-title>
-            </v-card>
-            <br>
-            <v-card class="logo py-4 d-flex justify-center" color="white">
-              <v-card-title>あそびのタイトル</v-card-title>
+            <v-card color="white">
+              <v-card-title>{{ post.title }}</v-card-title>
+              <v-card-text>{{ post.body }}</v-card-text>
             </v-card>
           </v-col>
         </v-row>
+      </div>
       </v-col>
     </v-row>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import Menu from '../components/Menu.vue'
 export default {
   components: {
     Menu
+  },
+  data () {
+    return {
+      posts: '',
+    }
+  },
+  mounted() {
+    const url = 'http://localhost:3000' + '/posts'
+    axios.get(url, {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        this.posts = response.data
+      })
   }
 }
 </script>

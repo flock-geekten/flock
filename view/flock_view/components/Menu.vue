@@ -9,7 +9,6 @@
       <v-list shaped color="blue-grey lighten-5">
         <v-subheader>メニュー</v-subheader>
         <v-list-item-group
-          v-model="selectedItem"
           color="primary"
           >
           <v-list-item

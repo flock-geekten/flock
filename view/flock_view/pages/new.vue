@@ -66,6 +66,10 @@ import axios from 'axios'
         })
     },
     methods: {
+      // テキストの改行したときの空白を改行コードにする
+      space2br: function(text){
+        return text
+      },
       createPost: function(){
         const createPostUrl = 'http://localhost:3000' + '/posts'
         axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -73,7 +77,11 @@ import axios from 'axios'
         params.append('title', this.title);
         params.append('body', this.body);
         axios.post(createPostUrl, params).then(
-          this.$router.push('/')
+          response => {
+            var id = response.data.id
+            // this.$router.push('/articles/'+id)
+            this.$router.push('/')
+          }
         )
       }
     }

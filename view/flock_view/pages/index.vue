@@ -8,7 +8,15 @@
       <div v-for="post in posts" :key="post.id">
         <v-row align="center" class="justify-center">
           <v-col cols="12" sm="8" md="6">
-            <v-card color="white">
+            <v-card 
+              color="white" 
+              :to="{
+                name: 'articles-id',
+                params: {
+                  id: post.id
+                }
+              }"
+            >
               <v-card-title>{{ post.title }}</v-card-title>
               <v-card-text>{{ post.body }}</v-card-text>
             </v-card>

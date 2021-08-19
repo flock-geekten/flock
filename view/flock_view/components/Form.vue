@@ -71,7 +71,7 @@
             rounded
             depressed
             dark
-            @click="dialog = false"
+            @click="changeEditFlag()"
             >
             いいえ
           </v-btn>

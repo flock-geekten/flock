@@ -1,10 +1,10 @@
 <template>
   <div>
-    <v-row>
-      <v-col cols="3">
-        <Menu />
-      </v-col>
-      <v-col cols="9">
+    <!-- <v-row> -->
+    <!--   <v-col cols="3"> -->
+    <!--     <Menu /> -->
+    <!--   </v-col> -->
+    <!--   <v-col cols="9"> -->
       <div v-for="post in posts" :key="post.id">
         <v-row align="center" class="justify-center">
           <v-col cols="12" sm="8" md="6">

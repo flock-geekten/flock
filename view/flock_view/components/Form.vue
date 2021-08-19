@@ -3,7 +3,6 @@
     <v-row>
       <v-col>
         <v-sheet>
-          <p>投稿日：{{ createdAt }} | 最終更新日：{{ updatedAt }}</p>
           <v-text-field
             v-model="post.title"
             label="タイトル"

@@ -3,15 +3,12 @@
     <v-row>
       <v-col>
         <v-sheet>
-          <p>投稿日：{{ createdAt }} | 最終更新日：{{ updatedAt }}</p>
           <v-text-field
             v-model="post.title"
             label="タイトル"
             outlined
             clearable
-            class="mt-15"
           />
-          <br>
           <v-divider />
           <br>
           <v-textarea
@@ -21,7 +18,6 @@
             value="自動生成された文章を入れる"
             outlined
             counter
-            class="mt-5"
           />
           <v-combobox
             v-model="select"
@@ -32,7 +28,6 @@
             multiple
             outlined
             chips
-            class="mt-5"
           />
         </v-sheet>
       </v-col>

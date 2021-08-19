@@ -3,14 +3,7 @@
     <div v-if="editFlag===false">
       <v-row>
         <v-col>
-          <v-sheet>
-            <p>投稿日：{{ createdAt }} | 最終更新日：{{ updatedAt }}</p>
-            <h1>{{ post.title }}</h1>
-            <br>
-            <v-divider />
-            <br>
-            <p>{{ post.body }}</p>
-          </v-sheet>
+          <Article :post="post" />
         </v-col>
       </v-row>
       <v-row>
@@ -49,17 +42,17 @@
 import axios from 'axios'
 import moment from 'moment'
 import Menu from '../../components/Menu.vue'
+import Article from '../../components/Article.vue'
 import Form from '../../components/Form.vue'
 export default {
   components: {
     Menu,
+    Article,
     Form
   },
   data () {
     return {
       post: '',
-      createdAt: '',
-      updatedAt: '',
       editFlag: false
     }
   },
@@ -72,8 +65,6 @@ export default {
     })
       .then(response => {
         this.post = response.data
-        this.createdAt = moment(this.post.created_at).format('YYYY年MM月DD日') 
-        this.updatedAt = moment(this.post.updated).format('YYYY年MM月DD日') 
       })
   },
   methods: {
@@ -83,8 +74,3 @@ export default {
   }
 }
 </script>
-<style>
-p {
-  white-space: pre-wrap;
-}
-</style>

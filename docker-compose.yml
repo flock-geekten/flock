@@ -37,6 +37,21 @@ services:
     # environment:
     #   - VUE_APP_URL=http://localhost
 
+  text_summary:
+    build: ./text_summary
+    container_name: "flock-text-summary-es"
+    ports:
+      - 9000:9000
+    volumes: 
+      - type: bind
+        source: ./text_summary/e_sum
+        target: /home/workspace
+    tty: true
+    
+    # FastAPIを9000ポートで待機
+    # main.pyのapp = FastAPI()をmain:appと表記する
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 9000
+
 volumes:
   mysql-data:
     driver: local

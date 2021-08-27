@@ -74,6 +74,7 @@ import Summary from '../../components/Summary.vue'
         dialog: false,
         select: [],
         tags: [],
+        summary: ''
       }
     },
     mounted() {
@@ -88,8 +89,6 @@ import Summary from '../../components/Summary.vue'
         })
     },
     methods: {
-      // 確認用ページに飛ばす
-      // ここに要約文が入るようにする
       onEditFlag: function(){
         this.editFlag = true
       },
@@ -97,7 +96,16 @@ import Summary from '../../components/Summary.vue'
         this.editFlag = false
       },
       onSummaryFlag: function(){
-        this.summary = "ここが要約文になるよ"
+        // 要約
+        const summaryUrl = this.$summaryBaseUrl + "/2/" + this.body
+        this.$axios.get(summaryUrl, {
+          headers: { 
+            "Content-Type": "application/json", 
+          }
+        })
+          .then(response => {
+            this.summary = response.data
+        })
         // 要約のレスポンスが返ってきたら画面遷移する
         this.summaryFlag = true
       },

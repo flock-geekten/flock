@@ -7,5 +7,11 @@ Rails.application.routes.draw do
     put '/summaries', to: 'summaries#update'
     delete '/summaries', to: 'summaries#destroy'
   end
+
+  namespace 'api' do
+    namespace 'v1' do
+      get "posts" => "posts_api#index"
+    end
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

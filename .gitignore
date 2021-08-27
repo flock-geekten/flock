@@ -1,3 +1,5 @@
 /view/flock_view/node_modules
 /view/flock_view/.nuxt
 /api/Gemfile.lock
+/text_summary/e_sum/__pycache__/
+

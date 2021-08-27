@@ -34,8 +34,8 @@ services:
       - ./view/flock_view:/app/nuxt-project/flock-view
     stdin_open: true
     tty: true
-    # environment:
-    #   - VUE_APP_URL=http://localhost
+    environment:
+      - VUE_APP_URL=http://localhost:3000
 
 volumes:
   mysql-data:

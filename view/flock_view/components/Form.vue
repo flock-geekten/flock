@@ -2,34 +2,32 @@
   <div>
     <v-row>
       <v-col>
-        <v-sheet>
-          <v-text-field
-            v-model="post.title"
-            label="タイトル"
-            outlined
-            clearable
-          />
-          <v-divider />
-          <br>
-          <v-textarea
-            v-model="post.body"
-            height="500"
-            label="本文"
-            value="自動生成された文章を入れる"
-            outlined
-            counter
-          />
-          <v-combobox
-            v-model="select"
-            :items="tags"
-            item-text="name"
-            item-value="id"
-            label="タグ"
-            multiple
-            outlined
-            chips
-          />
-        </v-sheet>
+        <v-text-field
+          v-model="post.title"
+          label="タイトル"
+          outlined
+          clearable
+        />
+        <v-divider />
+        <br>
+        <v-textarea
+          v-model="post.body"
+          height="500"
+          label="本文"
+          value="自動生成された文章を入れる"
+          outlined
+          counter
+        />
+        <v-combobox
+          v-model="select"
+          :items="tags"
+          item-text="name"
+          item-value="id"
+          label="タグ"
+          multiple
+          outlined
+          chips
+        />
       </v-col>
     </v-row>
     <v-row>
@@ -39,9 +37,9 @@
           depressed
           outlined
           dark
-          color="blue"
-          @click="updatePost()"
-          >完了
+          color="blue lighten-1"
+          @click="offEditFlag()"
+          >戻る
         </v-btn>
         <v-btn
           rounded
@@ -51,6 +49,14 @@
           color="red"
           @click="deleteDialog = true"
           >記事の削除
+        </v-btn>
+        <v-btn
+          rounded
+          depressed
+          dark
+          color="blue"
+          @click="offEditFlag();onSummaryFlag()"
+          >編集
         </v-btn>
       </v-col>
     </v-row>
@@ -71,7 +77,7 @@
             rounded
             depressed
             dark
-            @click="changeEditFlag()"
+            @click="deleteDialog=false"
             >
             いいえ
           </v-btn>
@@ -91,7 +97,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import moment from 'moment'
   export default {
     props: {
@@ -99,6 +104,8 @@ import moment from 'moment'
     },
     data () {
       return {
+        title: '',
+        body: '',
         select: [],
         tags: [],
         createdAt: moment(this.post.created_at).format('YYYY年MM月DD日'),
@@ -107,8 +114,8 @@ import moment from 'moment'
       }
     },
     mounted() {
-      const url = 'http://localhost:3000' + '/tags'
-      axios.get(url, {
+      const url = '/tags'
+      this.$axios.get(url, {
         headers: { 
           "Content-Type": "application/json", 
         }
@@ -118,21 +125,22 @@ import moment from 'moment'
         })
     },
     methods: {
-      changeEditFlag: function(){
-        this.$emit('changeEditFlag')
+      onEditFlag: function(){
+        this.$emit('onEditFlag')
       },
-      // 編集メソッド
-      updatePost: function(){
-        const updatePostUrl = 'http://localhost:3000' + '/posts/' + this.post.id + '?title=' + this.post.title + '&body=' + this.post.body;
-        axios.defaults.headers.common['Content-Type'] = 'application/json';
-        axios.put(updatePostUrl).then(
-          this.changeEditFlag()
-        )
+      offEditFlag: function(){
+        this.$emit('offEditFlag')
+      },
+      onSummaryFlag: function(){
+        this.$emit('onSummaryFlag')
+      },
+      offSummaryFlag: function(){
+        this.$emit('offSummaryFlag')
       },
       // 削除メソッド
       destroyPost: function(){
-        const destroyPostUrl = 'http://localhost:3000' + '/posts/' + this.post.id
-        axios.delete(destroyPostUrl).then(
+        const destroyPostUrl = '/posts/' + this.post.id
+        this.$axios.delete(destroyPostUrl).then(
           this.$router.push('/')
         )
       }

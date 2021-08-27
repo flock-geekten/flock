@@ -10,6 +10,7 @@
           <v-col cols="12" sm="8" md="6">
             <v-card 
               color="white" 
+              flat
               :to="{
                 name: 'articles-id',
                 params: {
@@ -29,7 +30,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Menu from '../components/Menu.vue'
 export default {
   components: {
@@ -41,8 +41,7 @@ export default {
     }
   },
   mounted() {
-    const url = 'http://localhost:3000' + '/posts'
-    axios.get(url, {
+    this.$axios.get('/posts', {
       headers: { 
         "Content-Type": "application/json", 
       }

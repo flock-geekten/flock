@@ -47,7 +47,10 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    // baseURL: 'http://localhost:3000'
+    baseURL: process.env.VUE_APP_URL
+  },
   // momentの日本設定
   moment: {
     locales: ['ja']

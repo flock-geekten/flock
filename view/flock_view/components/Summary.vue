@@ -97,6 +97,7 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     props: {
       mode: Number, // 1: 新規投稿, 2: 投稿編集
@@ -125,16 +126,26 @@
       },
       // 記事の投稿
       createPost: function(){
-        const createPostUrl = '/posts?title=' + this.title + '&body=' + this.body
-        this.$axios.defaults.headers.common['Content-Type'] = 'application/json';
-        this.$axios.post(createPostUrl).then(
+        const createPostUrl = this.$apiBaseUrl + '/posts'
+        axios.defaults.headers.common['Content-Type'] = 'application/json';
+        var params = new URLSearchParams();
+        params.append('title', this.title);
+        params.append('body', this.body);
+        axios.post(createPostUrl, params).then(
           response => {
             var id = response.data.id
-            const createSummaryUrl = '/posts/' + id + '/summaries?content=' + this.summary + '&post_id=' + id
-            this.$axios.post(createSummaryUrl)
+            this.createSummary(id, this.summary)
             this.$router.push('/articles/confirm')
           }
         )
+      },
+      // 要約文の作成
+      createSummary: function(id, summary){
+        const createSummaryUrl = this.$apiBaseUrl + '/posts/' + id + '/summaries'
+        var params = new URLSearchParams();
+        params.append('content', summary);
+        params.append('post_id', id);
+        axios.post(createSummaryUrl, params)
       },
       // 記事の編集
       updatePost: function(){

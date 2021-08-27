@@ -14,12 +14,12 @@
               :to="{
                 name: 'articles-id',
                 params: {
-                  id: post.id
+                  id: post.post.id
                 }
               }"
             >
-              <v-card-title>{{ post.title }}</v-card-title>
-              <v-card-text>{{ post.body }}</v-card-text>
+              <v-card-title>{{ post.post.title }}</v-card-title>
+              <v-card-text>{{ post.summary.content }}</v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -41,7 +41,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get('/posts', {
+    this.$axios.get('/api/v1/posts', {
       headers: { 
         "Content-Type": "application/json", 
       }

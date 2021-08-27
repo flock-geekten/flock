@@ -1,0 +1,21 @@
+# Correction of notational errors
+neologdn
+
+# From text to sentences
+ja-sentence-segmenter
+
+# From sentence to words
+mecab-python3
+mecabpr
+
+# Deleting Emoji
+emoji
+
+# LexRank model
+sumy
+numpy
+tinysegmenter
+
+# FastAPI
+uvicorn
+fastapi

@@ -1,4 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
+const envPath = `config/.env.${process.env.ENV || 'local'}`
+require('dotenv').config({path: envPath})
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -22,13 +24,22 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  env: {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messageSenderId: process.env.MESSAGE_SENDER_ID,
+    appId: process.env.APP_ID,
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/constants.js' }
+    { src: '~/plugins/constants.js' },
+    { src: '~/plugins/firebase.js' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

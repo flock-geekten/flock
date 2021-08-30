@@ -1,9 +1,10 @@
 <template>
   <div>
-    {{ user }}
+    <UserInfo :user="user" />
+    <br>
     <v-sheet class="pa-15">
       <div v-if="editFlag">
-        <Form 
+        <Form
           :post="post"
           @onEditFlag="onEditFlag"
           @offEditFlag="offEditFlag"
@@ -12,7 +13,7 @@
           />
       </div>
       <div v-else-if="summaryFlag">
-        <Summary 
+        <Summary
           :mode="2"
           :id="post.id"
           :title="post.title"
@@ -33,6 +34,7 @@
         <v-row>
           <v-col>
             <v-btn
+              v-if="this.$store.state.user.userId === this.user.id"
               rounded
               depressed
               outlined
@@ -63,18 +65,20 @@ import Menu from '../../components/Menu.vue'
 import Article from '../../components/Article.vue'
 import Summary from '../../components/Summary.vue'
 import Form from '../../components/Form.vue'
+import UserInfo from '../../components/UserInfo.vue'
 export default {
   components: {
     Menu,
     Article,
     Form,
-    Summary
+    Summary,
+    UserInfo
   },
   data () {
     return {
-      post: '',
-      user: '',
-      summary: '',
+      post: {},
+      user: {},
+      summary: {},
       editFlag: false,
       summaryFlag: false,
     }
@@ -90,16 +94,6 @@ export default {
         this.post = response.data.post
         this.user = response.data.user
         this.summary = response.data.summary
-        // 要約文の取得
-        // const summaryUrl = '/posts/' + this.post.id + '/summaries'
-        // this.$axios.get(summaryUrl, {
-        //   headers: { 
-        //     "Content-Type": "application/json", 
-        //   }
-        // })
-        // .then(response => {
-        //   this.summary = response.data[0]
-        // })
     })
   },
   methods: {

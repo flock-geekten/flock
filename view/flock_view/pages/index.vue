@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Menu from '../components/Menu.vue'
 export default {
   components: {
@@ -62,6 +63,15 @@ export default {
     }
   },
   mounted() {
+    if (this.$store.state.user.uid !== ''){
+      const currentUserUrl = this.$apiBaseUrl + '/api/v1/current_user'
+      var params = new URLSearchParams();
+      params.append('uid', this.$store.state.user.uid);
+      axios.post(currentUserUrl, params)
+        .then((res) => {
+          this.$store.commit('user/setUser', res.data[0])
+        })
+    }
     this.$axios.get('/api/v1/posts', {
       headers: { 
         "Content-Type": "application/json", 

@@ -12,7 +12,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    render json: @user
+    @posts = @user.posts
+    @likes = @user.likes
+    render json: { user: @user, posts: @posts, likes: @likes }
   end
 
   def create

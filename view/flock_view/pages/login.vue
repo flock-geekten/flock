@@ -1,6 +1,6 @@
 <template>
   <div>
-  <v-card max-width="500" class="mt-10 mx-auto">
+  <v-card flat max-width="500" class="mt-10 mx-auto">
     <v-snackbar
       v-model="snackbar"
       color="error"
@@ -9,6 +9,7 @@
     >
       {{ message }}
     </v-snackbar>
+    <v-card-title>ログイン</v-card-title>
     <v-card-text>
       <v-container>
         <v-row>
@@ -33,11 +34,12 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <div class="w-100 px-4">
+      <div class="w-100 px-4" style="text-align:center">
         <v-btn
-          x-large
+          rounded
+          depressed
+          dark
           color="blue"
-          block
           class="mx-auto mb-5"
           @click="login()"
         >

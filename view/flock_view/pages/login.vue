@@ -56,6 +56,7 @@
 
 <script>
 import firebase from '~/plugins/firebase'
+import axios from 'axios'
 
 export default {
   data: () => {
@@ -73,6 +74,14 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then((res) => {
           this.$store.commit('user/setUid', res.user.uid)
+          const url = this.$apiBaseUrl + '/api/v1/current_user'
+          var params = new URLSearchParams();
+          params.append('uid', res.user.uid);
+          axios.post(url, params).then((response) => {
+            console.log(response.data)
+            this.$store.commit('user/setUser', response.data)
+            console.log(this.$store.state.user.user)
+          })
           this.$store.commit('user/login')
           this.$router.push('/')
         })

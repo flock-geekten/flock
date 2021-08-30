@@ -4,11 +4,14 @@
     <br>
     <v-divider />
     <br>
+    <br>
+    <p>{{ post.body }}</p>
+
+    <br><br>
+    要約
     <v-sheet color="#EEEEEE" class="pa-5">
       <p>{{ summary.content }}</p>
     </v-sheet>
-    <br>
-    <p>{{ post.body }}</p>
   </div>
 </template>
 

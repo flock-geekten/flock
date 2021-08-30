@@ -14,7 +14,8 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = Post.new(post_params)
+    @user_id = User.where(uid: params[:uid]).first.id
+    @post = Post.new(title: params[:title], body: params[:body], user_id: @user_id)
 
     if @post.save
       render json: @post, status: :created, location: @post

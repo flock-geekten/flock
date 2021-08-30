@@ -131,6 +131,7 @@
         var params = new URLSearchParams();
         params.append('title', this.title);
         params.append('body', this.body);
+        params.append('uid', this.$store.state.user.uid);
         axios.post(createPostUrl, params).then(
           response => {
             var id = response.data.id

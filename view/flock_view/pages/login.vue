@@ -1,4 +1,5 @@
 <template>
+  <div>
   <v-card max-width="500" class="mt-10 mx-auto">
     <v-snackbar
       v-model="snackbar"
@@ -50,6 +51,7 @@
       </nuxt-link>
     </div>
   </v-card>
+  </div>
 </template>
 
 <script>
@@ -69,9 +71,9 @@ export default {
     login() {
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          // Signed in
-          // ...
+        .then((res) => {
+          this.$store.commit('user/setUid', res.user.uid)
+          this.$store.commit('user/login')
           this.$router.push('/')
         })
         .catch(() => {

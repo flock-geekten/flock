@@ -95,7 +95,7 @@ import Summary from '../../components/Summary.vue'
       offEditFlag: function(){
         this.editFlag = false
       },
-      onSummaryFlag: function(){
+     onSummaryFlag: function(){
         // 要約
         const summaryUrl = this.$summaryBaseUrl + "/2/" + this.body
         this.$axios.get(summaryUrl, {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{ user }}
     <v-sheet class="pa-15">
       <div v-if="editFlag">
         <Form 
@@ -72,30 +73,33 @@ export default {
   data () {
     return {
       post: '',
+      user: '',
       summary: '',
       editFlag: false,
       summaryFlag: false,
     }
   },
   mounted() {
-    const postUrl = '/posts/' + this.$route.params.id
+    const postUrl = '/api/v1/posts/' + this.$route.params.id
     this.$axios.get(postUrl, {
       headers: { 
         "Content-Type": "application/json", 
       }
     })
       .then(response => {
-        this.post = response.data
+        this.post = response.data.post
+        this.user = response.data.user
+        this.summary = response.data.summary
         // 要約文の取得
-        const summaryUrl = '/posts/' + this.post.id + '/summaries'
-        this.$axios.get(summaryUrl, {
-          headers: { 
-            "Content-Type": "application/json", 
-          }
-        })
-        .then(response => {
-          this.summary = response.data[0]
-        })
+        // const summaryUrl = '/posts/' + this.post.id + '/summaries'
+        // this.$axios.get(summaryUrl, {
+        //   headers: { 
+        //     "Content-Type": "application/json", 
+        //   }
+        // })
+        // .then(response => {
+        //   this.summary = response.data[0]
+        // })
     })
   },
   methods: {

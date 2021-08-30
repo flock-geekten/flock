@@ -16,7 +16,8 @@
     "firebase": "^9.0.0",
     "moment": "^2.29.1",
     "nuxt": "^2.15.7",
-    "vuetify": "^2.5.5"
+    "vuetify": "^2.5.5",
+    "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.12.1"

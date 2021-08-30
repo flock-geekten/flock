@@ -1,4 +1,5 @@
 <template>
+  <div> 
   <v-card max-width="500" class="p-4 mt-10 mx-auto">
     <v-snackbar
       v-model="snackbar"
@@ -11,6 +12,13 @@
     <v-card-text>
       <v-container>
         <v-row>
+          <v-col cols="12">
+            <v-text-field
+              v-model="name"
+              label="名前"
+              required
+            />
+          </v-col>
           <v-col cols="12">
             <v-text-field
               v-model="email"
@@ -45,14 +53,17 @@
       </div>
     </v-card-actions>
   </v-card>
+  </div>
 </template>
 
 <script>
 import firebase from '~/plugins/firebase'
+import axios from 'axios'
 
 export default {
   data: () => {
     return {
+      name: '',
       email: '',
       password: '',
       isPasswordShow: false,
@@ -65,12 +76,16 @@ export default {
       firebase.auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((res) => {
-          const params = { token: res.user.za, registration: { email: res.user.email } }
-          const url = '/api/v1/users/registrations'
-          this.$axios.post(url, params)
+          const url = this.$apiBaseUrl + '/users'
+          var params = new URLSearchParams();
+          params.append('name', this.name);
+          params.append('email', res.user.email);
+          params.append('uid', res.user.uid);
+          this.$store.commit('user/setUid', res.user.uid)
+          this.$store.commit('user/login')
+          axios.post(url, params)
             .then((res) => {
-              console.log(res)
-              this.$router.push("/")
+              this.$router.push('/')
             })
             .catch((error) => {
               console.log(error)

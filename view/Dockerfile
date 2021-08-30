@@ -12,5 +12,6 @@ RUN npm install -g create-nuxt-app
 RUN npm install firebase
 RUN npm install firebase@9.0.0
 RUN npm install -g firebase-tools
+RUN npm install vuex-persistedstate
 RUN yarn add firebase
 RUN yarn add @nuxtjs/dotenv

@@ -15,7 +15,12 @@ class Api::V1::PostsApiController < ApplicationController
     @post = Post.find(params[:post_id])
     @user = @post.user
     @summary = @post.summary
-    render json: { post: @post, user: @user, summary: @summary }
+    @comments = @post.comments
+    comments_with_users = []
+    for comment in @comments
+      comments_with_users << { comment: comment, user: comment.user }
+    end
+    render json: { post: @post, user: @user, summary: @summary, comments: comments_with_users }
   end
 
 end

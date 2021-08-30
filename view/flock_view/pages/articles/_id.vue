@@ -48,6 +48,12 @@
       </div>
     </v-sheet>
     <br>
+    <Comments 
+      :comments="comments" 
+      :postId="post.id"
+      @reload="reload"
+    />
+    <br>
     <v-btn
       rounded
       depressed
@@ -64,6 +70,7 @@ import moment from 'moment'
 import Menu from '../../components/Menu.vue'
 import Article from '../../components/Article.vue'
 import Summary from '../../components/Summary.vue'
+import Comments from '../../components/Comments.vue'
 import Form from '../../components/Form.vue'
 import UserInfo from '../../components/UserInfo.vue'
 export default {
@@ -71,6 +78,7 @@ export default {
     Menu,
     Article,
     Form,
+    Comments,
     Summary,
     UserInfo
   },
@@ -79,6 +87,7 @@ export default {
       post: {},
       user: {},
       summary: {},
+      comments: '',
       editFlag: false,
       summaryFlag: false,
     }
@@ -94,9 +103,24 @@ export default {
         this.post = response.data.post
         this.user = response.data.user
         this.summary = response.data.summary
+        this.comments = response.data.comments
     })
   },
   methods: {
+    reload: function(){
+      const postUrl = '/api/v1/posts/' + this.$route.params.id
+      this.$axios.get(postUrl, {
+        headers: { 
+          "Content-Type": "application/json", 
+        }
+      })
+        .then(response => {
+          this.post = response.data.post
+          this.user = response.data.user
+          this.summary = response.data.summary
+          this.comments = response.data.comments
+      })
+    },
     onEditFlag: function(){
       this.editFlag = true
     },

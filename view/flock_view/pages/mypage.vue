@@ -1,5 +1,9 @@
 <template>
-  <p>{{ currentUser.name }}</p>
+  <div>
+    <p>{{ currentUser }}</p>
+    <p>{{ posts }}</p>
+    <p>{{ likes }}</p>
+  </div>
 </template>
 <script>
 import axios from 'axios'
@@ -10,6 +14,8 @@ export default {
     return {
       message: '',
       currentUser: '',
+      posts: '',
+      likes: '',
     }
   },
 
@@ -21,7 +27,9 @@ export default {
       params.append('uid', this.$store.state.user.uid);
       axios.post(currentUserUrl, params)
         .then((res) => {
-          this.currentUser = res.data[0]
+          this.currentUser = res.data.user
+          this.posts = res.data.posts
+          this.likes = res.data.likes
         })
     }
   }

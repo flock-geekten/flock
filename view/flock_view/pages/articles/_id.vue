@@ -33,19 +33,42 @@
         </v-row>
         <v-row>
           <v-col>
-            <v-btn
-              v-if="this.$store.state.user.userId === this.user.id"
-              rounded
-              depressed
-              outlined
-              dark
-              color="blue"
-              @click="onEditFlag()"
-              >編集
-            </v-btn>
+            <div v-if="this.$store.state.user.userId === this.user.id">
+              <v-btn
+                rounded
+                depressed
+                outlined
+                dark
+                color="blue"
+                @click="onEditFlag()"
+                >編集
+              </v-btn>
+            </div>
+            <div v-else-if="this.$store.state.user.userId !== this.user.id &&this.$store.state.user.loggedIn">
+              <v-btn
+                v-if="like===0"
+                rounded
+                depressed
+                dark
+                outlined
+                color="blue"
+                @click="createLike()"
+                >いいね
+              </v-btn>
+              <v-btn
+                v-if="like===1"
+                rounded
+                depressed
+                dark
+                color="blue"
+                @click="destroyLike()"
+                >いいねをはずす
+              </v-btn>
+            </div>
           </v-col>
         </v-row>
       </div>
+
     </v-sheet>
     <br>
     <Comments 
@@ -67,6 +90,7 @@
 
 <script>
 import moment from 'moment'
+import axios from 'axios'
 import Menu from '../../components/Menu.vue'
 import Article from '../../components/Article.vue'
 import Summary from '../../components/Summary.vue'
@@ -87,9 +111,10 @@ export default {
       post: {},
       user: {},
       summary: {},
-      comments: '',
+      comments: [],
       editFlag: false,
       summaryFlag: false,
+      like: '',
     }
   },
   mounted() {
@@ -104,6 +129,7 @@ export default {
         this.user = response.data.user
         this.summary = response.data.summary
         this.comments = response.data.comments
+        this.isLike()
     })
   },
   methods: {
@@ -119,6 +145,33 @@ export default {
           this.user = response.data.user
           this.summary = response.data.summary
           this.comments = response.data.comments
+      })
+    },
+    isLike: function(){
+      const isLikeUrl = this.$apiBaseUrl + '/is_like'
+      var params = new URLSearchParams();
+      params.append('user_id', this.$store.state.user.userId);
+      params.append('post_id', this.post.id);
+      axios.post(isLikeUrl, params)
+        .then((res) => {
+          this.like = res.data.is_like
+      })
+    },
+    createLike: function(){
+      const createLikeUrl = this.$apiBaseUrl + '/likes'
+      var params = new URLSearchParams();
+      params.append('user_id', this.$store.state.user.userId);
+      params.append('post_id', this.post.id);
+      axios.post(createLikeUrl, params)
+        .then((res) => {
+          this.like = res.data.is_like
+      })
+    },
+    destroyLike: function(){
+      const destroyLikeUrl = this.$apiBaseUrl + '/likes?user_id=' + this.$store.state.user.userId + '&post_id=' + this.post.id
+      axios.delete(destroyLikeUrl)
+        .then((res) => {
+          this.like = res.data.is_like
       })
     },
     onEditFlag: function(){

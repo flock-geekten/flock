@@ -40,6 +40,27 @@ export default {
       posts: '',
     }
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.user.loggedIn
+    }
+  },
+  methods: {
+    fetchContents(){
+      const url = "/api/v1/posts"
+      this.$axios.get(url)
+        .then((res) => {
+          this.posts = res.data
+        })
+    }
+  },
+  watch: {
+    loggedIn: function() {
+      if (this.loggedIn) {
+        this.fetchContents()
+      }
+    }
+  },
   mounted() {
     this.$axios.get('/api/v1/posts', {
       headers: { 

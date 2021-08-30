@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :users
   resources :post_tags
   resources :tags
   resources :posts do
@@ -10,7 +11,9 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      get "posts" => "posts_api#index"
+      get 'posts' => 'posts_api#index'
+      get 'posts/:post_id' => 'posts_api#show'
+      post 'current_user' => 'users#current_user'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

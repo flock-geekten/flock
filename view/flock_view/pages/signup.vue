@@ -93,23 +93,13 @@ export default {
           this.$store.commit('user/login')
           axios.post(url, params)
             .then((res) => {
+              this.$store.commit('user/setUser', res.data)
               this.$router.push('/')
             })
             .catch((error) => {
               console.log(error)
             })
         })
-    },
-    login() {
-      firebase.auth()
-        .createUserWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          this.$router.push('/')
-        })
-        .catch((error) => {
-          this.setErrorMessage(error.code)
-          this.snackbar = true
-        });
     },
     setErrorMessage(errorCode) {
       switch (errorCode) {

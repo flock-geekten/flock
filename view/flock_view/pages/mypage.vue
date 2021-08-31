@@ -1,8 +1,15 @@
 <template>
   <div>
+    <h1>ユーザー情報</h1>
     <p>{{ currentUser }}</p>
+    <h1>投稿情報</h1>
     <p>{{ posts }}</p>
+    <h1>いいね情報</h1>
     <p>{{ likes }}</p>
+    <h1>フォロー</h1>
+    <p>{{ followings }}</p>
+    <h1>フォロワー</h1>
+    <p>{{ followers }}</p>
   </div>
 </template>
 <script>
@@ -16,6 +23,8 @@ export default {
       currentUser: '',
       posts: '',
       likes: '',
+      followings: '',
+      followers: '',
     }
   },
 
@@ -30,6 +39,8 @@ export default {
           this.currentUser = res.data.user
           this.posts = res.data.posts
           this.likes = res.data.likes
+          this.followings = res.data.followings
+          this.followers = res.data.followers
         })
     }
   }

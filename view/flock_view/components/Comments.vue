@@ -31,7 +31,8 @@
         <div v-for="comment in comments" :key="comment.id">
           <v-divider />
           <v-card flat class="my-5">
-            <p><nuxt-link :to="{ name: 'users-id', params: { id: comment.user.id } }">{{ comment.user.name }}</nuxt-link></p>
+            <p v-if="currentUserId === comment.user.id">{{ comment.user.name }}</p>
+            <p v-else><nuxt-link :to="{ name: 'users-id', params: { id: comment.user.id } }">{{ comment.user.name }}</nuxt-link></p>
             <v-card-text>{{ comment.comment.body }}</v-card-text>
             <div style="text-align:right">
               <v-card-text>{{ dateFormat(comment.comment.created_at) }}</v-card-text>
@@ -53,7 +54,8 @@ import axios from 'axios'
     },
     data () {
       return {
-        body: ''
+        body: '',
+        currentUserId: this.$store.state.user.userId
       }
     },
     methods: {

@@ -9,9 +9,16 @@ Rails.application.routes.draw do
     put '/summaries', to: 'summaries#update'
     delete '/summaries', to: 'summaries#destroy'
   end
+  
+  # いいね機能まわり
   post '/likes', to: 'likes#create'
   delete '/likes', to: 'likes#destroy'
   post '/is_like', to: 'likes#is_likes'
+
+  # フォロー機能まわり
+  post '/follow', to: 'relationships#follow'
+  delete '/unfollow', to: 'relationships#unfollow'
+  post '/is_follow', to: 'relationships#is_follow'
 
   namespace 'api' do
     namespace 'v1' do

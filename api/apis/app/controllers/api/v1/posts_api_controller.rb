@@ -2,7 +2,7 @@ class Api::V1::PostsApiController < ApplicationController
 
   def index
     # 全ての投稿を要約と共に取得する
-    @posts = Post.all
+    @posts = Post.order("RAND()").limit(20)
     post_summary_dict = []
     for post in @posts
       summary = post.summary

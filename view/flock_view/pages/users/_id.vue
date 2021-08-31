@@ -21,17 +21,102 @@
         >フォローをはずす
       </v-btn>
     </div>
-    
-    <h1>ユーザー情報</h1>
-    <p>{{ user }}</p>
-    <h1>投稿情報</h1>
-    <p>{{ posts }}</p>
-    <h1>いいね情報</h1>
-    <p>{{ likes }}</p>
-    <h1>フォロー</h1>
-    <p>{{ followings }}</p>
-    <h1>フォロワー</h1>
-    <p>{{ followers }}</p>
+    <h1 class="ma-5">
+      {{ user.name }}
+    </h1>
+    <br>
+    <v-card flat>
+      <v-toolbar
+        color="white"
+        flat
+        >
+        <template v-slot:extension>
+          <v-tabs
+            v-model="tab"
+            align-with-title
+            >
+            <v-tabs-slider color="blue"></v-tabs-slider>
+
+            <v-tab
+              v-for="item in items"
+              :key="item"
+              >
+              {{ item }}
+            </v-tab>
+          </v-tabs>
+        </template>
+      </v-toolbar>
+
+      <v-tabs-items v-model="tab">
+
+        <!-- 投稿情報 -->
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <div v-for="post in posts" :key="post.id">
+                <v-card 
+                   flat 
+                   color="grey lighten-3" 
+                   class="pa-5"
+                   :to="{
+                        name: 'articles-id',
+                        params: {
+                        id: post.post.id
+                        }
+                        }"
+                   >
+                   {{ post.summary.content }}
+                </v-card>
+                  <br>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+
+        <!-- いいね情報 -->
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <div v-for="like in likes" :key="like.id">
+                <v-card 
+                   flat 
+                   color="grey lighten-3" 
+                   class="pa-5"
+                   :to="{
+                        name: 'articles-id',
+                        params: {
+                        id: like.post.id
+                        }
+                        }"
+                   >
+                   {{ like.summary.content }}
+                </v-card>
+                  <br>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+
+        <!-- フォロー情報 -->
+        <v-tab-item>
+          <v-card flat class="px-10 pt-5">
+            <div v-for="following in followings" :key="following.id">
+              <p><nuxt-link :to="{ name: 'users-id', params: { id: following.id } }">{{ following.name }}</nuxt-link></p>
+            </div>
+          </v-card>
+        </v-tab-item>
+
+        <!-- フォロワー情報 -->
+        <v-tab-item>
+          <v-card flat class="px-10 pt-5">
+            <div v-for="follower in followers" :key="follower.id">
+              <p><nuxt-link :to="{ name: 'users-id', params: { id: follower.id } }">{{ follower.name }}</nuxt-link></p>
+            </div>
+          </v-card>
+        </v-tab-item>
+
+      </v-tabs-items>
+    </v-card>
   </div>
 </template>
 
@@ -46,6 +131,10 @@ export default {
       follow: '',
       followings: '',
       followers: '',
+      tab: null,
+      items: [
+        '投稿', 'いいね', 'フォロー', 'フォロワー',
+      ],
     }
   },
   mounted() {

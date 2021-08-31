@@ -81,7 +81,7 @@ export default {
           params.append('uid', res.user.uid);
           axios.post(url, params).then((response) => {
             console.log(response.data)
-            this.$store.commit('user/setUser', response.data)
+            this.$store.commit('user/setUser', response.data.user)
             console.log(this.$store.state.user.user)
           })
           this.$store.commit('user/login')

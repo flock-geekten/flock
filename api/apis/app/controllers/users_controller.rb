@@ -14,7 +14,9 @@ class UsersController < ApplicationController
   def show
     @posts = @user.posts
     @likes = @user.likes
-    render json: { user: @user, posts: @posts, likes: @likes }
+    @followings = @user.followings
+    @followers = @user.followers
+    render json: { user: @user, posts: @posts, likes: @likes, followings: @followings, followers: @followers }
   end
 
   def create

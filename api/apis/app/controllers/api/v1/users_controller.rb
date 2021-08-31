@@ -4,7 +4,9 @@ class Api::V1::UsersController < ApplicationController
     @user = User.where(uid: params[:uid]).first
     @posts = @user.posts
     @likes = @user.likes
-    render json: { user: @user, posts: @posts, likes: @likes }
+    @followings = @user.followings
+    @followers = @user.followers
+    render json: { user: @user, posts: @posts, likes: @likes, followings: @followings, followers: @followers }
   end
 
 end

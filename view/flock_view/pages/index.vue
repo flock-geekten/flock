@@ -1,30 +1,25 @@
 <template>
   <div>
-    <!-- <v-row> -->
-    <!--   <v-col cols="3"> -->
-    <!--     <Menu /> -->
-    <!--   </v-col> -->
-    <!--   <v-col cols="9"> -->
-      <div v-for="post in posts" :key="post.id">
-        <v-row align="center" class="justify-center">
-          <v-col cols="12" sm="8" md="6">
-            <v-card 
-              color="white" 
-              flat
-              :to="{
-                name: 'articles-id',
-                params: {
-                  id: post.post.id
-                }
-              }"
-            >
-              <v-card-title>{{ post.post.title }}</v-card-title>
-              <v-card-text>{{ post.summary.content }}</v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
-      </v-col>
+    <div v-for="post in posts" :key="post.id">
+      <v-row align="center" class="justify-center">
+        <v-col cols="12">
+          <v-card 
+               color="white" 
+               flat
+               :to="{
+                      name: 'articles-id',
+                      params: {
+                      id: post.post.id
+                      }
+                      }"
+               >
+               <v-card-title>{{ post.post.title }}</v-card-title>
+               <v-card-text>{{ post.summary.content }}</v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+    </v-col>
     </v-row>
   </div>
 </template>

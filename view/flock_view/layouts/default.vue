@@ -1,9 +1,17 @@
 <template>
   <v-app dark>
     <v-main>
+      <div v-if="this.$route.path === '/'" class="index-header">
+        <div class="index-header__hello-image">
+        </div>
+      </div>
       <v-container>
         <Header />
-        <Nuxt />
+        <v-layout align-center justify-center>
+          <div style="width:800px">
+            <Nuxt />
+          </div>
+        </v-layout>
       </v-container>
     </v-main>
     <v-footer
@@ -36,5 +44,29 @@ export default {
 <style>
 .v-main__wrap{
   background-color: #FAFAFA;
+}
+.index-header {
+  position: relative;
+  overflow: hidden;
+  min-width: 1160px;
+  min-height: 400px;
+}
+.index-header__hello-image {
+    position: center;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background-image: url("~/assets/sky.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.index-header__slogan{
+  margin-top: 40px;
+  color: #2e2e3b;
+  font-size: 28px;
+  font-weight: 700;
+  text-align: center;
 }
 </style>

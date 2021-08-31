@@ -55,15 +55,15 @@
                 @click="createLike()"
                 >いいね
               </v-btn>
-              <v-btn
-                v-if="like===1"
-                rounded
-                depressed
-                dark
-                color="blue"
-                @click="destroyLike()"
-                >いいねをはずす
-              </v-btn>
+                <v-btn
+                  v-if="like===1"
+                  rounded
+                  depressed
+                  dark
+                  color="blue"
+                  @click="destroyLike()"
+                  >いいねをはずす
+                </v-btn>
             </div>
           </v-col>
         </v-row>
@@ -75,7 +75,7 @@
       :comments="comments" 
       :postId="post.id"
       @reload="reload"
-    />
+      />
     <br>
     <v-btn
       rounded

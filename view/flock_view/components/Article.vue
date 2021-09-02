@@ -2,8 +2,6 @@
   <div>
     <h1>{{ post.title }}</h1>
     <br>
-    <v-divider />
-    <br>
     <br>
     <p>{{ post.body }}</p>
 
@@ -27,7 +25,7 @@ import moment from 'moment'
         createdAt: moment(this.post.created_at).format('YYYY年MM月DD日'),
         updatedAt: moment(this.post.updated_at).format('YYYY年MM月DD日'),
         summary: '',
-        editSummaryFlag: false
+        editSummaryFlag: false,
       }
     },
     methods: {

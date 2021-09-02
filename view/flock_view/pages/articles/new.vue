@@ -15,11 +15,11 @@
            />
       </div>
       <div v-else>
-        <h1>記事の投稿</h1>
         <v-text-field
           v-model="title"
           label="タイトル"
-          outlined
+          flat
+          solo
           clearable
           class="mt-15"
           />
@@ -28,7 +28,8 @@
             height="1200"
             label="本文"
             value="自動生成された文章を入れる"
-            outlined
+            flat
+            solo
             counter
             class="mt-5"
             />
@@ -115,3 +116,9 @@ import Summary from '../../components/Summary.vue'
     }
   }
 </script>
+
+<style>
+.v-text-field.v-text-field--solo .v-input__control input{
+  font-size: xx-large;
+}
+</style>

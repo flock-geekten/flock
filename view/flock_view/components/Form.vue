@@ -5,7 +5,8 @@
         <v-text-field
           v-model="post.title"
           label="タイトル"
-          outlined
+          flat
+          solo
           clearable
         />
         <v-divider />
@@ -15,19 +16,21 @@
           height="500"
           label="本文"
           value="自動生成された文章を入れる"
-          outlined
+          flat
+          solo
+          clearable
           counter
         />
-        <v-combobox
-          v-model="select"
-          :items="tags"
-          item-text="name"
-          item-value="id"
-          label="タグ"
-          multiple
-          outlined
-          chips
-        />
+        <!-- <v-combobox -->
+        <!--   v-model="select" -->
+        <!--   :items="tags" -->
+        <!--   item-text="name" -->
+        <!--   item-value="id" -->
+        <!--   label="タグ" -->
+        <!--   multiple -->
+        <!--   outlined -->
+        <!--   chips -->
+        <!-- /> -->
       </v-col>
     </v-row>
     <v-row>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="ma-5">
+    <h1 class="my-5">
       {{ currentUser.name }}
     </h1>
     <br>
@@ -36,7 +36,7 @@
                 <v-card 
                    flat 
                    color="grey lighten-3" 
-                   class="px-5"
+                   class="pa-5"
                    :to="{
                         name: 'articles-id',
                         params: {

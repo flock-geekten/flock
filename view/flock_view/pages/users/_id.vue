@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-if="this.user.id &&this.$store.state.user.loggedIn">
+    <h1 class="my-5">
+      {{ user.name }}
+    </h1>
+    <div v-if="this.user.id !== this.$store.state.user.userId && this.$store.state.user.loggedIn">
       <v-btn
         v-if="follow===0"
         rounded
@@ -21,9 +24,6 @@
         >フォローをはずす
       </v-btn>
     </div>
-    <h1 class="ma-5">
-      {{ user.name }}
-    </h1>
     <br>
     <v-card flat>
       <v-toolbar

@@ -62,6 +62,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Summary from '../../components/Summary.vue'
   export default {
   components: {
@@ -98,14 +99,14 @@ import Summary from '../../components/Summary.vue'
       },
      onSummaryFlag: function(){
         // 要約
-        const summaryUrl = this.$summaryBaseUrl + "/3/" + this.body
-        this.$axios.get(summaryUrl, {
-          headers: { 
-            "Content-Type": "application/json", 
-          }
-        })
+        const summaryUrl = this.$summaryBaseUrl + "/summary/"
+        var params = { 
+          "sum_count": 3,
+          "text": this.body
+        }
+        axios.post(summaryUrl, params)
           .then(response => {
-            this.summary = response.data
+            this.summary = response.data.summary
         })
         // 要約のレスポンスが返ってきたら画面遷移する
         this.summaryFlag = true

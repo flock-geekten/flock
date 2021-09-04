@@ -31,16 +31,27 @@
     <div v-else>
       <h3>要約</h3>
       <v-sheet class="pa-10" color="#EEEEEE">
-        <p>{{ summary }}</p>
-        <v-btn
-          rounded
-          depressed
+        <div
+          v-if="summary === ''"
+          style="text-align:center"
+          >
+        <v-progress-circular
+          indeterminate
           color="blue lighten-1"
-          dark
-          @click="editSummaryFlag = true"
-        >
-          編集
-        </v-btn>
+         />
+        </div>
+        <div v-else>
+          <p>{{ summary }}</p>
+          <v-btn
+            rounded
+            depressed
+            color="blue lighten-1"
+            dark
+            @click="editSummaryFlag = true"
+          >
+            編集
+          </v-btn>
+        </div>
       </v-sheet>
     </div>
     <br><br>

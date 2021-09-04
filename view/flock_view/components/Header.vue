@@ -14,7 +14,8 @@
           <v-btn depressed text dark color="#333333" to="/mypage" class="ml-3">
             {{ this.$store.state.user.userName }}
           </v-btn>
-          <v-btn depressed dark color="blue lighten-1" to="/articles/new">投稿</v-btn>
+          <v-btn depressed dark color="blue lighten-1" to="/hangouts/recommend" class="ml-3">あそびレコメンド</v-btn>
+          <v-btn depressed dark color="blue lighten-1" to="/articles/new" class="ml-3">投稿</v-btn>
           <v-btn depressed dark color="blue lighten-1" @click="logout()" class="ml-3">ログアウト</v-btn>
         </div>
         <div v-else-if="!this.$store.state.user.uid">

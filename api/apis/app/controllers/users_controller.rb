@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
-    @users = User.all
+    @users = User.order("RAND()").limit(5)
     render json: @users
   end
 
@@ -60,6 +60,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:name, :email, :uid)
+      params.permit(:name, :email, :uid, :age, :sex)
     end
 end

@@ -6,7 +6,7 @@ services:
     command: /root/.rbenv/shims/rails s -p 3000 -b '0.0.0.0'
     volumes:
       - ./api/apis:/myapp
-      - mysql-data:/var/lib/mysql
+      # - mysql-data:/var/lib/mysql
     ports:
       - "3000:3000"
     stdin_open: true

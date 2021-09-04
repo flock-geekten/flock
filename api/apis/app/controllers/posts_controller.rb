@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   # GET /posts
   def index
-    @posts = Post.order("RANDOM()").limit(20)
+    @posts = Post.order("RANDOM()").limit(9)
     render json: @posts
   end
 

@@ -85,6 +85,14 @@
       to='/'
       >←TOP
     </v-btn>
+    <v-btn
+      rounded
+      depressed
+      dark
+      color="blue lighten-1"
+      to='/friends'
+      >一緒に遊ぶ友達を探す
+    </v-btn>
   </div>
 </template>
 

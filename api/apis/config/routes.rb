@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :hangouts
   resources :comments
   resources :users
   resources :post_tags

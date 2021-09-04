@@ -9,7 +9,9 @@
         <Header />
         <v-layout align-center justify-center>
           <div style="width:800px">
-            <Nuxt />
+            <transition mode='in-out'>
+              <Nuxt />
+            </transition>
           </div>
         </v-layout>
       </v-container>
@@ -68,5 +70,29 @@ export default {
   font-size: 28px;
   font-weight: 700;
   text-align: center;
+}
+</style>
+
+<style>
+.v-enter {
+  transform: scale(0.9);
+  opacity: 0.1;
+}
+.v-enter-to {
+  opacity: 1;
+}
+.v-enter-active {
+  transition: all 0.6s .1s ease;
+}
+.v-leave {
+  transform: scale(0.1) translate(0%,100%);
+  opacity: 1;
+}
+.v-leave-to {
+  transform: scale(0.1) translate(0%,100%);
+  opacity: 0;
+}
+.v-leave-active {
+  transition: all 5s 0s ease;
 }
 </style>

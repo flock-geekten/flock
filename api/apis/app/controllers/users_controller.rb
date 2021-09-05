@@ -16,14 +16,18 @@ class UsersController < ApplicationController
     @post_summary_dict = []
     for post in @posts
       summary = post.summary
-      @post_summary_dict << { post: post, summary: summary }
+      likes_count = post.likes.count
+      comments_count = post.comments.count
+      @post_summary_dict << { post: post, summary: summary, likes_count: likes_count, comments_count: comments_count }
     end
     @likes = @user.likes
     @likes_post_summary_dict = []
     for like in @likes
       post = like.post
+      likes_count = post.likes.count
+      comments_count = post.comments.count
       summary = post.summary
-      @likes_post_summary_dict << { post: post, summary: summary }
+      @likes_post_summary_dict << { post: post, summary: summary, likes_count: likes_count, comments_count: comments_count }
     end
     @followings = @user.followings
     @followers = @user.followers
@@ -60,6 +64,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:name, :email, :uid, :age, :sex)
+      params.permit(:name, :email, :uid, :age, :sex, :profile)
     end
 end

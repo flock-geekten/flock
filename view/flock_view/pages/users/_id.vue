@@ -3,6 +3,7 @@
     <h1 class="my-5">
       {{ user.name }}
     </h1>
+    <p>{{ user.profile }}</p>
     <div v-if="this.user.id !== this.$store.state.user.userId && this.$store.state.user.loggedIn">
       <v-btn
         v-if="follow===0"
@@ -65,7 +66,8 @@
                         }
                         }"
                    >
-                   {{ post.summary.content }}
+                  <v-card-title>{{ post.post.title }}<v-spacer /><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-title>
+                   <v-card-text>{{ post.summary.content }}</v-card-text>
                 </v-card>
                   <br>
               </div>
@@ -89,7 +91,8 @@
                         }
                         }"
                    >
-                   {{ like.summary.content }}
+                  <v-card-title>{{ like.post.title }}<v-spacer /><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ like.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ like.comments_count }}</v-card-title>
+                   <v-card-text>{{ like.summary.content }}</v-card-text>
                 </v-card>
                   <br>
               </div>

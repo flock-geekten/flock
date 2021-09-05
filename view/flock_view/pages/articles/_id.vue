@@ -46,23 +46,22 @@
             </div>
             <div v-else-if="this.$store.state.user.userId !== this.user.id &&this.$store.state.user.loggedIn">
               <v-btn
-                v-if="like===0"
-                rounded
-                depressed
+                v-if="like.is_like===0"
                 dark
-                outlined
-                color="blue"
+                text
+                fab
+                color="pink"
                 @click="createLike()"
-                >いいね
+                ><v-icon>mdi-heart-outline</v-icon><div class="pr-1">{{ like.likes_count }}</div>
               </v-btn>
                 <v-btn
-                  v-if="like===1"
-                  rounded
-                  depressed
+                  v-if="like.is_like===1"
                   dark
-                  color="blue"
+                  text
+                  fab
+                  color="pink"
                   @click="destroyLike()"
-                  >いいねをはずす
+                  ><v-icon>mdi-heart</v-icon><div class="pr-1">{{ like.likes_count }}</div>
                 </v-btn>
             </div>
           </v-col>
@@ -162,7 +161,7 @@ export default {
       params.append('post_id', this.post.id);
       axios.post(isLikeUrl, params)
         .then((res) => {
-          this.like = res.data.is_like
+          this.like = res.data
       })
     },
     createLike: function(){
@@ -172,14 +171,14 @@ export default {
       params.append('post_id', this.post.id);
       axios.post(createLikeUrl, params)
         .then((res) => {
-          this.like = res.data.is_like
+          this.like = res.data
       })
     },
     destroyLike: function(){
       const destroyLikeUrl = this.$apiBaseUrl + '/likes?user_id=' + this.$store.state.user.userId + '&post_id=' + this.post.id
       axios.delete(destroyLikeUrl)
         .then((res) => {
-          this.like = res.data.is_like
+          this.like = res.data
       })
     },
     onEditFlag: function(){

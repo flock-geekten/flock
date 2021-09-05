@@ -38,8 +38,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/constants.js' },
-    { src: '~/plugins/firebase.js' },
+    { src: '~/plugins/constants.js', ssr: false },
+    { src: '~/plugins/firebase.js', ssr: false },
     { src: '~/plugins/persistedstate.js', ssr: false }
   ],
 

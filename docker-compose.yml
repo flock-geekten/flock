@@ -16,6 +16,7 @@ services:
     build: ./view
     container_name: "flock-view"
     command: npm run dev
+    # command: npm run start
     ports:
       - "8000:8000"
     volumes:

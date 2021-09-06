@@ -1,6 +1,5 @@
 <template>
   <div>
-    <v-container>
       <v-row>
         <v-layout align-center justify-center>
           <h1 class="my-15">{{ post.title }}</h1>
@@ -112,7 +111,6 @@
           </v-btn>
         </v-col>
       </v-row>
-    </v-container>
   </div>
 </template>
 

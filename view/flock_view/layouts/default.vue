@@ -1,10 +1,6 @@
 <template>
   <v-app dark>
     <v-main>
-      <div v-if="this.$route.path === '/'" class="index-header">
-        <div class="index-header__hello-image">
-        </div>
-      </div>
       <v-container>
         <Header />
         <v-layout align-center justify-center>

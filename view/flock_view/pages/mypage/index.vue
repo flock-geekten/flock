@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="userEditFlag===true">
+    <div v-show="userEditFlag===true">
       <UserEdit 
         :name="currentUser.name"
         :email="currentUser.email"
@@ -11,7 +11,7 @@
         @offUserEditFlag="offUserEditFlag"
       />
     </div>
-    <div v-else>
+    <div v-show="userEditFlag===false">
     <h1 class="my-5">
       {{ currentUser.name }}
     </h1>

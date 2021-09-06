@@ -10,7 +10,7 @@
       >
       <v-btn to="/" text color="black">flock</v-btn>
       <v-spacer />
-        <div v-if="this.$store.state.user.uid">
+        <div v-show="this.$store.state.user.loggedIn">
           <v-menu
             bottom
             origin="center center"
@@ -43,7 +43,7 @@
             </v-list>
           </v-menu>
         </div>
-        <div v-else-if="!this.$store.state.user.uid">
+        <div v-show="!this.$store.state.user.loggedIn">
           <v-btn depressed dark color="blue lighten-1" to="/login" class="ml-3">ログイン</v-btn>
         </div>
     </v-app-bar>

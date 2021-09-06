@@ -2,7 +2,7 @@
   <div>
     <v-sheet class="pa-15">
       <v-textarea
-        v-if="this.$store.state.user.loggedIn"
+        v-show="this.$store.state.user.loggedIn===true"
         v-model="body"
         height="100"
         label="コメント"
@@ -10,7 +10,7 @@
       />
       <div style="text-align:right">
         <v-btn
-          v-if="this.$store.state.user.loggedIn"
+          v-show="this.$store.state.user.loggedIn"
           rounded
           depressed
           color="blue lighten-1"
@@ -22,17 +22,17 @@
       </div>
       <br>
       <br>
-      <div v-if="comments.length === 0">
+      <div v-show="comments.length === 0">
         <v-card flat class="my-5">
           <v-card-text>コメントがありません</v-card-text>
         </v-card>
       </div>
-      <div v-else>
+      <div v-show="comments.length > 0">
         <div v-for="comment in comments" :key="comment.id">
           <v-divider />
           <v-card flat class="my-5">
-            <p v-if="currentUserId === comment.user.id">{{ comment.user.name }}</p>
-            <p v-else><nuxt-link :to="{ name: 'users-id', params: { id: comment.user.id } }">{{ comment.user.name }}</nuxt-link></p>
+            <p v-show="currentUserId === comment.user.id">{{ comment.user.name }}</p>
+            <p v-show="currentUserId !== comment.user.id"><nuxt-link :to="{ name: 'users-id', params: { id: comment.user.id } }">{{ comment.user.name }}</nuxt-link></p>
             <v-card-text>{{ comment.comment.body }}</v-card-text>
             <div style="text-align:right">
               <v-card-text>{{ dateFormat(comment.comment.created_at) }}</v-card-text>

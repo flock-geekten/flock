@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-sheet class="pa-15">
-      <div v-if="summaryFlag">
+      <div v-show="summaryFlag===true">
         <Summary 
            :mode="1"
            :id="0"
@@ -14,7 +14,7 @@
            :summary="summary"
            />
       </div>
-      <div v-else>
+      <div v-show="summaryFlag===false">
         <v-text-field
           v-model="title"
           label="タイトル"

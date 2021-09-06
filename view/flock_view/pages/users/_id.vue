@@ -4,9 +4,9 @@
       {{ user.name }}
     </h1>
     <p>{{ user.profile }}</p>
-    <div v-if="this.user.id !== this.$store.state.user.userId && this.$store.state.user.loggedIn">
+    <div v-show="this.user.id !== this.$store.state.user.userId && this.$store.state.user.loggedIn">
       <v-btn
-        v-if="follow===0"
+        v-show="follow===0"
         rounded
         depressed
         dark
@@ -16,7 +16,7 @@
         >フォロー
       </v-btn>
       <v-btn
-        v-if="follow===1"
+        v-show="follow===1"
         rounded
         depressed
         dark

@@ -3,7 +3,7 @@
   <div style="text-align:center">
     <h1 class="py-3">新規登録</h1>
   </div>
-  <v-card v-if="detailFlag === true" flat max-width="500" class="p-4 mt-10 mx-auto">
+  <v-card v-show="detailFlag === true" flat max-width="500" class="p-4 mt-10 mx-auto">
     <v-snackbar
       v-model="snackbar"
       color="error"
@@ -75,7 +75,7 @@
     </div>
   </v-card>
 
-  <v-card v-else flat max-width="500" class="p-4 mt-10 mx-auto">
+  <v-card v-show="detailFlag===false" flat max-width="500" class="p-4 mt-10 mx-auto">
     <v-snackbar
       v-model="snackbar"
       color="error"
@@ -117,7 +117,7 @@
       <v-spacer></v-spacer>
       <div class="w-100 px-4" style="text-align:center">
         <v-btn
-          v-if="password === passwordConfirm"
+          v-show="password === passwordConfirm"
           rounded
           depressed
           outlined
@@ -129,7 +129,7 @@
           次へ
         </v-btn>
         <v-btn
-          v-else
+          v-show="password !== passwordConfirm"
           disabled
           rounded
           depressed

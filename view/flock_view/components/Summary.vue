@@ -7,7 +7,7 @@
       class="pa-5"
     >こちらで内容で投稿します。よろしいですか？</v-alert>
     <br>
-    <div v-if="editSummaryFlag">
+    <div v-show="editSummaryFlag === true">
       <h3>要約</h3>
       <v-sheet class="pa-10">
       <v-textarea
@@ -28,11 +28,11 @@
       </v-btn>
       </v-sheet>
     </div>
-    <div v-else>
+    <div v-show="editSummaryFlag === false">
       <h3>要約</h3>
       <v-sheet class="pa-10" color="#EEEEEE">
         <div
-          v-if="summary === ''"
+          v-show="summary === ''"
           style="text-align:center"
           >
         <v-progress-circular
@@ -40,7 +40,7 @@
           color="blue lighten-1"
          />
         </div>
-        <div v-else>
+        <div v-show="summary !== ''">
           <p>{{ summary }}</p>
           <v-btn
             rounded
@@ -62,7 +62,7 @@
       <br>
       <p>{{ body }}</p>
     </v-sheet>
-    <div v-if="mode===1" class="text-center">
+    <div v-show="mode===1" class="text-center">
       <v-btn
         rounded
         depressed
@@ -83,7 +83,7 @@
         投稿
       </v-btn>
     </div>
-    <div v-if="mode===2" class="text-center">
+    <div v-show="mode===2" class="text-center">
       <v-btn
         rounded
         depressed

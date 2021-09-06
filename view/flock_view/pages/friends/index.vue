@@ -2,7 +2,7 @@
   <div>
     <h1 class="py-5">友達レコメンド</h1>
     <div v-for="user in users" :key="user.id" class="py-1">
-      <p><nuxt-link :to="{ name: 'users-id', params: { id: user.id } }">{{ user.name }}</nuxt-link></p>
+      <nuxt-link :to="{ name: 'users-id', params: { id: user.id } }">{{ user.name }}</nuxt-link>
     </div>
   </div>
 </template>

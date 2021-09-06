@@ -13,7 +13,6 @@
       {{ message }}
     </v-snackbar>
     <v-card-text>
-      <v-container>
         <v-row>
           <v-col cols="12">
             <v-text-field
@@ -41,7 +40,6 @@
               ></v-select>
           </v-col>
         </v-row>
-      </v-container>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -87,7 +85,6 @@
       {{ message }}
     </v-snackbar>
     <v-card-text>
-      <v-container>
         <v-row>
           <v-col cols="12">
             <v-text-field
@@ -115,7 +112,6 @@
             />
           </v-col>
         </v-row>
-      </v-container>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -197,10 +193,9 @@ export default {
           axios.post(url, params)
             .then((res) => {
               this.$store.commit('user/setUser', res.data)
+              this.$store.commit('user/setUserId', res.data.id)
+              this.$store.commit('user/setUserName', res.data.name)
               this.$router.push('/')
-            })
-            .catch((error) => {
-              console.log(error)
             })
         })
     },

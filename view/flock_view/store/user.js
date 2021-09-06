@@ -23,12 +23,20 @@ export const mutations = {
   },
   setUser(state, user) {
     state.user = user
-    state.userId = user.id
-    state.userName = user.name
   },
   removeUser(state) {
     state.user = ''
+  },
+  setUserId(state, userId) {
+    state.userId = userId
+  },
+  removeUserId(state) {
     state.userId = ''
+  },
+  setUserName(state, userName) {
+    state.userName = userName
+  },
+  removeUserName(state) {
     state.userName = ''
-  }
+  },
 }

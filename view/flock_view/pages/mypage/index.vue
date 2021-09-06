@@ -105,7 +105,7 @@
         <v-tab-item>
           <v-card flat class="px-10 pt-5">
             <div v-for="following in followings" :key="following.id">
-              <p><nuxt-link :to="{ name: 'users-id', params: { id: following.id } }">{{ following.name }}</nuxt-link></p>
+              <nuxt-link :to="{ name: 'users-id', params: { id: following.id } }">{{ following.name }}</nuxt-link>
             </div>
           </v-card>
         </v-tab-item>
@@ -114,7 +114,7 @@
         <v-tab-item>
           <v-card flat class="px-10 pt-5">
             <div v-for="follower in followers" :key="follower.id">
-              <p><nuxt-link :to="{ name: 'users-id', params: { id: follower.id } }">{{ follower.name }}</nuxt-link></p>
+              <nuxt-link :to="{ name: 'users-id', params: { id: follower.id } }">{{ follower.name }}</nuxt-link>
             </div>
           </v-card>
         </v-tab-item>

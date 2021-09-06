@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>プロフィールを編集する</h1>
-    <v-container>
       <v-row>
         <v-col cols="12">
           <v-text-field
@@ -52,7 +51,6 @@
           編集
         </v-btn>
       </v-row>
-    </v-container>
   </div>
 </template>
 
@@ -83,9 +81,6 @@ export default {
           this.$store.commit('user/setUser', res.data)
           this.$emit('getCurrentUser')
           this.offUserEditFlag()
-        })
-        .catch((error) => {
-          console.log(error)
         })
     },
     offUserEditFlag: function(){

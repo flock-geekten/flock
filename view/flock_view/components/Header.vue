@@ -60,6 +60,8 @@ import firebase from '~/plugins/firebase'
             this.$store.commit('user/logout')
             this.$store.commit('user/removeUid')
             this.$store.commit('user/removeUser')
+            this.$store.commit('user/removeUserId')
+            this.$store.commit('user/removeUserName')
             this.$router.push('/logout')
           })
       }

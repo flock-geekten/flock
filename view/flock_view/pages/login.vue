@@ -11,7 +11,6 @@
     </v-snackbar>
     <v-card-title>ログイン</v-card-title>
     <v-card-text>
-      <v-container>
         <v-row>
           <v-col cols="12">
             <v-text-field
@@ -30,7 +29,6 @@
             />
           </v-col>
         </v-row>
-      </v-container>
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -80,17 +78,13 @@ export default {
           var params = new URLSearchParams();
           params.append('uid', res.user.uid);
           axios.post(url, params).then((response) => {
-            console.log(response.data)
             this.$store.commit('user/setUser', response.data.user)
-            console.log(this.$store.state.user.user)
+            this.$store.commit('user/setUserId', response.data.user.id)
+            this.$store.commit('user/setUserName', response.data.user.name)
           })
           this.$store.commit('user/login')
           this.$router.push('/')
         })
-        .catch(() => {
-          this.message = 'メールアドレスまたはパスワードが正しくありません'
-          this.snackbar = true
-        });
     },
   }
 }

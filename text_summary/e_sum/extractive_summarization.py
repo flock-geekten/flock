@@ -65,6 +65,8 @@ def separate_words(sentences):
 # 文章要約メソッド
 def summy_test(sentences_org, corpus, sum_count):
     sentences = [' '.join(sentence) + u'。' for sentence in corpus]
+    for i, sentence in enumerate(sentences):
+        sentences[i] = sentence.strip() # 前後の空白を削除(先頭に英単語があると空白が入ってエラーが出る)
     text_prep = "".join(sentences)
     parser = PlaintextParser.from_string(text_prep, Tokenizer('japanese'))
 

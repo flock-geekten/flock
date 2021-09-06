@@ -1,4 +1,6 @@
 import colors from 'vuetify/es5/util/colors'
+const envPath = `config/.env.${process.env.ENV || 'local'}`
+require('dotenv').config({path: envPath})
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -22,12 +24,23 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  env: {
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messageSenderId: process.env.MESSAGE_SENDER_ID,
+    appId: process.env.APP_ID,
+  },
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/constants.js', ssr: false },
+    { src: '~/plugins/firebase.js', ssr: false },
+    { src: '~/plugins/persistedstate.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -37,20 +50,37 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/markdownit'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    '@nuxtjs/moment'
+    '@nuxtjs/moment',
+    '@nuxtjs/markdownit'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    // baseURL: 'http://localhost:3000'
+    baseURL: process.env.VUE_APP_URL
+  },
   // momentの日本設定
   moment: {
     locales: ['ja']
+  },
+  markdownit: {
+    preset: 'default',
+    injected: true, 
+    breaks: true, 
+    html: true, 
+    linkify: true,
+    typography: true, 
+    xhtmlOut: true,
+    langPrefix: 'language-',
+    quotes: '“”‘’',
+    highlight: function (/*str, lang*/) { return ''; },
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

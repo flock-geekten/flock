@@ -1,28 +1,22 @@
 <template>
   <div>
-    <!-- <v-row> -->
-    <!--   <v-col cols="3"> -->
-    <!--     <Menu /> -->
-    <!--   </v-col> -->
-    <!--   <v-col cols="9"> -->
-      <div v-for="post in posts" :key="post.id">
-        <v-row align="center" class="justify-center">
-          <v-col cols="12" sm="8" md="6">
-            <v-card 
-              color="white" 
-              :to="{
-                name: 'articles-id',
-                params: {
-                  id: post.id
-                }
-              }"
-            >
-              <v-card-title>{{ post.title }}</v-card-title>
-              <v-card-text>{{ post.body }}</v-card-text>
-            </v-card>
-          </v-col>
-        </v-row>
-      </div>
+    <v-row align="center" class="justify-center">
+      <v-col cols="6" v-for="post in posts" :key="post.id">
+        <v-card 
+          color="white" 
+          flat
+          height="250"
+          :to="{
+               name: 'articles-id',
+               params: {
+               id: post.post.id
+               }
+               }"
+          class="pa-5"
+          >
+          <v-card-title>{{ post.post.title }}<v-spacer /><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-title>
+          <v-card-text>{{ post.summary.content | omittedText }}</v-card-text>
+        </v-card>
       </v-col>
     </v-row>
   </div>
@@ -40,9 +34,44 @@ export default {
       posts: '',
     }
   },
+  computed: {
+    loggedIn() {
+      return this.$store.state.user.loggedIn
+    }
+  },
+  methods: {
+    fetchContents(){
+      const url = "/api/v1/posts"
+      this.$axios.get(url)
+        .then((res) => {
+          this.posts = res.data
+        })
+    }
+  },
+  watch: {
+    loggedIn: function() {
+      if (this.loggedIn) {
+        this.fetchContents()
+      }
+    }
+  },
+  filters: {
+    omittedText(text) {
+     // 155文字目以降は"…"
+     return text.length > 155 ? text.slice(0, 155) + "…" : text;
+    },
+  },
   mounted() {
-    const url = 'http://localhost:3000' + '/posts'
-    axios.get(url, {
+    if (this.$store.state.user.uid !== ''){
+      const currentUserUrl = this.$apiBaseUrl + '/api/v1/current_user'
+      var params = new URLSearchParams();
+      params.append('uid', this.$store.state.user.uid);
+      axios.post(currentUserUrl, params)
+        .then((res) => {
+          this.$store.commit('user/setUser', res.data[0])
+        })
+    }
+    this.$axios.get('/api/v1/posts', {
       headers: { 
         "Content-Type": "application/json", 
       }

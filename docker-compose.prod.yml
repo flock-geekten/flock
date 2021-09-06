@@ -1,0 +1,45 @@
+version: '3.7'
+services:
+  api:
+    build: ./api
+    container_name: "flock-api"
+    command: /root/.rbenv/shims/rails s -p 3000 -b '0.0.0.0'
+    volumes:
+      - ./api/apis:/myapp
+      - mysql-data:/var/lib/mysql
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+
+  view:
+    build: ./view
+    container_name: "flock-view"
+    command: npm run start
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./view/flock_view:/app/nuxt-project/flock-view
+    stdin_open: true
+    tty: true
+    environment:
+      - VUE_APP_URL=https://flock-api.masashi-oba.net
+
+  text_summary:
+    build: ./text_summary
+    container_name: "flock-text-summary-es"
+    ports:
+      - 9000:9000
+    volumes: 
+      - type: bind
+        source: ./text_summary/e_sum
+        target: /home/workspace
+    tty: true
+    
+    # FastAPIを9000ポートで待機
+    # main.pyのapp = FastAPI()をmain:appと表記する
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 9000
+
+volumes:
+  mysql-data:
+    driver: local

@@ -1,15 +1,6 @@
 <template>
   <div>
-    <h1>{{ post.title }}</h1>
-    <br>
-    <br>
     <p>{{ post.body }}</p>
-
-    <br><br>
-    要約
-    <v-sheet color="#EEEEEE" class="pa-5">
-      <p>{{ summary.content }}</p>
-    </v-sheet>
   </div>
 </template>
 
@@ -18,7 +9,6 @@ import moment from 'moment'
   export default {
     props: {
       post: Object,
-      summary: Object
     },
     data () {
       return {

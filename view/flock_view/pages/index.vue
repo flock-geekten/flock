@@ -5,7 +5,10 @@
         <v-card 
           color="white" 
           flat
-          height="250"
+          height="300"
+          width="500"
+          max-height="300"
+          max-width="500"
           :to="{
                name: 'articles-id',
                params: {
@@ -14,8 +17,14 @@
                }"
           class="pa-5"
           >
-          <v-card-title>{{ post.post.title }}<v-spacer /><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-title>
-          <v-card-text>{{ post.summary.content | omittedText }}</v-card-text>
+          <v-img
+            max-height="150"
+            max-width="500"
+            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+            ></v-img>
+          <v-card-title>{{ post.post.title | omittedText10 }}<v-spacer /></v-card-title>
+          <v-card-text>{{ post.summary.content | omittedText140 }}</v-card-text>
+          <v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -56,9 +65,13 @@ export default {
     }
   },
   filters: {
-    omittedText(text) {
-     // 155文字目以降は"…"
-     return text.length > 155 ? text.slice(0, 155) + "…" : text;
+    omittedText140(text) {
+     // 140文字目以降は"…"
+     return text.length > 140 ? text.slice(0, 140) + "…" : text;
+    },
+    omittedText10(text) {
+     // 10文字目以降は"…"
+     return text.length > 10 ? text.slice(0, 10) + "…" : text;
     },
   },
   mounted() {

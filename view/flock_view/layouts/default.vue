@@ -8,7 +8,7 @@
       <v-container>
         <Header />
         <v-layout align-center justify-center>
-          <div style="width:800px">
+          <div style="width:1000px">
             <transition mode='in-out'>
               <Nuxt />
             </transition>

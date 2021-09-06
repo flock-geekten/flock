@@ -2,6 +2,8 @@
   <div>
     <v-sheet class="pa-3" color="green lighten-4" rounded="lg">
       <b><nuxt-link :to="{ name: 'users-id', params: { id: user.id } }">{{ user.name }}</nuxt-link> さんの投稿</b>
+      <p class="my-2">{{ user.age }}歳 {{ sexList[user.sex] }}</p>
+      <p class="my-2">{{ user.profile }}</p>
     </v-sheet>
   </div>
 </template>
@@ -10,6 +12,11 @@
 export default {
   props: {
     user: Object
+  },
+  data() {
+    return {
+      sexList: ['男性', '女性']
+    }
   }
 }
 </script>

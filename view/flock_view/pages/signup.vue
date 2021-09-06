@@ -173,8 +173,9 @@ export default {
       age: '',
       sex: '',
       sexList: [
-        { text: '男', value: 1 },
-        { text: '女', value: 2 }
+        { text: '男性', value: 1 },
+        { text: '女性', value: 2 },
+        { text: 'その他', value: 3 }
       ],
       detailFlag: false
     }

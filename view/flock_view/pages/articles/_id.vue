@@ -1,38 +1,53 @@
 <template>
   <div>
-    <UserInfo :user="user" />
-    <br>
-    <v-sheet class="pa-15">
-      <div v-if="editFlag">
-        <Form
-          :post="post"
-          @onEditFlag="onEditFlag"
-          @offEditFlag="offEditFlag"
-          @onSummaryFlag="onSummaryFlag"
-          @offSummaryFlag="offSummaryFlag"
-          />
-      </div>
-      <div v-else-if="summaryFlag">
-        <Summary
-          :mode="2"
-          :id="post.id"
-          :title="post.title"
-          :body="post.body"
-          :summary="summary.content"
-          @onEditFlag="onEditFlag"
-          @offEditFlag="offEditFlag"
-          @onSummaryFlag="onSummaryFlag"
-          @offSummaryFlag="offSummaryFlag"
-          />
-      </div>
-      <div v-else>
-        <v-row>
-          <v-col>
-            <Article :post="post" :summary="summary" />
-          </v-col>
-        </v-row>
-        <v-row>
-          <v-col>
+    <v-container>
+      <v-row>
+        <v-layout align-center justify-center>
+          <h1 class="my-15">{{ post.title }}</h1>
+        </v-layout>
+        <v-sheet color="grey lighten-4" rouded="lg" class="ma-3 pa-6">
+          <h3>要約</h3>
+          <br>
+          <p>{{ summary.content}}</p>
+        </v-sheet>
+      </v-row>
+      <v-row>
+        <v-col cols="9">
+          <v-sheet class="pa-6" rounded="lg">
+            <div v-if="editFlag">
+              <Form
+                :post="post"
+                @onEditFlag="onEditFlag"
+                @offEditFlag="offEditFlag"
+                @onSummaryFlag="onSummaryFlag"
+                @offSummaryFlag="offSummaryFlag"
+                />
+            </div>
+            <div v-else-if="summaryFlag">
+              <Summary
+                :mode="2"
+                :id="post.id"
+                :title="post.title"
+                :body="post.body"
+                :summary="summary.content"
+                @onEditFlag="onEditFlag"
+                @offEditFlag="offEditFlag"
+                @onSummaryFlag="onSummaryFlag"
+                @offSummaryFlag="offSummaryFlag"
+                />
+            </div>
+            <div v-else>
+              <v-col>
+                <Article :post="post" :summary="summary" />
+              </v-col>
+            </div>
+          </v-sheet>
+        </v-col>
+        <v-col cols="3">
+          <UserInfo :user="user" />
+          <Tags />
+          <v-sheet class="my-3 pa-3" color="blue-grey lighten-4" rounded="lg">
+            <div class="my-2 mx-3"><v-icon color="pink" class="pr-2">mdi-heart</v-icon>{{ like.likes_count }}</div>
             <div v-if="this.$store.state.user.userId === this.user.id">
               <v-btn
                 rounded
@@ -40,6 +55,7 @@
                 outlined
                 dark
                 color="blue"
+                class="my-5"
                 @click="onEditFlag()"
                 >編集
               </v-btn>
@@ -48,50 +64,55 @@
               <v-btn
                 v-if="like.is_like===0"
                 dark
-                text
-                fab
+                rounded
+                depressed
                 color="pink"
+                class="my-5"
                 @click="createLike()"
-                ><v-icon>mdi-heart-outline</v-icon><div class="pr-1">{{ like.likes_count }}</div>
+                >いいね
               </v-btn>
-                <v-btn
-                  v-if="like.is_like===1"
-                  dark
-                  text
-                  fab
-                  color="pink"
-                  @click="destroyLike()"
-                  ><v-icon>mdi-heart</v-icon><div class="pr-1">{{ like.likes_count }}</div>
-                </v-btn>
+              <v-btn
+                v-if="like.is_like===1"
+                dark
+                rounded
+                outlined
+                depressed
+                color="pink"
+                class="my-5"
+                @click="destroyLike()"
+                >いいねをはずす
+              </v-btn>
             </div>
-          </v-col>
-        </v-row>
-      </div>
-
-    </v-sheet>
-    <br>
-    <Comments 
-      :comments="comments" 
-      :postId="post.id"
-      @reload="reload"
-      />
-    <br>
-    <v-btn
-      rounded
-      depressed
-      dark
-      color="blue lighten-1"
-      to='/'
-      >←TOP
-    </v-btn>
-    <v-btn
-      rounded
-      depressed
-      dark
-      color="blue lighten-1"
-      to='/friends'
-      >一緒に遊ぶ友達を探す
-    </v-btn>
+          </v-sheet>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12">
+        <Comments 
+          :comments="comments" 
+          :postId="post.id"
+          @reload="reload"
+          />
+        <br>
+        <v-btn
+          rounded
+          depressed
+          dark
+          color="blue lighten-1"
+          to='/'
+          >←TOP
+        </v-btn>
+          <v-btn
+            rounded
+            depressed
+            dark
+            color="blue lighten-1"
+            to='/friends'
+            >一緒に遊ぶ友達を探す
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -104,6 +125,7 @@ import Summary from '../../components/Summary.vue'
 import Comments from '../../components/Comments.vue'
 import Form from '../../components/Form.vue'
 import UserInfo from '../../components/UserInfo.vue'
+import Tags from '../../components/Tags.vue'
 export default {
   components: {
     Menu,
@@ -111,7 +133,8 @@ export default {
     Form,
     Comments,
     Summary,
-    UserInfo
+    UserInfo,
+    Tags
   },
   data () {
     return {

@@ -11,9 +11,6 @@ class RelationshipsController < ApplicationController
   # フォローをはずす
   def unfollow
     # フォローする 側
-    p "============="
-    p params[:user_id]
-    p "============="
     @user = User.find(params[:user_id])
     @user.unfollow(params[:following_id])
     render json: { is_follow: 0 }

@@ -11,7 +11,6 @@
         </v-sheet>
       </v-row>
 
-      <!-- -->
       <v-row>
         <v-col cols="9">
           <v-sheet class="pa-6" rounded="lg">
@@ -50,7 +49,7 @@
 
         <v-col cols="3">
           <UserInfo :user="user" />
-          <Tags />
+          <Tags :tags="tags"/>
           <v-sheet class="my-3 pa-3" color="blue-grey lighten-4" rounded="lg">
             <div class="my-2 mx-3"><v-icon color="pink" class="pr-2">mdi-heart</v-icon>{{ like.likes_count }}</div>
             <div v-show="this.$store.state.user.userId === this.user.id">
@@ -149,6 +148,7 @@ export default {
       editFlag: false,
       summaryFlag: false,
       like: '',
+      tags:'',
     }
   },
   mounted() {
@@ -163,6 +163,7 @@ export default {
         this.user = response.data.user
         this.summary = response.data.summary
         this.comments = response.data.comments
+        this.tags = response.data.tags
         this.isLike()
     })
   },

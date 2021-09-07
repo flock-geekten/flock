@@ -8,7 +8,8 @@ class Api::V1::PostsApiController < ApplicationController
       summary = post.summary
       comments_count = post.comments.count
       likes_count = post.likes.count
-      post_summary_dict << { post: post, summary: summary, comments_count: comments_count, likes_count: likes_count }
+      tags = post.tags
+      post_summary_dict << { post: post, summary: summary, comments_count: comments_count, likes_count: likes_count, tags: tags }
     end
     render json: post_summary_dict
   end
@@ -22,7 +23,8 @@ class Api::V1::PostsApiController < ApplicationController
     for comment in @comments
       comments_with_users << { comment: comment, user: comment.user }
     end
-    render json: { post: @post, user: @user, summary: @summary, comments: comments_with_users }
+    @tags = @post.tags
+    render json: { post: @post, user: @user, summary: @summary, comments: comments_with_users, tags: @tags }
   end
 
 end

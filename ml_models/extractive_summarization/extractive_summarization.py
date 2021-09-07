@@ -5,7 +5,7 @@ from ja_sentence_segmenter.concatenate.simple_concatenator import concatenate_ma
 from ja_sentence_segmenter.normalize.neologd_normalizer import normalize
 from ja_sentence_segmenter.split.simple_splitter import split_newline, split_punctuation
 # クリーニング
-import data_cleaning as dc
+from extractive_summarization import data_cleaning as dc
 # 名詞/形容詞/副詞/動詞のみを抽出 かつ 形態素解析の実行ライブラリ
 import re
 import mecabpr
@@ -26,7 +26,7 @@ def preprocessed_lexrank(text, sum_count=3):
 
 # 文区切り
 def separate_sentences(text):
-    split_punc2 = functools.partial(split_punctuation, punctuations=r"。!?")
+    split_punc2 = functools.partial(split_punctuation, punctuations=r"。.．!！?？")
     concat_tail_te = functools.partial(concatenate_matching, 
                                        former_matching_rule=r"^(?P<result>.+)([\r\n]+)$", 
                                        remove_former_matched=False)
@@ -57,7 +57,7 @@ def separate_words(sentences):
                     wat = re.sub(r"[a-zA-Z]", "", word.split(',')[6])
             else:
                 wat = word.split(',')[6]
-            sentence_ma.append(dc.delete_kuten(wat))
+            sentence_ma.append(wat)
         sentence_words.append(sentence_ma)
     return sentence_words
     

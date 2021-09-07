@@ -3,8 +3,6 @@ import emoji
 import neologdn
 import requests
 import unicodedata
-import nltk
-from nltk.corpus import wordnet
 
 def data_cleaning(data):
     return [text_cleaning(text) for text in data]
@@ -19,6 +17,7 @@ def clean_text(text):
     replaced_text = text.lower()
     replaced_text = neologdn.normalize(replaced_text)    # 『楽しみ〜〜〜』の『〜〜〜』などを削除
     replaced_text = re.sub(r'　', ' ', replaced_text)  # 全角空白の除去
+    replaced_text = replaced_text.replace('．', '。').replace('，', '、').replace(',', '、')
     return replaced_text
 
 def clean_url(html_text):
@@ -39,7 +38,7 @@ def normalize_unicode(text, form='NFKC'):
 
 def delete_symbol(text):
     code_regex = re.compile('[\t\s!"#$%&\'\\\\()*+,-./:;；：<=>?@[\\]^_`{|}~○｢｣「」〔〕“”〈〉'\
-                            '『』【】＆＊（）＄＃＠？！｀＋￥¥％♪…◇→←↓↑｡･ω･｡ﾟ´∀｀ΣДｘ⑥◎©︎♡★☆▽※ゞノ〆εσ＞＜┌┘]')
+                            '『』【】＆＊（）＄＃＠？！｀＋￥¥％♪…◇→←↓↑｡。、･ω･｡ﾟ´∀｀ΣДｘ⑥◎©︎♡★☆▽※ゞノ〆εσ＞＜┌┘]')
     return code_regex.sub('', text)
 
 def normalize_number(text):
@@ -48,7 +47,3 @@ def normalize_number(text):
 
 def lower_text(text):
     return text.lower()
-                                        
-def delete_kuten(word):
-    return re.sub(u'。','',word)
-                                        

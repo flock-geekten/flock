@@ -1,3 +1,5 @@
+numpy
+
 # Correction of notational errors
 neologdn
 

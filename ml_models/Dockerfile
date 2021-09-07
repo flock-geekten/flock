@@ -22,6 +22,8 @@ RUN cd /mecab-ipadic-neologd && ./bin/install-mecab-ipadic-neologd -n -y
 WORKDIR /home
 COPY requirements.txt ${PWD}
 RUN python3.7 -m pip install -r requirements.txt
+# YAKE! model
+RUN python3.7 -m pip install git+https://github.com/LIAAD/yake
 
 # 作業ディレクトリ
 WORKDIR /home/workspace

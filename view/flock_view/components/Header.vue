@@ -15,6 +15,7 @@
             bottom
             origin="center center"
             transition="scale-transition"
+            open-on-hover
             >
             <template v-slot:activator="{ on, attrs }">
               <v-btn

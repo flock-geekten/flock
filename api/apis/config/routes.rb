@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
+  resources :post_tags
   resources :hangouts
   resources :comments
   resources :users
-  resources :post_tags
   resources :tags
   resources :posts do
     get '/summaries', to: 'summaries#show'

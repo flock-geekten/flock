@@ -5,7 +5,7 @@
         <v-card 
           color="white" 
           flat
-          height="480"
+          height="500"
           width="500"
           max-height="800"
           max-width="500"
@@ -24,6 +24,7 @@
             ></v-img>
           <v-card-title>{{ post.post.title | omittedText20 }}<v-spacer /></v-card-title>
           <v-card-text>{{ post.summary.content | omittedText200 }}</v-card-text>
+          <v-chip>{{ post.tags[0].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[1].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[2].name | omittedText20 }}</v-chip>
           <v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
         </v-card>
       </v-col>

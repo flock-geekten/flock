@@ -21,16 +21,6 @@
           clearable
           counter
         />
-        <!-- <v-combobox -->
-        <!--   v-model="select" -->
-        <!--   :items="tags" -->
-        <!--   item-text="name" -->
-        <!--   item-value="id" -->
-        <!--   label="タグ" -->
-        <!--   multiple -->
-        <!--   outlined -->
-        <!--   chips -->
-        <!-- /> -->
       </v-col>
     </v-row>
     <v-row>

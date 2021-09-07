@@ -2,4 +2,7 @@
 /view/flock_view/.nuxt
 /api/Gemfile.lock
 /text_summary/e_sum/__pycache__/
+ml_models/__pycache__/
+ml_models/extractive_summarization/__pycache__/
+ml_models/keyphrase_extraction/__pycache__/
 

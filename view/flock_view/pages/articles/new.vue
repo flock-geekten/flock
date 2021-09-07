@@ -12,6 +12,7 @@
            @onSummaryFlag="onSummaryFlag"
            @offSummaryFlag="offSummaryFlag"
            :summary="summary"
+           :keyPhrases="keyPhrases"
            />
       </div>
       <div v-show="summaryFlag===false">
@@ -33,17 +34,6 @@
             counter
             class="mt-5"
             />
-            <!-- <v-combobox -->
-            <!--   v-model="select" -->
-            <!--   :items="tags" -->
-            <!--   item-text="name" -->
-            <!--   item-value="id" -->
-            <!--   label="タグ" -->
-            <!--   multiple -->
-            <!--   outlined -->
-            <!--   chips -->
-            <!--   class="mt-5" -->
-            <!--   /> -->
             <div class="text-center">
               <v-btn
                 rounded
@@ -76,7 +66,8 @@ import Summary from '../../components/Summary.vue'
         dialog: false,
         select: [],
         tags: [],
-        summary: ''
+        summary: '',
+        keyPhrases: '',
       }
     },
     mounted() {
@@ -100,13 +91,23 @@ import Summary from '../../components/Summary.vue'
      onSummaryFlag: function(){
         // 要約
         const summaryUrl = this.$summaryBaseUrl + "/summary/"
-        var params = { 
+        var summaryParams = { 
           "sum_count": 3,
           "text": this.body
         }
-        axios.post(summaryUrl, params)
+        axios.post(summaryUrl, summaryParams)
           .then(response => {
             this.summary = response.data.summary
+        })
+        // キーフレーズ抽出
+        const keyPhraseUrl = this.$summaryBaseUrl + "/keyphrase/"
+        var keyPhraseParams = { 
+          "get_key_num": 5,
+          "text": this.body
+        }
+        axios.post(keyPhraseUrl, keyPhraseParams)
+          .then(response => {
+            this.keyPhrases = response.data.keyphrase
         })
         // 要約のレスポンスが返ってきたら画面遷移する
         this.summaryFlag = true

@@ -15,18 +15,22 @@ class PostTagsController < ApplicationController
 
   # POST /post_tags
   def create
-    @post_tag = PostTag.new(post_tag_params)
-
-    if @post_tag.save
-      render json: @post_tag, status: :created, location: @post_tag
+    post_id = params[:post_id]
+    tag_name = params[:tag_name]
+    # タグが無い場合はタグを作成
+    if Tag.where(name: tag_name).empty?
+      tag = Tag.create(name: tag_name)
     else
-      render json: @post_tag.errors, status: :unprocessable_entity
+      tag = Tag.where(name: tag_name).first
     end
+    @post_tag = PostTag.create(post_id: post_id, tag_id: tag.id)
+    render json: @post_tag
   end
 
   # PATCH/PUT /post_tags/1
   def update
     if @post_tag.update(post_tag_params)
+    p tag_name
       render json: @post_tag
     else
       render json: @post_tag.errors, status: :unprocessable_entity
@@ -46,6 +50,6 @@ class PostTagsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_tag_params
-      params.require(:post_tag).permit(:post_id, :tag_id)
+      params..permit(:post_id, :tag_id)
     end
 end

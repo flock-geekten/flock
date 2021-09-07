@@ -26,14 +26,14 @@ services:
     environment:
       - VUE_APP_URL=http://localhost:3000
 
-  text_summary:
-    build: ./text_summary
-    container_name: "flock-text-summary-es"
+  ml_models:
+    build: ./ml_models
+    container_name: "flock-ml_models"
     ports:
       - 9000:9000
     volumes: 
       - type: bind
-        source: ./text_summary/e_sum
+        source: ./ml_models/
         target: /home/workspace
     tty: true
     

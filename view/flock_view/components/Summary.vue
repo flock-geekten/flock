@@ -53,6 +53,21 @@
           </v-btn>
         </div>
       </v-sheet>
+      <br>
+      <v-sheet>
+        <h3>タグ</h3>
+        <v-container>
+          <v-row>
+            <v-col v-for="(keyPhrase, index) in keyPhrases" :key="index">
+              <v-text-field
+                v-model="keyPhrases[index]"
+                :label="'#タグ' + (index+1)"
+                outlined
+                ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-sheet>
     </div>
     <br><br>
     <v-sheet>
@@ -116,6 +131,7 @@
       title: String,
       body: String,
       summary: String,
+      keyPhrases: Object,
     },
     data () {
       return {
@@ -147,9 +163,21 @@
           response => {
             var id = response.data.id
             this.createSummary(id, this.summary)
+            for (let i=0; i < 5; i++){
+              this.createTag(id, this.keyPhrases[i])
+            }
             this.$router.push('/articles/confirm')
           }
         )
+      },
+      // タグの作成
+      createTag: function(post_id, tag_name){
+        const createTagUrl = this.$apiBaseUrl + '/post_tags'
+        axios.defaults.headers.common['Content-Type'] = 'application/json';
+        var params = new URLSearchParams();
+        params.append('post_id', post_id);
+        params.append('tag_name', tag_name);
+        axios.post(createTagUrl, params)
       },
       // 要約文の作成
       createSummary: function(id, summary){

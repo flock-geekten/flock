@@ -26,6 +26,17 @@
       >
       プロフィールを編集
     </v-btn>
+      <br><br>
+    <v-btn
+      rounded
+      depressed
+      outlined
+      dark
+      color="blue"
+      to="/hangouts/choose"
+      >
+      あそびを選択する
+    </v-btn>
     <br><br>
     <v-card flat>
       <v-toolbar

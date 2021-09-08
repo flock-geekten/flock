@@ -1,6 +1,11 @@
 <template>
   <v-app dark>
     <v-main>
+        <div v-show="this.$route.path === '/'" class="top">
+          <div style="text-align:center">
+            <h1 class="top-message">Fun! Fun!! Fun!!!</h1>
+          </div>
+        </div>
       <v-container>
         <Header />
         <v-layout align-center justify-center>
@@ -90,5 +95,14 @@ export default {
 }
 .v-leave-active {
   transition: all 5s 0s ease;
+}
+.top {
+  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=82fef78f-5d5a-4c1f-8ae9-134fc87409ba');
+  height: 400px
+}
+.top-message {
+  padding-top: 150px;
+  font-size: 80px;
+  color: #FFFFFF; 
 }
 </style>

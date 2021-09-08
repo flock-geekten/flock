@@ -1,14 +1,25 @@
 <template>
   <div>
     <v-row align="center" class="justify-center">
-      <v-col cols="6" v-for="post in posts" :key="post.id">
+      <div class="pa-10">
+        <v-btn 
+          to="/hangouts/recommend"
+          color="blue lighten-1"
+          dark
+          depressed
+          rounded
+          class="pa-8"
+        >
+          あそびを探す
+        </v-btn>
+      </div>
+
+      <v-col cols="12" v-for="post in posts" :key="post.id">
         <v-card 
           color="white" 
           flat
-          height="500"
-          width="500"
+          height="350"
           max-height="800"
-          max-width="500"
           :to="{
                name: 'articles-id',
                params: {
@@ -17,15 +28,24 @@
                }"
           class="pa-5"
           >
-          <v-img
-            max-height="150"
-            max-width="500"
-            src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-            ></v-img>
-          <v-card-title>{{ post.post.title | omittedText20 }}<v-spacer /></v-card-title>
-          <v-card-text>{{ post.summary.content | omittedText200 }}</v-card-text>
-          <v-chip>{{ post.tags[0].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[1].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[2].name | omittedText20 }}</v-chip>
-          <v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
+          <v-row>
+            <v-col cols="3">
+              <v-img
+                max-height="300"
+                max-width="300"
+                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                ></v-img>
+            </v-col>
+            <v-col cols="9">
+              <v-card-title>{{ post.post.title | omittedText20 }}</v-card-title>
+              <v-card-text>{{ post.summary.content | omittedText200 }}</v-card-text>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12">
+              <v-chip>{{ post.tags[0].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[1].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[2].name | omittedText20 }}</v-chip><v-spacer /><v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
     </v-row>

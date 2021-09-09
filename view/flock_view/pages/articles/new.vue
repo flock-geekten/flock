@@ -1,21 +1,21 @@
 <template>
   <div>
-    <v-sheet class="pa-15">
-      <div v-show="summaryFlag===true">
-        <Summary 
-           :mode="1"
-           :id="0"
-           :title="title"
-           :body="body"
-           @onEditFlag="onEditFlag"
-           @offEditFlag="offEditFlag"
-           @onSummaryFlag="onSummaryFlag"
-           @offSummaryFlag="offSummaryFlag"
-           :summary="summary"
-           :keyPhrases="keyPhrases"
-           />
-      </div>
-      <div v-show="summaryFlag===false">
+    <div v-show="summaryFlag===true">
+      <Summary 
+         :mode="1"
+         :id="0"
+         :title="title"
+         :body="body"
+         @onEditFlag="onEditFlag"
+         @offEditFlag="offEditFlag"
+         @onSummaryFlag="onSummaryFlag"
+         @offSummaryFlag="offSummaryFlag"
+         :summary="summary"
+         :keyPhrases="keyPhrases"
+         />
+    </div>
+    <div v-show="summaryFlag===false">
+      <v-sheet class="pa-15">
         <v-text-field
           v-model="title"
           label="タイトル"
@@ -24,31 +24,31 @@
           clearable
           class="mt-15"
           />
-          <v-textarea
-            v-model="body"
-            height="1200"
-            label="本文"
-            value="自動生成された文章を入れる"
-            flat
-            solo
-            counter
-            class="mt-5"
-            />
-            <div class="text-center">
-              <v-btn
-                rounded
-                depressed
-                color="blue lighten-1"
-                class="pa-6"
-                dark
-                :ripple="false"
-                @click="onSummaryFlag()"
-                >
-                投稿
-              </v-btn>
-            </div>
+        <v-textarea
+          v-model="body"
+          height="1200"
+          label="本文"
+          value="自動生成された文章を入れる"
+          flat
+          solo
+          counter
+          class="mt-5"
+          />
+      </v-sheet>
+      <div class="text-center py-5">
+        <v-btn
+          rounded
+          depressed
+          color="blue lighten-1"
+          class="pa-6"
+          dark
+          :ripple="false"
+          @click="onSummaryFlag()"
+          >
+          投稿
+        </v-btn>
       </div>
-    </v-sheet>
+    </div>
   </div>
 </template>
 
@@ -111,11 +111,19 @@ import Summary from '../../components/Summary.vue'
             this.keyPhrases = response.data.keyphrase
         })
         // 要約のレスポンスが返ってきたら画面遷移する
+       this.scrollTop()
         this.summaryFlag = true
       },
       offSummaryFlag: function(){
         this.summaryFlag = false
       },
+      // 一番上にスクロールする
+      scrollTop: function(){
+        window.scrollTo({
+          top: 0,
+          behavior: "auto"
+        })
+      }
     }
   }
 </script>

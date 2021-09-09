@@ -60,6 +60,7 @@
                 dark
                 color="blue"
                 class="my-5"
+                :ripple="false"
                 @click="onEditFlag()"
                 >編集
               </v-btn>
@@ -72,6 +73,7 @@
                 depressed
                 color="pink"
                 class="my-5"
+                :ripple="false"
                 @click="createLike()"
                 >いいね
               </v-btn>
@@ -83,6 +85,7 @@
                 depressed
                 color="pink"
                 class="my-5"
+                :ripple="false"
                 @click="destroyLike()"
                 >いいねをはずす
               </v-btn>
@@ -104,6 +107,7 @@
           dark
           color="blue lighten-1"
           to='/'
+          :ripple="false"
           >←TOP
         </v-btn>
           <v-btn
@@ -112,6 +116,7 @@
             dark
             color="blue lighten-1"
             to='/friends'
+            :ripple="false"
             >一緒に遊ぶ友達を探す
           </v-btn>
         </v-col>

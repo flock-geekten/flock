@@ -41,6 +41,7 @@
                 color="blue lighten-1"
                 class="pa-6"
                 dark
+                :ripple="false"
                 @click="onSummaryFlag()"
                 >
                 投稿

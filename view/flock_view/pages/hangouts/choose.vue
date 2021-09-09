@@ -32,6 +32,7 @@
         depressed
         dark
         color="blue lighten-1"
+        :ripple="false"
         to="/"
         >
         決定

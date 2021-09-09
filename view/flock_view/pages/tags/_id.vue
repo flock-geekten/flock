@@ -8,6 +8,7 @@
           flat
           height="350"
           max-height="800"
+          :ripple="false"
           :to="{
                name: 'articles-id',
                params: {

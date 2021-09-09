@@ -15,6 +15,7 @@
           depressed
           color="blue lighten-1"
           dark
+          :ripple="false"
           @click="createComment()"
         >
           コメント
@@ -23,14 +24,14 @@
       <br>
       <br>
       <div v-show="comments.length === 0">
-        <v-card flat class="my-5">
+        <v-card flat class="my-5" :ripple="false">
           <v-card-text>コメントがありません</v-card-text>
         </v-card>
       </div>
       <div v-show="comments.length > 0">
         <div v-for="comment in comments" :key="comment.id">
           <v-divider />
-          <v-card flat class="my-5">
+          <v-card flat class="my-5" :ripple="false">
             <p v-show="currentUserId === comment.user.id">{{ comment.user.name }}</p>
             <p v-show="currentUserId !== comment.user.id"><nuxt-link :to="{ name: 'users-id', params: { id: comment.user.id } }">{{ comment.user.name }}</nuxt-link></p>
             <v-card-text>{{ comment.comment.body }}</v-card-text>

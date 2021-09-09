@@ -10,6 +10,7 @@
           dark
           color="blue lighten-1"
           to='/'
+          :ripple="false"
           >←TOP
         </v-btn>
       </div>

@@ -12,6 +12,7 @@
         dark
         outlined
         color="blue"
+        :ripple="false"
         @click="createFollow()"
         >フォロー
       </v-btn>
@@ -21,6 +22,7 @@
         depressed
         dark
         color="blue"
+        :ripple="false"
         @click="destroyFollow()"
         >フォローをはずす
       </v-btn>
@@ -59,6 +61,7 @@
                    flat 
                    color="grey lighten-3" 
                    class="pa-5"
+                   :ripple="false"
                    :to="{
                         name: 'articles-id',
                         params: {

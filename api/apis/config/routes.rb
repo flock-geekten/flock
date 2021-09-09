@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       post 'current_user' => 'users#current_user'
       get 'tags/:tag_id/posts' => 'tags_api#index'
       # あそびを選択したときまわり
+      get '/score/:user_id', to: 'scores_api#show'
       post '/score', to: 'scores_api#create'
       put '/score', to: 'scores_api#update'
       delete '/score', to: 'scores_api#destroy'

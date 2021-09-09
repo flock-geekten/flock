@@ -22,6 +22,7 @@
         depressed
         color="red"
         dark
+        :ripple="false"
         @click="editSummaryFlag=false"
       >
         完了
@@ -47,6 +48,7 @@
             depressed
             color="blue lighten-1"
             dark
+            :ripple="false"
             @click="editSummaryFlag = true"
           >
             編集
@@ -84,6 +86,7 @@
         outlined
         dark
         color="red"
+        :ripple="false"
         @click="offSummaryFlag();onEditFlag()"
       >
         戻る
@@ -93,6 +96,7 @@
         depressed
         color="blue lighten-1"
         dark
+        :ripple="false"
         @click="createPost()"
       >
         投稿
@@ -104,6 +108,7 @@
         depressed
         outlined
         dark
+        :ripple="false"
         color="red"
         @click="offSummaryFlag();onEditFlag()"
       >
@@ -114,6 +119,7 @@
         depressed
         color="blue lighten-1"
         dark
+        :ripple="false"
         @click="updatePost()"
       >
         完了

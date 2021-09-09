@@ -5,6 +5,7 @@
       max-width="300"
       tile
       flat
+      :ripple="false"
       >
       <v-list shaped color="blue-grey lighten-5">
         <v-subheader>メニュー</v-subheader>

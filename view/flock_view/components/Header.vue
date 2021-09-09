@@ -11,7 +11,7 @@
       <v-layout align-center justify-center>
         <div style="width:1000px">
           <v-row>
-            <v-btn to="/" text color="black">flock</v-btn>
+            <v-btn to="/" text color="black" :ripple="false">flock</v-btn>
             <v-spacer />
               <div v-show="this.$store.state.user.loggedIn">
                 <v-menu
@@ -26,6 +26,7 @@
                       text
                       v-bind="attrs"
                       v-on="on"
+                      :ripple="false"
                       >
                       <v-icon>mdi-account-circle</v-icon>
                     </v-btn>
@@ -47,7 +48,7 @@
                 </v-menu>
               </div>
               <div v-show="!this.$store.state.user.loggedIn">
-                <v-btn depressed dark color="blue lighten-1" to="/login" class="ml-3">ログイン</v-btn>
+                <v-btn depressed dark color="blue lighten-1" to="/login" class="ml-3" :ripple="false">ログイン</v-btn>
               </div>
           </v-row>
         </div>

@@ -22,6 +22,7 @@
       outlined
       dark
       color="blue"
+      :ripple="false"
       @click="userEditFlag = true"
       >
       プロフィールを編集
@@ -33,6 +34,7 @@
       outlined
       dark
       color="blue"
+      :ripple="false"
       to="/hangouts/choose"
       >
       あそびを選択する
@@ -71,6 +73,7 @@
                    flat 
                    color="grey lighten-3" 
                    class="pa-5"
+                   :ripple="false"
                    :to="{
                         name: 'articles-id',
                         params: {

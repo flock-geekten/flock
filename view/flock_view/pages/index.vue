@@ -2,13 +2,15 @@
   <div>
     <v-row align="center" class="justify-center">
       <div class="pa-10">
-        <v-btn 
+        <v-btn
+          v-show="this.$store.state.user.loggedIn"
           to="/hangouts/recommend"
           color="blue lighten-1"
           dark
           depressed
           rounded
           class="pa-8"
+          :ripple="false"
         >
           あそびを探す
         </v-btn>
@@ -26,7 +28,8 @@
                id: post.post.id
                }
                }"
-          class="pa-5"
+          class="pa-5" 
+          :ripple="false"
           >
           <v-row>
             <v-col cols="3">

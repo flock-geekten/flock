@@ -51,6 +51,7 @@
           dark
           color="blue"
           class="mx-auto mb-5"
+          :ripple="false"
           @click="detailFlag = false"
         >
           戻る
@@ -62,6 +63,7 @@
           dark
           color="blue"
           class="mx-auto mb-5"
+          :ripple="false"
           @click="signup()"
         >
           新規登録
@@ -124,6 +126,7 @@
           dark
           color="blue"
           class="mx-auto mb-5"
+          :ripple="false"
           @click="detailFlag = true"
         >
           次へ
@@ -137,6 +140,7 @@
           dark
           color="blue"
           class="mx-auto mb-5"
+          :ripple="false"
           @click="detailFlag = true"
         >
           次へ

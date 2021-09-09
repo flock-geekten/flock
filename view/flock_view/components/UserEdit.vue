@@ -36,6 +36,7 @@
           color="blue lighten-1"
           class="ma-1"
           dark
+          :ripple="false"
           @click="offUserEditFlag()"
           >
           戻る
@@ -46,6 +47,7 @@
           color="blue lighten-1"
           class="ma-1"
           dark
+          :ripple="false"
           @click="edit()"
           >
           編集

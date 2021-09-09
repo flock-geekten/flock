@@ -31,6 +31,7 @@
           outlined
           dark
           color="blue lighten-1"
+          :ripple="false"
           @click="offEditFlag()"
           >戻る
         </v-btn>
@@ -40,6 +41,7 @@
           outlined
           dark
           color="red"
+          :ripple="false"
           @click="deleteDialog = true"
           >記事の削除
         </v-btn>
@@ -48,6 +50,7 @@
           depressed
           dark
           color="blue"
+          :ripple="false"
           @click="offEditFlag();onSummaryFlag()"
           >編集
         </v-btn>
@@ -70,6 +73,7 @@
             rounded
             depressed
             dark
+            :ripple="false"
             @click="deleteDialog=false"
             >
             いいえ
@@ -79,6 +83,7 @@
             rounded
             depressed
             dark
+            :ripple="false"
             @click="destroyPost()"
             >
             はい

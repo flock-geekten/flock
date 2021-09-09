@@ -1,12 +1,14 @@
 <template>
   <div>
+    <!-- アラート -->
     <v-alert
       dense
       text
       type="success"
-      class="pa-5"
+      class="pa-5 my-5"
     >こちらで内容で投稿します。よろしいですか？</v-alert>
-    <br>
+    
+    <!-- 要約 -->
     <div v-show="editSummaryFlag === true">
       <h3>要約</h3>
       <v-sheet class="pa-10">
@@ -30,7 +32,7 @@
       </v-sheet>
     </div>
     <div v-show="editSummaryFlag === false">
-      <h3>要約</h3>
+      <h3 class="mb-3">要約</h3>
       <v-sheet class="pa-10" color="#EEEEEE">
         <div
           v-show="summary === ''"
@@ -55,24 +57,32 @@
           </v-btn>
         </div>
       </v-sheet>
-      <br>
-      <v-sheet>
-        <h3>タグ</h3>
+
+      <!-- タグ -->
+      <h3 class="mt-10 mb-3">タグ</h3>
+      <v-sheet color="#EEEEEE">
         <v-container>
           <v-row>
             <v-col v-for="(keyPhrase, index) in keyPhrases" :key="index">
               <v-text-field
                 v-model="keyPhrases[index]"
-                :label="'#タグ' + (index+1)"
                 outlined
+                rounded
+                dense
                 ></v-text-field>
             </v-col>
           </v-row>
         </v-container>
       </v-sheet>
     </div>
-    <br><br>
-    <v-sheet>
+
+    <!-- タグ編集ダイアログ -->
+    <v-dialog>
+
+    </v-dialog>
+
+    <!-- 記事 -->
+    <v-sheet class="pa-15 my-15">
       <h1>{{ title }}</h1>
       <br>
       <v-divider />

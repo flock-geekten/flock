@@ -9,6 +9,12 @@ class CreateHangouts < ActiveRecord::Migration[6.1]
       t.integer :house
       t.integer :town
       t.integer :mountain
+      t.integer :sea
+      t.integer :nonbiri
+      t.integer :waiwai
+      t.integer :dont_move
+      t.integer :move
+      t.integer :exercise
       t.integer :online
       t.integer :offline
       t.integer :to_2000yen

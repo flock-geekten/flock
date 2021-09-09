@@ -3,7 +3,7 @@ class HangoutsController < ApplicationController
 
   # GET /hangouts
   def index
-    @hangouts = Hangout.order("RAND()").limit(5)
+    @hangouts = Hangout.all
 
     render json: @hangouts
   end

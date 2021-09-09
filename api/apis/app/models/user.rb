@@ -1,6 +1,8 @@
 class User < ApplicationRecord 
   has_many :posts
   has_many :comments
+  has_many :user_hangout_funs
+  has_many :user_hangout_results
 
   # いいね機能関係
   has_many :likes, dependent: :destroy

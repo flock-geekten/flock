@@ -69,6 +69,7 @@
                 outlined
                 rounded
                 dense
+                prefix="# "
                 ></v-text-field>
             </v-col>
           </v-row>

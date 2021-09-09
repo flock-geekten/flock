@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get 'posts' => 'posts_api#index'
       get 'posts/:post_id' => 'posts_api#show'
       post 'current_user' => 'users#current_user'
+      get 'tags/:tag_id/posts' => 'tags_api#index'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

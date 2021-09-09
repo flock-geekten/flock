@@ -61,6 +61,13 @@ export default {
     '@nuxtjs/markdownit'
   ],
 
+  // 画面が変化したときに一番上にスクロール
+  router: {
+    scrollBehavior: function (to, from, savedPosition) {
+      return { x: 0, y: 0 }
+    }
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // baseURL: 'http://localhost:3000'

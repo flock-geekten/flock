@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="py-5">あそびレコメンド</h1>
-      {{ recommend }}
+    <h1 class="py-5">管理者ページ</h1>
+    {{ message }}
   </div>
 </template>
 
@@ -11,11 +11,11 @@ export default {
   data () {
     return {
       hangouts: '',
-      recommend: '',
+      message: '',
     }
   },
   mounted() {
-    this.$axios.get('/api/v1/score/' + this.$store.state.user.userId, {
+    this.$axios.get('/hangouts', {
       headers: { 
         "Content-Type": "application/json", 
       }
@@ -24,13 +24,14 @@ export default {
         this.hangouts = response.data
         this.hangouts = JSON.stringify(this.hangouts)
         this.hangouts = this.hangouts.replaceAll("\"", "\'")
-        const recommendUrl = this.$summaryBaseUrl + '/fun_reco'
+        const recommendUrl = this.$summaryBaseUrl + '/mca'
         var params = {
-          y_json: this.hangouts
+          playlist: this.hangouts
         }
         axios.post(recommendUrl, params).then((res) => {
-          this.recommend = res.data
+          this.message = res.data
         })
+        
       })
   },
 }

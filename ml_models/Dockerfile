@@ -1,9 +1,7 @@
-FROM ubuntu:18.04
+FROM python:3.7
 
 # aptとpipの更新
 RUN apt update && apt -y upgrade
-RUN apt install -y python3.7 python3.7-dev
-RUN apt install -y python3-pip
 
 # mecabとmecab-ipadic-NEologdの導入
 RUN apt install -y mecab
@@ -24,6 +22,8 @@ COPY requirements.txt ${PWD}
 RUN python3.7 -m pip install -r requirements.txt
 # YAKE! model
 RUN python3.7 -m pip install git+https://github.com/LIAAD/yake
+# 多重対応分析
+RUN python3.7 -m pip install --user mca
 
 # 作業ディレクトリ
 WORKDIR /home/workspace

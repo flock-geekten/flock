@@ -1,8 +1,6 @@
 <template>
   <div>
     <h1 class="py-5">{{ this.$store.state.user.userName }} さんにおすすめのあそび</h1>
-    {{ hangouts }}
-    {{ recommend }}
     <div v-show="recommend.length === 0">
       <div style="text-align:center">
         <v-progress-circular
@@ -21,7 +19,7 @@
           dark
           color="blue lighten-1"
           >
-          {{ r }}
+          {{ r.fun_name }}
         </v-btn>
       </div>
     </div>
@@ -53,7 +51,7 @@ export default {
           is_sorted: 1
         }
         axios.post(recommendUrl, params).then((res) => {
-          this.recommend = res.data
+          this.recommend = res.data.slice(0, 5)
         })
       })
   },

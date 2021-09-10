@@ -1,8 +1,27 @@
 <template>
   <div>
-    <h1 class="py-5">あそびレコメンド</h1>
-    <div v-for="r in recommend" :key="r.hangout_id">
-      {{ r }}
+    <h1 class="py-5">{{ this.$store.state.user.userName }} さんにおすすめのあそび</h1>
+    <div v-show="recommend.length === 0">
+      <div style="text-align:center">
+        <v-progress-circular
+          indeterminate
+          color="blue lighten-1"
+         />
+      </div>
+    </div>
+    <div v-show="recommend.length !== 0">
+      <div v-for="r in recommend" :key="r.hangout_id">
+        <v-btn
+          class="mt-5"
+          to="/plans/new"
+          depressed
+          rounded
+          dark
+          color="blue lighten-1"
+          >
+          {{ r }}
+        </v-btn>
+      </div>
     </div>
   </div>
 </template>
@@ -13,7 +32,7 @@ export default {
   data () {
     return {
       hangouts: '',
-      recommend: '',
+      recommend: ['', '', '', '', ''],
     }
   },
   mounted() {
@@ -31,7 +50,7 @@ export default {
           y_json: this.hangouts
         }
         axios.post(recommendUrl, params).then((res) => {
-          this.recommend = res.data.sort()
+          this.recommend = res.data.slice(5)
         })
       })
   },

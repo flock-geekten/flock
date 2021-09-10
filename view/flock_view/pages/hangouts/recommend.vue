@@ -22,6 +22,8 @@
           {{ r.fun_name }}
         </v-btn>
       </div>
+      <h3 class="py-5">がおすすめされました</h3>
+      <h3 class="py-5">あそんでみてはいかがですか？</h3>
     </div>
   </div>
 </template>
@@ -32,7 +34,7 @@ export default {
   data () {
     return {
       hangouts: '',
-      recommend: ['', '', '', '', ''],
+      recommend: '',
     }
   },
   mounted() {

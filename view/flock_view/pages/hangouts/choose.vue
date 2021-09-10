@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h1 class="py-5">以下のあそびは好き度を入力してください</h1>
+    <h1 class="py-5">以下のあそびの好き度を入力してください</h1>
     <p>ハートが多い方が好きになるように入力してください</p>
     <br>
 
     <v-sheet class="pa-5">
       <v-container>
         <v-row v-for="(hangout, index) in hangouts" :key="hangout.id">
-          <v-col cols="2">
+          <v-col cols="3">
             {{ hangout.name }}
           </v-col>
-          <v-col cols="10">
+          <v-col cols="9">
             <v-rating
               v-model="funScore[index]"
               empty-icon="mdi-heart-outline"
@@ -18,7 +18,6 @@
               half-icon="mdi-heart-half-full"
               background-color="red lighten-3"
               color="red"
-              small
               ></v-rating>
           </v-col>
         </v-row>
@@ -60,6 +59,11 @@ import axios from 'axios'
       })
         .then(response => {
           this.hangouts = response.data
+          for (let i = this.hangouts.length - 1; i >= 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.hangouts[i], this.hangouts[j]] = [this.hangouts[j], this.hangouts[i]];
+          }
+          this.hangouts = this.hangouts.slice(0, 5)
         })
     },
     methods: {

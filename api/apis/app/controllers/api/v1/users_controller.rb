@@ -21,7 +21,13 @@ class Api::V1::UsersController < ApplicationController
     end
     @followings = @user.followings
     @followers = @user.followers
-    render json: { user: @user, posts: @post_summary_dict, likes: @likes_post_summary_dict, followings: @followings, followers: @followers }
+    @plans = @user.plans
+    @participations = @user.participations
+    participation_plan_list = []
+    for participation in @participations
+      participation_plan_list << participation.plan
+    end
+    render json: { user: @user, posts: @post_summary_dict, likes: @likes_post_summary_dict, followings: @followings, followers: @followers, plans: @plans, participations: participation_plan_list }
   end
 
 end

@@ -132,6 +132,56 @@
             </div>
           </v-card>
         </v-tab-item>
+        
+        <!-- 予定情報 -->
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <div v-for="plan in plans" :key="plan.id">
+                <v-card 
+                   flat 
+                   color="grey lighten-3" 
+                   class="pa-5"
+                   :to="{
+                        name: 'plans-id',
+                        params: {
+                        id: like.post.id
+                        }
+                        }"
+                   >
+                  <v-card-title>{{ plan.title }}</v-card-title>
+                   <v-card-text>{{ plan.body }}</v-card-text>
+                </v-card>
+                  <br>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+
+        <!-- 参加情報 -->
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <div v-for="participation in participations" :key="participation.id">
+                <v-card
+                   flat
+                   color="grey lighten-3"
+                   class="pa-5"
+                   :to="{
+                        name: 'plans-id',
+                        params: {
+                        id: participation.id
+                        }
+                        }"
+                   >
+                  <v-card-title>{{ participation.title }}</v-card-title>
+                   <v-card-text>{{ participation.body }}</v-card-text>
+                </v-card>
+                  <br>
+              </div>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
 
       </v-tabs-items>
     </v-card>
@@ -156,10 +206,12 @@ export default {
       likes: '',
       followings: '',
       followers: '',
+      plans: '',
+      participations: '',
       tab: null,
       userEditFlag: false,
       items: [
-        '投稿', 'いいね', 'フォロー', 'フォロワー',
+        '投稿', 'いいね', 'フォロー', 'フォロワー', '予定', '参加'
       ],
     }
   },
@@ -182,6 +234,8 @@ export default {
           this.likes = res.data.likes
           this.followings = res.data.followings
           this.followers = res.data.followers
+          this.plans = res.data.plans
+          this.participations = res.data.participations
         })
     },
     offUserEditFlag: function(){

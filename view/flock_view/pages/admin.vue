@@ -24,7 +24,7 @@ export default {
         this.hangouts = response.data
         this.hangouts = JSON.stringify(this.hangouts)
         this.hangouts = this.hangouts.replaceAll("\"", "\'")
-        const recommendUrl = this.$summaryBaseUrl + '/mca'
+        const recommendUrl = this.$summaryBaseUrl + '/mca/'
         var params = {
           playlist: this.hangouts
         }

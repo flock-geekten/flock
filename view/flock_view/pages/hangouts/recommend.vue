@@ -47,7 +47,7 @@ export default {
         this.hangouts = response.data
         this.hangouts = JSON.stringify(this.hangouts)
         this.hangouts = this.hangouts.replaceAll("\"", "\'")
-        const recommendUrl = this.$summaryBaseUrl + '/fun_reco'
+        const recommendUrl = this.$summaryBaseUrl + '/fun_reco/'
         var params = {
           y_json: this.hangouts,
           is_sorted: 1

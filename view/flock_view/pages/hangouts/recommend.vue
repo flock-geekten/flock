@@ -1,7 +1,9 @@
 <template>
   <div>
     <h1 class="py-5">あそびレコメンド</h1>
-      {{ recommend }}
+    <div v-for="r in recommend" :key="r.hangout_id">
+      {{ r }}
+    </div>
   </div>
 </template>
 
@@ -29,7 +31,7 @@ export default {
           y_json: this.hangouts
         }
         axios.post(recommendUrl, params).then((res) => {
-          this.recommend = res.data
+          this.recommend = res.data.sort()
         })
       })
   },

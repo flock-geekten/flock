@@ -2,6 +2,7 @@ numpy
 pandas
 scipy
 GPy
+scikit-learn
 
 # 多重対応分析の可視化で利用
 matplotlib

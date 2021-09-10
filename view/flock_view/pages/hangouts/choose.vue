@@ -59,7 +59,7 @@ import axios from 'axios'
         }
       })
         .then(response => {
-          this.hangouts = response.data
+          this.hangouts = response.data.slice(0, 5)
         })
     },
     methods: {

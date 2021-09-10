@@ -8,7 +8,7 @@ import GPy
 from sklearn.preprocessing import MinMaxScaler
 
 # 多重対応分析の結果のcsvの保存場所
-FUN_FEATURES = '/home/workspace/data/fun_features.csv'
+FUN_FEATURES = '/home/workspace/recommendation_models/data/fun_features.csv'
 
 
 def run(y_json):
@@ -75,5 +75,5 @@ def _calc_minmaxscaler(values):
 def to_json(y_pred):
     y_pred_json = []
     for i, val in enumerate(y_pred):
-        y_pred_json.append(dict(id=i, val=val))
+        y_pred_json.append(dict(hangout_id=i+1, val=val))
     return y_pred_json

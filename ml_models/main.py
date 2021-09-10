@@ -71,9 +71,9 @@ async def post_mca(mca: MCA):
 
 class FunRecommendation(BaseModel):
     y_json: str
+    is_sorted: int # 0:ソートしない，1:ソートする
 
 @app.post("/fun_reco/")
 async def post_fun_reco(fr: FunRecommendation):
     y_json = ast.literal_eval(fr.y_json)
-    print(y_json)
-    return rm_fr.run(y_json)
+    return rm_fr.run(y_json, fr.is_sorted)

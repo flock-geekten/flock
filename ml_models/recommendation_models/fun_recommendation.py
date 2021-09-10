@@ -82,5 +82,5 @@ def _sort_eval_vals(df_eval_vals):
 def to_json(results):   
     y_pred_json = []
     for i, val in enumerate(results.values.flatten()): 
-        y_pred_json.append(dict(hangout_id=results.index[i], score=val))
+        y_pred_json.append(dict(hangout_id=int(results.index[i]), score=val))
     return y_pred_json

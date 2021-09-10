@@ -1,6 +1,8 @@
 <template>
   <div>
     <h1 class="py-5">{{ this.$store.state.user.userName }} さんにおすすめのあそび</h1>
+    {{ hangouts }}
+    {{ recommend }}
     <div v-show="recommend.length === 0">
       <div style="text-align:center">
         <v-progress-circular
@@ -47,10 +49,11 @@ export default {
         this.hangouts = this.hangouts.replaceAll("\"", "\'")
         const recommendUrl = this.$summaryBaseUrl + '/fun_reco'
         var params = {
-          y_json: this.hangouts
+          y_json: this.hangouts,
+          is_sorted: 1
         }
         axios.post(recommendUrl, params).then((res) => {
-          this.recommend = res.data.slice(5)
+          this.recommend = res.data
         })
       })
   },

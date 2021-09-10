@@ -76,4 +76,4 @@ class FunRecommendation(BaseModel):
 @app.post("/fun_reco/")
 async def post_fun_reco(fr: FunRecommendation):
     y_json = ast.literal_eval(fr.y_json)
-    return rm_fr.run(y_json, fr.is_sorted)
+    return rm_fr.run(y_json, fr.is_sorted) 

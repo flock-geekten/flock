@@ -33,16 +33,19 @@
                   </template>
                   <v-list>
                     <v-list-item to="/mypage">
-                      <v-list-item-title><v-icon class="mr-2">mdi-account</v-icon>{{ this.$store.state.user.userName }}</v-list-item-title>
+                      <v-list-item-title>{{ this.$store.state.user.userName }}</v-list-item-title>
                     </v-list-item>
                     <v-list-item to="/articles/new">
-                      <v-list-item-title><v-icon class="mr-2">mdi-note-plus-outline</v-icon>投稿</v-list-item-title>
+                      <v-list-item-title>記事を投稿する</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item to="/plans/new">
+                      <v-list-item-title>計画をたてる</v-list-item-title>
                     </v-list-item>
                     <v-list-item to="/hangouts/recommend">
-                      <v-list-item-title><v-icon class="mr-2">mdi-play</v-icon>あそびレコメンド</v-list-item-title>
+                      <v-list-item-title>あそびレコメンド</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="logout()">
-                      <v-list-item-title><v-icon class="mr-2">mdi-exit-to-app</v-icon>ログアウト</v-list-item-title>
+                      <v-list-item-title>ログアウト</v-list-item-title>
                     </v-list-item>
                   </v-list>
                 </v-menu>

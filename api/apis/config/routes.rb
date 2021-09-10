@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :plan_comments
+  resources :participations
+  resources :plans
   resources :post_tags
   resources :hangouts
   resources :comments
@@ -15,6 +18,11 @@ Rails.application.routes.draw do
   post '/likes', to: 'likes#create'
   delete '/likes', to: 'likes#destroy'
   post '/is_like', to: 'likes#is_likes'
+
+  # 参加機能まわり
+  post '/participations', to: 'participationss#create'
+  delete '/participations', to: 'participations#destroy'
+  post '/is_participation', to: 'participations#is_participations'
 
   # フォロー機能まわり
   post '/follow', to: 'relationships#follow'

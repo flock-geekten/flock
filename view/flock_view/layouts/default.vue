@@ -1,20 +1,33 @@
 <template>
   <v-app dark>
     <v-main>
-        <div v-show="this.$route.path === '/'" class="top">
-          <div style="text-align:center">
-            <h1 class="top-message">Fun! Fun!! Fun!!!</h1>
+      <div v-show="this.$route.path === '/'" class="top">
+        <div style="text-align:center">
+          <h1 class="top-message">Fun! Fun!! Fun!!!</h1>
+          <div class="pa-1">
+            <v-btn
+              v-show="this.$store.state.user.loggedIn"
+              to="/hangouts/recommend"
+              color="white"
+              depressed
+              rounded
+              class="pa-8"
+              :ripple="false"
+              >
+              あそびを探す
+            </v-btn>
           </div>
         </div>
+      </div>
       <v-container>
         <Header />
-        <v-layout align-center justify-center>
-          <div style="width:1000px">
-            <transition mode='in-out'>
+          <v-layout align-center justify-center>
+            <div style="width:1000px">
+              <transition mode='in-out'>
               <Nuxt />
-            </transition>
-          </div>
-        </v-layout>
+              </transition>
+            </div>
+          </v-layout>
       </v-container>
     </v-main>
     <v-footer
@@ -101,7 +114,7 @@ export default {
   height: 400px
 }
 .top-message {
-  padding-top: 150px;
+  padding-top: 100px;
   font-size: 80px;
   color: #FFFFFF; 
 }

@@ -1,21 +1,13 @@
 <template>
   <div>
+    <div v-show="this.$store.state.user.loggedIn === true">
+      <h2 class="py-5">あそびの予定</h2>
+      <v-row align="center" class="justify-center">
+        <Plans :plans="plans" />
+      </v-row>
+    </div>
+    <h2 class="pt-15 pb-5">おすすめ記事</h2>
     <v-row align="center" class="justify-center">
-      <div class="pa-10">
-        <v-btn
-          v-show="this.$store.state.user.loggedIn"
-          to="/hangouts/recommend"
-          color="blue lighten-1"
-          dark
-          depressed
-          rounded
-          class="pa-8"
-          :ripple="false"
-        >
-          あそびを探す
-        </v-btn>
-      </div>
-
       <v-col cols="12" v-for="post in posts" :key="post.id">
         <v-card 
           color="white" 
@@ -46,7 +38,7 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <v-chip>{{ post.tags[0].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[1].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[2].name | omittedText20 }}</v-chip><v-spacer /><v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
+              <v-chip>{{ post.tags[0].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[1].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[2].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[3].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[4].name | omittedText20 }}</v-chip><v-spacer /><v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
             </v-col>
           </v-row>
         </v-card>
@@ -58,13 +50,16 @@
 <script>
 import axios from 'axios'
 import Menu from '../components/Menu.vue'
+import Plans from '../components/Plans.vue'
 export default {
   components: {
-    Menu
+    Menu,
+    Plans
   },
   data () {
     return {
       posts: '',
+      plans: '',
     }
   },
   computed: {
@@ -97,6 +92,14 @@ export default {
      // 20文字目以降は"…"
      return text.length > 20 ? text.slice(0, 20) + "…" : text;
     },
+    omittedText80(text) {
+     // 80文字目以降は"…"
+     return text.length > 80 ? text.slice(0, 80) + "…" : text;
+    },
+    omittedText11(text) {
+     // 11文字目以降は"…"
+     return text.length > 11 ? text.slice(0, 11) + "…" : text;
+    },
   },
   mounted() {
     if (this.$store.state.user.uid !== ''){
@@ -115,6 +118,14 @@ export default {
     })
       .then(response => {
         this.posts = response.data
+      })
+    this.$axios.get('/plans', {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        this.plans = response.data
       })
   }
 }

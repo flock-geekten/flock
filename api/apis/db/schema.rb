@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 2021_09_09_115757) do
   create_table "user_hangout_results", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "user_id"
     t.integer "hangout_id"
-    t.integer "result"
+    t.float "result"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

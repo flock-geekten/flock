@@ -11,10 +11,21 @@
               color="white"
               depressed
               rounded
-              class="pa-8"
+              class="pa-6 mr-3"
               :ripple="false"
               >
               あそびを探す
+            </v-btn>
+            <v-btn
+              v-show="this.$store.state.user.loggedIn"
+              to="/friends"
+              color="white"
+              depressed
+              rounded
+              class="pa-6 ml-3"
+              :ripple="false"
+              >
+              ともだちを探す
             </v-btn>
           </div>
         </div>

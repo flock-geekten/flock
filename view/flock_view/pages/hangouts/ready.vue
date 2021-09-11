@@ -1,30 +1,14 @@
 <template>
   <div>
-    <h1 class="py-5">{{ this.$store.state.user.userName }} さんにおすすめのあそび</h1>
-    <div v-show="flag === false">
+    <v-sheet class="pa-15">
       <div style="text-align:center">
+        <h1>設定中です</h1>
         <v-progress-circular
           indeterminate
           color="blue lighten-1"
          />
       </div>
-    </div>
-    <div v-show="flag === true">
-      <div v-for="r in recommend" :key="r.hangout_id">
-        <v-btn
-          class="mt-5"
-          to="/plans/new"
-          depressed
-          rounded
-          dark
-          color="blue lighten-1"
-          >
-          {{ r.fun_name }}
-        </v-btn>
-      </div>
-      <h3 class="py-5">がおすすめされました</h3>
-      <h3 class="py-5">あそんでみてはいかがですか？</h3>
-    </div>
+    </v-sheet>
   </div>
 </template>
 
@@ -34,9 +18,7 @@ export default {
   data () {
     return {
       hangouts: '',
-      recommend: '',
       recommendsAll: '',
-      flag: false
     }
   },
   mounted() {
@@ -55,14 +37,13 @@ export default {
           is_sorted: 1 // ソートしたもの
         }
         axios.post(recommendUrl, params).then((res) => {
-          this.recommend = res.data.slice(0, 5)
           this.recommendsAll = res.data
           for (var i=0; i<this.recommendsAll.length; i++){
             this.createResult(this.recommendsAll[i].hangout_id, this.recommendsAll[i].score)
             // 全部保存し終わってからおすすめのあそびを表示
             if ( i == this.recommendsAll.length - 1 ){
               console.log("けっこうたいへんやったけど，ほぞんおわったでー")
-              this.flag = true
+              this.$router.push('/')
             }
           }
         })
@@ -81,3 +62,4 @@ export default {
   }
 }
 </script>
+

@@ -44,6 +44,8 @@ Rails.application.routes.draw do
       post '/result', to: 'results_api#create'
       put '/result', to: 'results_api#update'
       delete '/result', to: 'results_api#destroy'
+      # 友達レコメンド
+      post '/friends', to: 'friends_api#recommend'
     end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

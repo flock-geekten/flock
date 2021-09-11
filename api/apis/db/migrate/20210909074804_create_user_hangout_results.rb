@@ -3,7 +3,7 @@ class CreateUserHangoutResults < ActiveRecord::Migration[6.1]
     create_table :user_hangout_results do |t|
       t.integer :user_id
       t.integer :hangout_id
-      t.integer :result
+      t.float :result
 
       t.timestamps
     end

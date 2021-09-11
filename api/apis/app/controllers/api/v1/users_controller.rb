@@ -1,5 +1,6 @@
 class Api::V1::UsersController < ApplicationController
 
+  # 現在ログインしているユーザーの情報
   def current_user
     @user = User.where(uid: params[:uid]).first
     @posts = @user.posts

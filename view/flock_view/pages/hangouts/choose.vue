@@ -79,7 +79,7 @@ import axios from 'axios'
         for (var i=0; i < this.hangouts.length; i++){
           this.createFun(this.hangouts[i].id, this.funScore[i])
         }
-        this.$router.push("/")
+        this.$router.push("/hangouts/ready")
       }
     }
   }

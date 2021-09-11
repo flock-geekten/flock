@@ -111,6 +111,7 @@
           >←TOP
         </v-btn>
           <v-btn
+            v-show="this.$store.state.user.loggedIn === true"
             rounded
             depressed
             dark

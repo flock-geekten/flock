@@ -145,7 +145,7 @@
                    :to="{
                         name: 'plans-id',
                         params: {
-                        id: like.post.id
+                        id: plan.id
                         }
                         }"
                    >

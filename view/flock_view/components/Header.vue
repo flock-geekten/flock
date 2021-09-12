@@ -11,7 +11,7 @@
       <v-layout align-center justify-center>
         <div style="width:1000px">
           <v-row>
-            <v-app-bar-nav-icon><v-img src="https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/Slogo72ppi.png?alt=media&token=1ed0aadf-9325-4f1c-9c2b-5df65bf87287" max-width="120" max-height="100" /></v-app-bar-nav-icon>
+            <v-app-bar-nav-icon to="/"><v-img src="https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/Slogo72ppi.png?alt=media&token=1ed0aadf-9325-4f1c-9c2b-5df65bf87287" max-width="120" max-height="100" /></v-app-bar-nav-icon>
             <v-spacer />
               <div v-show="this.$store.state.user.loggedIn">
                 <v-menu

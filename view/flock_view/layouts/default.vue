@@ -121,7 +121,7 @@ export default {
   transition: all 5s 0s ease;
 }
 .top {
-  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=82fef78f-5d5a-4c1f-8ae9-134fc87409ba');
+  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=180a805e-7f24-428f-addd-de7fefcc1506');
   height: 400px
 }
 .top-message {

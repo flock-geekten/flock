@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
   def index
-    @users = User.order("RAND()").limit(5)
+    @users = User.all
     render json: @users
   end
 

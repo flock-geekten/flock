@@ -24,6 +24,7 @@
               half-icon="mdi-heart-half-full"
               background-color="red lighten-3"
               color="red"
+              readonly
               ></v-rating>
             <v-rating
               v-show="user.score > 0.4 && user.score <= 0.6"
@@ -33,6 +34,7 @@
               half-icon="mdi-heart-half-full"
               background-color="red lighten-3"
               color="red"
+              readonly
               ></v-rating>
             <v-rating
               v-show="user.score > 0.1 && user.score <= 0.4"
@@ -42,6 +44,7 @@
               half-icon="mdi-heart-half-full"
               background-color="red lighten-3"
               color="red"
+              readonly
               ></v-rating>
             <v-rating
               v-show="user.score <= 0.1"
@@ -51,6 +54,7 @@
               half-icon="mdi-heart-half-full"
               background-color="red lighten-3"
               color="red"
+              readonly
               ></v-rating>
           </v-card-text>
           <v-btn to="/plans/new" color="blue lighten-1" dark depressed rounded :ripple="false">一緒に遊ぶ</v-btn>

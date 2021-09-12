@@ -14,22 +14,16 @@ class HangoutsController < ApplicationController
 
   # POST /hangouts
   def create
-    @hangout = Hangout.new(hangout_params)
-
-    if @hangout.save
-      render json: @hangout, status: :created, location: @hangout
-    else
-      render json: @hangout.errors, status: :unprocessable_entity
-    end
+    @hangout = Hangout.create(hangout_params)
+    @hangouts = Hangout.all
+    render json: @hangouts
   end
 
   # PATCH/PUT /hangouts/1
   def update
-    if @hangout.update(hangout_params)
-      render json: @hangout
-    else
-      render json: @hangout.errors, status: :unprocessable_entity
-    end
+    @hangout.update(hangout_params)
+    @hangouts = Hangout.all
+    render json: @hangouts
   end
 
   # DELETE /hangouts/1
@@ -45,6 +39,29 @@ class HangoutsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def hangout_params
-      params.require(:hangout).permit(:name)
+      params.permit(
+        :name, 
+        :indoor, 
+        :outdoor, 
+        :summer,
+        :winter,
+        :house,
+        :town,
+        :mountain,
+        :sea,
+        :nonbiri,
+        :waiwai,
+        :dont_move,
+        :move,
+        :exercise,
+        :online,
+        :offline,
+        :to_2000yen,
+        :to_4000yen,
+        :to_6000yen,
+        :to_8000yen,
+        :to_10000yen,
+        :over_10000yen,
+      )
     end
 end

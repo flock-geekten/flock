@@ -11,7 +11,6 @@ class Api::V1::FriendsApiController < ApplicationController
 
     # 自分のデータ整理
     my_scores = me.user_hangout_results.order(:hangout_id)
-    p my_scores
     my_data = []
     for my_score in my_scores
       my_data << my_score.result

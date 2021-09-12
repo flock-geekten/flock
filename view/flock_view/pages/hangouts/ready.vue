@@ -22,6 +22,7 @@ export default {
     }
   },
   mounted() {
+    // 全あそびの取得
     this.$axios.get('/api/v1/score/' + this.$store.state.user.userId, {
       headers: { 
         "Content-Type": "application/json", 

@@ -11,8 +11,9 @@
       <v-btn @click="authenticate()" depressed color="blue" dark class="my-5">俺が管理者じゃ</v-btn>
       <p>{{ confirm_message }}</p>
     </div>
-    <p>{{ message }}</p>
     <div v-show="flag===true">
+      <p>{{ addMessage }}</p>
+      <p>{{ message }}</p>
       <div v-show="createHangoutFlag === false">
         <v-btn @click="createHangoutFlag = true" depressed dark color="blue">あそびを追加する</v-btn>
         <v-simple-table 
@@ -227,6 +228,8 @@ export default {
       to_8000yen: false,
       to_10000yen: false,
       over_10000yen: false,
+      recommendsAll: '',
+      addMessage: '',
     }
   },
   mounted() {
@@ -268,7 +271,7 @@ export default {
       if(this.password === this.password_correct){
         this.flag = true
       }else{
-        this.confirm_message = "パスワード全然ちゃうぞ，出直してこい"
+        this.confirm_message = "お前だれやねん！パスワード全然ちゃうぞ，出直してこい！"
       }
     },
     reload: function(){
@@ -322,11 +325,65 @@ export default {
       params.append('to_10000yen', this.to_10000yen | this.to01);
       params.append('over_10000yen', this.over_10000yen | this.to01);
       axios.post(createHangoutUrl, params).then((res) => {
-        console.log(res.data)
         this.hangouts = res.data
-        this.message = this.name + "を追加しました",
-        this.createHangoutFlag = false
-        this.scrollTop()
+        this.addMessage = this.name + "を追加したったで，意外としんどいねんから頼むわー",
+        this.reloadAll()
+      })
+    },
+    // ユーザーのあそびのスコアを計算して保存
+    getUserHangoutScore: function(userId){
+      this.$axios.get('/api/v1/score/' + userId, {
+        headers: { 
+          "Content-Type": "application/json", 
+        }
+      })
+        .then(response => {
+          var userHangouts
+          userHangouts = response.data
+          userHangouts = JSON.stringify(userHangouts)
+          userHangouts = userHangouts.replaceAll("\"", "\'")
+          const recommendUrl = this.$summaryBaseUrl + '/fun_reco/'
+          var params = {
+            y_json: userHangouts,
+            is_sorted: 1 // ソートしたもの
+          }
+          axios.post(recommendUrl, params).then((res) => {
+            this.recommendsAll = res.data
+            for (var i=0; i<this.recommendsAll.length; i++){
+              this.createResult(this.recommendsAll[i].hangout_id, this.recommendsAll[i].score, userId)
+            }
+          })
+        })
+    },
+    // あそびのレコメンド結果を保存
+    createResult: function(hangoutId, score, userId){
+      const createResultUrl = this.$apiBaseUrl + '/api/v1/result'
+      var params = new URLSearchParams();
+      params.append('user_id', userId);
+      params.append('hangout_id', hangoutId);
+      params.append('result', score);
+      axios.post(createResultUrl, params)
+    },
+    // すべてのユーザーのあそびの情報を取得しなおす
+    reloadAll: function(){
+      this.$axios.get('/users', {
+      headers: { 
+        "Content-Type": "application/json", 
+      }
+    })
+      .then(response => {
+        var users
+        var count = 0
+        users = response.data
+        for ( const user of users ){
+          this.getUserHangoutScore(user.id)
+          count += 1
+          if (users.length === count){
+            this.reload()
+            this.createHangoutFlag = false
+            this.scrollTop()
+          }
+        }
       })
     },
     // 一番上にスクロールする

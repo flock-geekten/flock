@@ -2,7 +2,7 @@
   <div>
     <h1 class="py-5">友達レコメンド</h1>
     <h3>相性のいい友達</h3>
-    <div v-show="users.length === 0">
+    <div v-show="users.length === 0" style="text-align:center">
       <v-progress-circular
         indeterminate
         color="blue lighten-1"

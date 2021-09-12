@@ -39,5 +39,5 @@ RUN mkdir myapp
 WORKDIR /myapp
 ADD ./apis/Gemfile /Gemfile
 ADD ./apis/Gemfile.lock /Gemfile.lock
-COPY ./apis /myapa
+COPY ./apis /myapp
 RUN /root/.rbenv/shims/bundle install

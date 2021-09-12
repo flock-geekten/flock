@@ -14,7 +14,7 @@
     <div v-show="flag===true">
       <p>{{ addMessage }}</p>
       <p>{{ message }}</p>
-      <v-btn class="py-5" @click="reloadAll()" depressed dark color="green">
+      <v-btn class="py-5" @click="reloadAll()" depressed dark color="green">Reload</v-btn>
       <div v-show="createHangoutFlag === false">
         <v-btn @click="createHangoutFlag = true" depressed dark color="blue">あそびを追加する</v-btn>
         <v-simple-table 
@@ -399,7 +399,7 @@ export default {
 </script>
 
 <style scoped>
-.v-data-table>.v-data-table__wrapper>table {
+.v-data-table > .v-data-table__wrapper > table {
   width: 2500px;
   text-align: center
 }

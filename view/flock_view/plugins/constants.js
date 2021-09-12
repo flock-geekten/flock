@@ -1,5 +1,5 @@
 // const apiBaseUrl = 'https://flock-api.masashi-oba.net'
-// const summaryBaseUrl = 'https://flock.masashi-oba.net:9000'
+// const summaryBaseUrl = 'https://flock-text-summary.masashi-oba.net'
 const apiBaseUrl = 'http://localhost:3000'
 const summaryBaseUrl = 'http://localhost:9000'
 

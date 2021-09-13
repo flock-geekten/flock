@@ -31,7 +31,6 @@
       <v-btn @click="evaluationFlag = true" rounded depressed :ripple="false" dark color="red lighten-1">評価</v-btn>
     </div>
     <div v-show="flag === true && evaluationFlag === true">
-      {{ funScore }}
       <v-sheet class="pa-5">
         <v-container>
           <v-row v-for="(r, index) in recommend" :key="r.hangout_id">

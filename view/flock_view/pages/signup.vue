@@ -199,7 +199,7 @@ export default {
               this.$store.commit('user/setUser', res.data)
               this.$store.commit('user/setUserId', res.data.id)
               this.$store.commit('user/setUserName', res.data.name)
-              this.$router.push('/hangouts/choose')
+              this.$router.push('/hangouts/first')
             })
         })
     },

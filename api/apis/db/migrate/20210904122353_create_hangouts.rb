@@ -2,6 +2,9 @@ class CreateHangouts < ActiveRecord::Migration[6.1]
   def change
     create_table :hangouts do |t|
       t.string :name
+      t.integer :easy_week
+      t.integer :small_group
+      t.integer :large_group
       t.integer :indoor
       t.integer :outdoor
       t.integer :summer

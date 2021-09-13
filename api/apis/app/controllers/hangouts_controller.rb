@@ -41,6 +41,9 @@ class HangoutsController < ApplicationController
     def hangout_params
       params.permit(
         :name, 
+        :easy_week,
+        :small_group,
+        :large_group,
         :indoor, 
         :outdoor, 
         :summer,

@@ -58,7 +58,7 @@ import axios from 'axios'
         }
       })
         .then(response => {
-          this.hangouts = [response.data[54], response.data[14], response.data[19], response.data[11]]
+          this.hangouts = [response.data[53], response.data[14], response.data[19], response.data[11]]
         })
     },
     methods: {

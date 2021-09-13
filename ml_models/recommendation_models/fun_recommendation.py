@@ -51,7 +51,8 @@ def _create_train_set(fun_features, df_y):
 def _calc_gpr(fun_features, x_train, y_train):
     dim = len(x_train.columns)
     #kernel = GPy.kern.Matern32(dim) + GPy.kern.Linear(dim) + GPy.kern.Bias(dim) + GPy.kern.White(dim)
-    kernel = GPy.kern.RBF(dim) + GPy.kern.Linear(dim) + GPy.kern.Bias(dim) + GPy.kern.White(dim)
+    #kernel = GPy.kern.RBF(dim) + GPy.kern.Linear(dim) + GPy.kern.Bias(dim) + GPy.kern.White(dim)
+    kernel = GPy.kern.RBF(dim) + GPy.kern.Bias(dim) + GPy.kern.White(dim)
     # モデルの学習
     model = GPy.models.GPRegression(x_train, y_train, kernel)
     model.optimize()
@@ -69,7 +70,7 @@ def _calc_eval_vals(y_pred):
     variation = y_pred["95%"] - y_pred["5%"]
     variation_mm = _calc_minmaxscaler(variation)
     
-    A = 0.5
+    A = 0.6
     B = 1 - A
     # 期待値が高く,ばらつきが大きい(今までに経験してない)遊びをレコメンドしたい気持ちが込められてる
     eval_vals = A * expected_value_mm + B * variation_mm

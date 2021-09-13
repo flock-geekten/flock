@@ -12,8 +12,12 @@ FUN_FEATURES = '/home/workspace/recommendation_models/data/fun_data.csv'
 
 
 def run(y_json, is_sorted=1):
+    
     fun_name, fun_features = _get_datasets(y_json)
     df_y = _json2dataframe(y_json)
+    print ("=============================")
+    print (df_y)
+    print ("=============================")
     x_train, y_train = _create_train_set(fun_features, df_y)
     y_pred = _calc_gpr(fun_features, x_train, y_train)
     df_eval_vals = _calc_eval_vals(y_pred)

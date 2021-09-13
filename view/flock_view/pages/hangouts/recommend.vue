@@ -31,6 +31,7 @@
       <v-btn @click="evaluationFlag = true" rounded depressed :ripple="false" dark color="red lighten-1">評価</v-btn>
     </div>
     <div v-show="flag === true && evaluationFlag === true">
+      {{ funScore }}
       <v-sheet class="pa-5">
         <v-container>
           <v-row v-for="(r, index) in recommend" :key="r.hangout_id">
@@ -119,8 +120,8 @@ export default {
       axios.post(createFunUrl, params)
     },
     submit: function(){
-      for (var i=0; i < this.hangouts.length; i++){
-        this.createFun(this.hangouts[i].id, this.funScore[i])
+      for (var i=0; i < this.recommend.length; i++){
+        this.createFun(this.recommend[i].hangout_id, this.funScore[i])
       }
       this.$router.push("/hangouts/ready")
     }

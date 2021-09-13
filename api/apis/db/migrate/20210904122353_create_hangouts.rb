@@ -15,11 +15,11 @@ class CreateHangouts < ActiveRecord::Migration[6.1]
       t.integer :sea
       t.integer :nonbiri
       t.integer :waiwai
+      t.integer :scream
       t.integer :dont_move
       t.integer :move
       t.integer :exercise
       t.integer :online
-      t.integer :offline
       t.integer :to_2000yen
       t.integer :to_4000yen
       t.integer :to_6000yen

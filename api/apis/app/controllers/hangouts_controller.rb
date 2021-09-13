@@ -41,6 +41,9 @@ class HangoutsController < ApplicationController
     def hangout_params
       params.permit(
         :name, 
+        :easy_week,
+        :small_group,
+        :large_group,
         :indoor, 
         :outdoor, 
         :summer,
@@ -51,11 +54,11 @@ class HangoutsController < ApplicationController
         :sea,
         :nonbiri,
         :waiwai,
+        :scream,
         :dont_move,
         :move,
         :exercise,
         :online,
-        :offline,
         :to_2000yen,
         :to_4000yen,
         :to_6000yen,

@@ -28,6 +28,9 @@
             <tr>
               <th class="text-center">ID</th>
               <th class="text-center">名前</th>
+              <th class="text-center">手軽さ</th>
+              <th class="text-center">少人数</th>
+              <th class="text-center">大人数</th>
               <th class="text-center">室内</th>
               <th class="text-center">室外</th>
               <th class="text-center">夏</th>
@@ -38,11 +41,11 @@
               <th class="text-center">海辺</th>
               <th class="text-center">のんびり</th>
               <th class="text-center">ワイワイ</th>
+              <th class="text-center">絶叫</th>
               <th class="text-center">動かない</th>
               <th class="text-center">動く</th>
               <th class="text-center">運動</th>
-              <th class="text-center">オンライン</th>
-              <th class="text-center">オフライン</th>
+              <th class="text-center">オンライン可</th>
               <th class="text-center">0~2000円</th>
               <th class="text-center">2000~4000円</th>
               <th class="text-center">4000~6000円</th>
@@ -55,6 +58,9 @@
             <tr v-for="hangout in hangouts" :key=hangout.id>
               <td>{{ hangout.id }}</td>
               <td>{{ hangout.name }}</td>
+              <td>{{ hangout.easy_week }}</td>
+              <td>{{ hangout.small_group }}</td>
+              <td>{{ hangout.large_group }}</td>
               <td>{{ hangout.indoor }}</td>
               <td>{{ hangout.outdoor }}</td>
               <td>{{ hangout.summer }}</td>
@@ -65,11 +71,11 @@
               <td>{{ hangout.sea }}</td>
               <td>{{ hangout.nonbiri }}</td>
               <td>{{ hangout.waiwai }}</td>
+              <td>{{ hangout.scream }}</td>
               <td>{{ hangout.dont_move }}</td>
               <td>{{ hangout.move }}</td>
               <td>{{ hangout.exercise }}</td>
               <td>{{ hangout.online }}</td>
-              <td>{{ hangout.offline }}</td>
               <td>{{ hangout.to_2000yen }}</td>
               <td>{{ hangout.to_4000yen }}</td>
               <td>{{ hangout.to_6000yen }}</td>
@@ -88,6 +94,21 @@
           label="あそび名"
           outlined
         ></v-text-field>
+        <v-switch
+          v-model="easy_week"
+          label="手軽さ(週1以上可)"
+          inset
+        ></v-switch>
+        <v-switch
+          v-model="small_group"
+          label="少人数(4人以下)"
+          inset
+        ></v-switch>
+        <v-switch
+          v-model="large_group"
+          label="大人数(5人以下)"
+          inset
+        ></v-switch>
         <v-switch
           v-model="indoor"
           label="室内"
@@ -139,6 +160,11 @@
           inset
         ></v-switch>
         <v-switch
+          v-model="scream"
+          label="絶叫"
+          inset
+        ></v-switch>
+        <v-switch
           v-model="dont_move"
           label="動かない"
           inset
@@ -155,12 +181,7 @@
         ></v-switch>
         <v-switch
           v-model="online"
-          label="オンライン"
-          inset
-        ></v-switch>
-        <v-switch
-          v-model="offline"
-          label="オフライン"
+          label="オンライン可"
           inset
         ></v-switch>
         <v-switch
@@ -208,6 +229,9 @@ export default {
       flag: false,
       createHangoutFlag: false,
       name: '',
+      easy_week: false,
+      small_group: false,
+      large_group: false,
       indoor: false,
       outdoor: false,
       summer: false,
@@ -218,11 +242,11 @@ export default {
       sea: false,
       nonbiri: false,
       waiwai: false,
+      scream: false,
       dont_move: false,
       move: false,
       exercise: false,
       online: false,
-      offline: false,
       to_2000yen: false,
       to_4000yen: false,
       to_6000yen: false,
@@ -304,6 +328,9 @@ export default {
       const createHangoutUrl = this.$apiBaseUrl + '/hangouts'
       var params = new URLSearchParams();
       params.append('name', this.name);
+      params.append('easy_week', this.easy_week | this.to01);
+      params.append('small_group', this.small_group | this.to01);
+      params.append('large_group', this.large_group | this.to01);
       params.append('indoor', this.indoor | this.to01);
       params.append('outdoor', this.outdoor | this.to01);
       params.append('summer', this.summer | this.to01);
@@ -314,11 +341,11 @@ export default {
       params.append('sea', this.sea | this.to01);
       params.append('nonbiri', this.nonbiri | this.to01);
       params.append('waiwai', this.waiwai | this.to01);
+      params.append('scream', this.scream | this.to01);
       params.append('dont_move', this.dont_move | this.to01);
       params.append('move', this.move | this.to01);
       params.append('exercise', this.exercise | this.to01);
       params.append('online', this.online | this.to01);
-      params.append('offline', this.offline | this.to01);
       params.append('to_2000yen', this.to_2000yen | this.to01);
       params.append('to_4000yen', this.to_4000yen | this.to01);
       params.append('to_6000yen', this.to_6000yen | this.to01);

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-sheet class="pa-15">
+    <v-card class="pa-15" flat>
       <v-textarea
         v-show="this.$store.state.user.loggedIn===true"
         v-model="body"
@@ -53,7 +53,7 @@
           </v-card>
         </div>
       </div>
-    </v-sheet>
+    </v-card>
   </div>
 </template>
 

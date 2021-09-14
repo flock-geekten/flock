@@ -11,7 +11,7 @@
     <!-- 要約 -->
     <div v-show="editSummaryFlag === true">
       <h3>要約</h3>
-      <v-sheet class="pa-10">
+      <v-card flat class="pa-10">
       <v-textarea
         v-model="summary"
         height="150"
@@ -29,11 +29,11 @@
       >
         完了
       </v-btn>
-      </v-sheet>
+      </v-card>
     </div>
     <div v-show="editSummaryFlag === false">
       <h3 class="mb-3">要約</h3>
-      <v-sheet class="pa-10" color="#EEEEEE">
+      <v-card flat class="pa-10" color="#EEEEEE">
         <div
           v-show="summary === ''"
           style="text-align:center"
@@ -56,11 +56,11 @@
             編集
           </v-btn>
         </div>
-      </v-sheet>
+      </v-card>
 
       <!-- タグ -->
       <h3 class="mt-10 mb-3">タグ</h3>
-      <v-sheet color="#EEEEEE">
+      <v-card flat color="#EEEEEE">
         <v-container>
           <v-row>
             <v-col v-for="(keyPhrase, index) in keyPhrases" :key="index">
@@ -74,7 +74,7 @@
             </v-col>
           </v-row>
         </v-container>
-      </v-sheet>
+      </v-card>
     </div>
 
     <!-- タグ編集ダイアログ -->
@@ -83,13 +83,13 @@
     </v-dialog>
 
     <!-- 記事 -->
-    <v-sheet class="pa-15 my-15">
+    <v-card flat class="pa-15 my-15">
       <h1>{{ title }}</h1>
       <br>
       <v-divider />
       <br>
       <p>{{ body }}</p>
-    </v-sheet>
+    </v-card>
     <div v-show="mode===1" class="text-center">
       <v-btn
         rounded

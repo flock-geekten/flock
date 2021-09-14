@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-sheet class="pa-15">
+    <v-card flat class="pa-15">
       <div style="text-align:center">
         <h1>設定中です</h1>
         <v-progress-circular
@@ -8,7 +8,7 @@
           color="blue lighten-1"
          />
       </div>
-    </v-sheet>
+    </v-card>
   </div>
 </template>
 

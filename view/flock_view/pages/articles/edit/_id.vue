@@ -15,7 +15,7 @@
          />
     </div>
     <div v-show="summaryFlag===false">
-      <v-sheet class="pa-15">
+      <v-card flat class="pa-15">
         <v-text-field
           v-model="title"
           label="タイトル"
@@ -34,7 +34,7 @@
             counter
             class="mt-5"
             />
-      </v-sheet>
+      </v-card>
       <div class="text-center py-5">
         <v-btn
           rounded

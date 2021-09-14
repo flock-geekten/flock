@@ -4,16 +4,16 @@
         <v-layout align-center justify-center>
           <h1 class="my-15">{{ post.title }}</h1>
         </v-layout>
-        <v-sheet color="grey lighten-4" rouded="lg" class="ma-3 pa-6" width="1000px" max-width="1000px">
+        <v-card flat color="grey lighten-4" rouded="lg" class="ma-3 pa-6" width="1000px" max-width="1000px">
           <h3>要約</h3>
           <br>
           <p>{{ summary.content}}</p>
-        </v-sheet>
+        </v-card>
       </v-row>
 
       <v-row>
         <v-col cols="9">
-          <v-sheet class="pa-6" rounded="lg">
+          <v-card flat class="pa-6" rounded="lg">
             <!-- 編集画面 -->
             <div v-show="editFlag===true && summaryFlag===false">
               <Form
@@ -44,13 +44,13 @@
                 <Article :post="post" :summary="summary" />
               </v-col>
             </div>
-          </v-sheet>
+          </v-card>
         </v-col>
 
         <v-col cols="3">
           <UserInfo :user="user" />
           <Tags :tags="tags"/>
-          <v-sheet class="my-3 pa-3" color="blue-grey lighten-4" rounded="lg">
+          <v-card flat class="my-3 pa-3" color="blue-grey lighten-4" rounded="lg">
             <div class="my-2 mx-3"><v-icon color="pink" class="pr-2">mdi-heart</v-icon>{{ like.likes_count }}</div>
             <div v-show="this.$store.state.user.userId !== this.user.id &&this.$store.state.user.loggedIn">
               <v-btn
@@ -77,7 +77,7 @@
                 >いいねをはずす
               </v-btn>
             </div>
-          </v-sheet>
+          </v-card>
           <div v-show="this.$store.state.user.userId === this.user.id">
             <v-btn
               rounded

@@ -4,7 +4,7 @@
     <p>ハートが多い方が好きになるように入力してください</p>
     <br>
 
-    <v-sheet class="pa-5">
+    <v-card flat class="pa-5">
       <v-container>
         <v-row v-for="(hangout, index) in hangouts" :key="hangout.id">
           <v-col cols="3">
@@ -22,7 +22,7 @@
           </v-col>
         </v-row>
       </v-container>
-    </v-sheet>
+    </v-card>
     
     <br>
 

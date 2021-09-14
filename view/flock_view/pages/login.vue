@@ -85,6 +85,10 @@ export default {
           this.$store.commit('user/login')
           this.$router.push('/')
         })
+        .catch(() => {
+          this.message = 'メールアドレスまたはパスワードが正しくありません'
+          this.snackbar = true
+        });
     },
   }
 }

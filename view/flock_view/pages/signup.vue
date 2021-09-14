@@ -202,6 +202,10 @@ export default {
               this.$router.push('/hangouts/first')
             })
         })
+        .catch((error) => {
+          this.setErrorMessage(error.code)
+          this.snackbar = true
+        });
     },
     setErrorMessage(errorCode) {
       switch (errorCode) {

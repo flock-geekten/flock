@@ -52,19 +52,6 @@
           <Tags :tags="tags"/>
           <v-sheet class="my-3 pa-3" color="blue-grey lighten-4" rounded="lg">
             <div class="my-2 mx-3"><v-icon color="pink" class="pr-2">mdi-heart</v-icon>{{ like.likes_count }}</div>
-            <div v-show="this.$store.state.user.userId === this.user.id">
-              <v-btn
-                rounded
-                depressed
-                outlined
-                dark
-                color="blue"
-                class="my-5"
-                :ripple="false"
-                @click="onEditFlag()"
-                >編集
-              </v-btn>
-            </div>
             <div v-show="this.$store.state.user.userId !== this.user.id &&this.$store.state.user.loggedIn">
               <v-btn
                 v-show="like.is_like===0"
@@ -91,6 +78,24 @@
               </v-btn>
             </div>
           </v-sheet>
+          <div v-show="this.$store.state.user.userId === this.user.id">
+            <v-btn
+              rounded
+              depressed
+              outlined
+              dark
+              color="blue"
+              class="my-5"
+              :ripple="false"
+              :to="{
+                name: 'articles-edit-id',
+                params: {
+                  id: this.$route.params.id
+                }
+              }"
+              >編集
+            </v-btn>
+          </div>
         </v-col>
       </v-row>
       <v-row>

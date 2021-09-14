@@ -206,12 +206,20 @@
       },
       // 記事の編集
       updatePost: function(){
-        const updatePostUrl = '/posts/' + this.id + '?title=' + this.title + '&body=' + this.body
+        const updatePostUrl = '/posts/' + this.id
+        var updateParams = {
+          title: this.title,
+          body: this.body
+        }
         this.$axios.defaults.headers.common['Content-Type'] = 'application/json';
-        this.$axios.put(updatePostUrl).then(
+        this.$axios.put(updatePostUrl, updateParams).then(
           response => {
-            const updateSummaryUrl = '/posts/' + this.id + '/summaries?content=' + this.summary + '&post_id=' + this.id
-            this.$axios.put(updateSummaryUrl)
+            const updateSummaryUrl = '/posts/' + this.id + '/summaries'
+            var updateSummaryParams = {
+              content: this.summary,
+              post_id: this.id
+            }
+            this.$axios.put(updateSummaryUrl, updateSummaryParams)
             this.$router.push('/articles/confirm')
           }
         )

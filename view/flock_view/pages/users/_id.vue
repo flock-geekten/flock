@@ -56,7 +56,8 @@
         <v-tab-item>
           <v-card flat>
             <v-card-text>
-              <div v-for="post in posts" :key="post.id">
+              <div v-show="posts.length === 0"><v-card-text>投稿がまだありません</v-card-text></div>
+              <div v-show="postslenth !== 0" v-for="post in posts" :key="post.id">
                 <v-card 
                    flat 
                    color="grey lighten-3" 
@@ -82,11 +83,13 @@
         <v-tab-item>
           <v-card flat>
             <v-card-text>
-              <div v-for="like in likes" :key="like.id">
+              <div v-show="likes.length === 0"><v-card-text>まだいいねした投稿がありません</v-card-text></div>
+              <div v-show="likes.length !== 0" v-for="like in likes" :key="like.id">
                 <v-card 
                    flat 
                    color="grey lighten-3" 
                    class="pa-5"
+                   :ripple="false"
                    :to="{
                         name: 'articles-id',
                         params: {
@@ -106,8 +109,9 @@
         <!-- フォロー情報 -->
         <v-tab-item>
           <v-card flat class="px-10 pt-5">
-            <div v-for="following in followings" :key="following.id">
-              <nuxt-link :to="{ name: 'users-id', params: { id: following.id } }">{{ following.name }}</nuxt-link>
+            <div v-show="followings.length === 0"><v-card-text>フォローしているユーザーはいません</v-card-text></div>
+            <div v-show="followings.length !== 0" v-for="following in followings" :key="following.id">
+              <li><nuxt-link :to="{ name: 'users-id', params: { id: following.id } }">{{ following.name }}</nuxt-link></li>
             </div>
           </v-card>
         </v-tab-item>
@@ -115,8 +119,9 @@
         <!-- フォロワー情報 -->
         <v-tab-item>
           <v-card flat class="px-10 pt-5">
-            <div v-for="follower in followers" :key="follower.id">
-              <nuxt-link :to="{ name: 'users-id', params: { id: follower.id } }">{{ follower.name }}</nuxt-link>
+            <div v-show="followers.length === 0"><v-card-text>フォローされているユーザーはいません</v-card-text></div>
+            <div v-show="followers.length !== 0" v-for="follower in followers" :key="follower.id">
+              <li><nuxt-link :to="{ name: 'users-id', params: { id: follower.id } }">{{ follower.name }}</nuxt-link></li>
             </div>
           </v-card>
         </v-tab-item>
@@ -125,11 +130,13 @@
         <v-tab-item>
           <v-card flat>
             <v-card-text>
-              <div v-for="plan in plans" :key="plan.id">
+              <div v-show="plans.length === 0"><v-card-text>まだ予定はありません</v-card-text></div>
+              <div v-show="plans.length !== 0" v-for="plan in plans" :key="plan.id">
                 <v-card 
                    flat 
                    color="grey lighten-3" 
                    class="pa-5"
+                   :ripple="false"
                    :to="{
                         name: 'plans-id',
                         params: {
@@ -150,11 +157,13 @@
         <v-tab-item>
           <v-card flat>
             <v-card-text>
-              <div v-for="participation in participations" :key="participation.id">
+              <div v-show="participations.length === 0"><v-card-text>まだ参加予定の情報はありません</v-card-text></div>
+              <div v-show="participations.length !== 0" v-for="participation in participations" :key="participation.id">
                 <v-card
                    flat
                    color="grey lighten-3"
                    class="pa-5"
+                   :ripple="false"
                    :to="{
                         name: 'plans-id',
                         params: {

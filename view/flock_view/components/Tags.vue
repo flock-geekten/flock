@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-sheet class="pa-3 my-3" color="blue lighten-4" rounded="lg">
+    <v-card flat class="pa-3 my-3" color="blue lighten-4" rounded="lg">
       <div v-for="tag in tags" :key="tag.id">
         <v-chip 
           class="my-1" 
@@ -14,7 +14,7 @@
           # {{ tag.name | omittedText15 }}
         </v-chip>
       </div>
-    </v-sheet>
+    </v-card>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-sheet class="pa-15">
+    <v-card flat class="pa-15">
       <div style="text-align:center">
         <h1>ログアウトしました</h1>
         <br>
@@ -14,6 +14,6 @@
           >←TOP
         </v-btn>
       </div>
-    </v-sheet>
+    </v-card>
   </div>
 </template>

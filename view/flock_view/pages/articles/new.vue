@@ -93,7 +93,7 @@ import Summary from '../../components/Summary.vue'
         // 要約
         const summaryUrl = this.$summaryBaseUrl + "/summary/"
         var summaryParams = { 
-          "sum_count": 3,
+          "sum_count": 0,
           "text": this.body
         }
         axios.post(summaryUrl, summaryParams)

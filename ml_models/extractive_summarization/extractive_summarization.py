@@ -17,11 +17,26 @@ from sumy.summarizers.lex_rank import LexRankSummarizer
 
 
 # main
-def preprocessed_lexrank(text, sum_count=3):
+def preprocessed_lexrank(text, sum_count):
     sentences = separate_sentences(text)
     sentences_dc = dc.data_cleaning(sentences)
     sentence_words = separate_words(sentences_dc)
-    return summy_test(sentences, sentence_words, sum_count=sum_count)
+    print(sentence_words)
+    if sum_count != 0:
+        return sum_text(sentences, sentence_words, sum_count=sum_count)
+    if sum_count == 0:
+        num, stock = 2, 0
+        while 1:
+            targ = sum_text(sentences, sentence_words, sum_count=num)
+            if (len(targ) > 140) and (num == 2) :
+                return sum_text(sentences, sentence_words, sum_count=1)
+            elif len(targ) < 140 : 
+                stock = targ
+                num += 1
+            elif len(targ) > 140:
+                return stock
+            else:
+                return "unanticipated process"
 
 
 # 文区切り
@@ -63,7 +78,7 @@ def separate_words(sentences):
     
     
 # 文章要約メソッド
-def summy_test(sentences_org, corpus, sum_count):
+def sum_text(sentences_org, corpus, sum_count):
     sentences = [' '.join(sentence) + u'。' for sentence in corpus]
     for i, sentence in enumerate(sentences):
         sentences[i] = sentence.strip() # 前後の空白を削除(先頭に英単語があると空白が入ってエラーが出る)

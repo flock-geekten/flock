@@ -66,21 +66,9 @@ import Summary from '../../components/Summary.vue'
         summaryFlag: false,
         dialog: false,
         select: [],
-        tags: [],
         summary: '',
         keyPhrases: '',
       }
-    },
-    mounted() {
-      const url = '/tags'
-      this.$axios.get(url, {
-        headers: { 
-          "Content-Type": "application/json", 
-        }
-      })
-        .then(response => {
-          this.tags = response.data
-        })
     },
     methods: {
       onEditFlag: function(){

@@ -10,7 +10,19 @@
       />
       <div style="text-align:right">
         <v-btn
-          v-show="this.$store.state.user.loggedIn"
+          v-show="this.$store.state.user.loggedIn && this.body.length === 0"
+          rounded
+          depressed
+          outlined
+          disabled
+          color="blue lighten-1"
+          :ripple="false"
+          @click="createComment()"
+        >
+          コメント
+        </v-btn>
+        <v-btn
+          v-show="this.$store.state.user.loggedIn && this.body.length !== 0"
           rounded
           depressed
           color="blue lighten-1"

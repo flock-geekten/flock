@@ -19,7 +19,9 @@ mecab-python3
 mecabpr
 
 # Deleting Emoji
-emoji
+# アップデートで絵文字が削除できなくなったので，バージョン下げてます
+# https://twitter.com/ktr_wtb/status/1370283973373390850
+emoji==0.5.4
 
 # LexRank model
 sumy

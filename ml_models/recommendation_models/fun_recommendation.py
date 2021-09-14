@@ -70,7 +70,7 @@ def _calc_eval_vals(y_pred):
     variation = y_pred["95%"] - y_pred["5%"]
     variation_mm = _calc_minmaxscaler(variation)
     
-    A = 0.6
+    A = 0.4
     B = 1 - A
     # 期待値が高く,ばらつきが大きい(今までに経験してない)遊びをレコメンドしたい気持ちが込められてる
     eval_vals = A * expected_value_mm + B * variation_mm

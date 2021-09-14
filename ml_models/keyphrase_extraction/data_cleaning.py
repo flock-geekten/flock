@@ -17,8 +17,12 @@ def clean_text(text):
     replaced_text = text.lower()
     replaced_text = neologdn.normalize(replaced_text)    # 『楽しみ〜〜〜』の『〜〜〜』などを削除
     replaced_text = re.sub(r'　', ' ', replaced_text)  # 全角空白の除去
+    replaced_text = remove_emoji(replaced_text) # 絵文字の削除
     replaced_text = replaced_text.replace('．', '。').replace('，', '、').replace(',', '、')
     return replaced_text
+
+def remove_emoji(text):
+    return ''.join(c for c in text if c not in emoji.UNICODE_EMOJI)
 
 def clean_url(html_text):
     cleaned_text = re.sub(r'http\S+', '', html_text)

@@ -11,7 +11,6 @@ def text_cleaning(text):
     text = clean_text(text)
     text = clean_url(text)
     text = normalize(text)
-    print(text)
     return text
 
 def clean_text(text):

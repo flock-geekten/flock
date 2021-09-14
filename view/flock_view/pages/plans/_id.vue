@@ -1,6 +1,16 @@
 <template>
   <div>
-    <h1 class="py-5">{{ plan.title }}</h1>
+    <h1 class="py-5" v-show="editFlag === false">{{ plan.title }}</h1>
+    <h1 class="py-5" v-show="editFlag === true">
+      <v-text-field
+        v-model="editedTitle"
+        label="タイトル"
+        flat
+        solo
+        clearable
+        class="mt-5"
+        />
+    </h1>
     <p><nuxt-link :to="{ name: 'users-id', params: { id: user.id } }">{{ user.name }}</nuxt-link> さんのあそびの予定</p>
       <div v-show="this.$store.state.user.userId === plan.user_id">
         <v-btn
@@ -25,6 +35,18 @@
           >募集を再開する
         </v-btn>
         <v-btn
+          v-show="editFlag === false"
+          rounded
+          depressed
+          dark
+          color="grey"
+          :ripple="false"
+          @click="editFlagOn(plan.title, plan.body)"
+          >
+          編集
+        </v-btn>
+        <v-btn
+          v-show="editFlag === true"
           rounded
           depressed
           dark
@@ -58,16 +80,56 @@
           >参加取消
         </v-btn>
       </div>
-      <v-sheet 
-        class="mt-5 pa-5"
-        height="300px"
-      >
-        <p>{{ plan.body }}</p>
-      </v-sheet>
+      <div v-show="editFlag === false">
+        <v-sheet 
+          class="mt-5 pa-5"
+          height="300px"
+        >
+          <p>{{ plan.body }}</p>
+        </v-sheet>
+      </div>
+      <div v-show="editFlag === true">
+      <v-textarea
+        v-model="editedBody"
+        height="300"
+        label="内容"
+        value="自動生成された文章を入れる"
+        placeholder="日時：2021年9月19日 13:00～
+場所：渋谷
+人数：3人募集
+わいわい楽しくやりたいです！ぜひぜひ参加してください！
+                   "
+        hint="時間や場所、人数を明確に記載してください。"
+        flat
+        solo
+        class="mt-5"
+        />
+        <v-btn
+          rounded
+          depressed
+          dark
+          color="grey"
+          :ripple="false"
+          @click="editFlag = false"
+          >
+          戻る
+        </v-btn>
+        <v-btn
+          rounded
+          depressed
+          dark
+          color="blue"
+          :ripple="false"
+          @click="updatePlan()"
+          >
+          編集する
+        </v-btn>
+      </div>
       <br>
       <h3 class=py-3>参加者</h3>
       <v-sheet class="pa-5">
-        <div v-for="p in participations" :key="p.id">
+        <div v-show="participations.length === 0"><h5>参加者がいません</h5></div>
+        <div v-for="p in participations" :key="p.id" v-show="participations.length !== 0">
           <li><nuxt-link :to="{ name: 'users-id', params: { id: p.id } }">{{ p.name }}</nuxt-link> さん</li>
         </div>
       </v-sheet>
@@ -93,7 +155,10 @@ export default {
       user: '',
       comments: '',
       participation: '',
-      participations: ''
+      participations: '',
+      editFlag: false,
+      editedTitle: '',
+      editedBody: '',
     }
   },
   mounted() {
@@ -171,6 +236,22 @@ export default {
           this.reload()
       })
     },
+    // 編集モード
+    editFlagOn: function(title, body){
+      this.editedTitle = title
+      this.editedBody = body
+      this.editFlag = true
+    },
+    // 計画を編集する
+    updatePlan: function(){
+      const updateUrl = this.$apiBaseUrl + '/plans/' + this.plan.id + '?title=' + this.editedTitle + '&body=' + this.editedBody
+      axios.put(updateUrl)
+        .then((res) => {
+          this.reload()
+          this.editFlag = false
+      })
+    },
+    // 計画を削除する
     destroyPlan: function(){
       const destroyUrl = this.$apiBaseUrl + '/plans/' + this.plan.id
       axios.delete(destroyUrl)

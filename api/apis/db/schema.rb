@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 2021_09_09_115757) do
 
   create_table "hangouts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
+    t.integer "easy_week"
+    t.integer "small_group"
+    t.integer "large_group"
     t.integer "indoor"
     t.integer "outdoor"
     t.integer "summer"
@@ -32,11 +35,11 @@ ActiveRecord::Schema.define(version: 2021_09_09_115757) do
     t.integer "sea"
     t.integer "nonbiri"
     t.integer "waiwai"
+    t.integer "scream"
     t.integer "dont_move"
     t.integer "move"
     t.integer "exercise"
     t.integer "online"
-    t.integer "offline"
     t.integer "to_2000yen"
     t.integer "to_4000yen"
     t.integer "to_6000yen"

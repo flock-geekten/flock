@@ -31,9 +31,8 @@
                  }
                  }"
           >
-          <v-card-title>{{ plan.plan.title | omittedText11 }}</v-card-title>
+          <v-card-title>{{ plan.plan.title | omittedText11 }}<v-spacer /><v-icon class="mr-1" color="green">mdi-account-group-outline</v-icon>{{ plan.participations }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ plan.comments_count }}</v-card-title>
           <v-card-text><p>{{ plan.plan.body | omittedText80 }}</p></v-card-text>
-          <v-card-text><v-icon class="mr-1" color="green">mdi-account-group-outline</v-icon>{{ plan.participations }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ plan.comments_count }}</v-card-text>
           </v-card>
         </v-slide-item>
       </v-slide-group>

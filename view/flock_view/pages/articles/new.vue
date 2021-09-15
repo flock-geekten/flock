@@ -15,26 +15,21 @@
          />
     </div>
     <div v-show="summaryFlag===false">
-      <v-card flat class="pa-15">
-        <v-text-field
-          v-model="title"
-          label="タイトル"
-          flat
-          solo
-          clearable
-          class="mt-15"
-          />
-        <v-textarea
-          v-model="body"
-          height="1200"
-          label="本文"
-          value="自動生成された文章を入れる"
-          flat
-          solo
-          counter
-          class="mt-5"
-          />
-      </v-card>
+      <v-text-field
+        v-model="title"
+        label="タイトル"
+        flat
+        solo
+        class="my-5"
+        />
+      <v-textarea
+        v-model="body"
+        height="1200"
+        label="本文"
+        flat
+        solo
+        counter
+        />
       <div class="text-center py-5">
         <v-btn
           rounded

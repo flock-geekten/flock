@@ -7,10 +7,8 @@
           label="タイトル"
           flat
           solo
-          clearable
+          class="mt-5"
         />
-        <v-divider />
-        <br>
         <v-textarea
           v-model="post.body"
           height="500"
@@ -18,7 +16,6 @@
           value="自動生成された文章を入れる"
           flat
           solo
-          clearable
           counter
         />
       </v-col>

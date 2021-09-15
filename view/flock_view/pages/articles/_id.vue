@@ -2,12 +2,12 @@
   <div>
       <v-row>
         <v-layout align-center justify-center>
-          <h1 class="my-15">{{ post.title }}</h1>
+          <h1 class="my-15" style="font-size:40px">{{ post.title }}</h1>
         </v-layout>
         <v-card flat color="grey lighten-4" rouded="lg" class="ma-3 pa-6" width="1000px" max-width="1000px">
           <h3>要約</h3>
           <br>
-          <p>{{ summary.content}}</p>
+          <p style="font-size:20px; line-height:36px">{{ summary.content}}</p>
         </v-card>
       </v-row>
 

@@ -121,8 +121,8 @@ export default {
   transition: all 5s 0s ease;
 }
 .top {
-  /* background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=180a805e-7f24-428f-addd-de7fefcc1506'); */
-  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/IMG_20200607_164538.jpg?alt=media&token=aa8532be-d6e7-4004-ae17-ac6ea1ff5424');
+  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=180a805e-7f24-428f-addd-de7fefcc1506');
+  /* background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/IMG_20200607_164538.jpg?alt=media&token=aa8532be-d6e7-4004-ae17-ac6ea1ff5424'); */
   height: 400px
 }
 .top-message {

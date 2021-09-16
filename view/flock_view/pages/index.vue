@@ -8,7 +8,7 @@
     <TopArticles :posts="posts" v-show="this.$device.isDesktopOrTablet" />
     <TopArticlesMobile :posts="posts" v-show="this.$device.isMobile" />
     <div style="text-align:center">
-      <v-btn depressed rounded color="blue ligthen-1" dark @click="reload()">更新</v-btn>
+      <v-btn depressed rounded class="my-3" color="blue ligthen-1" dark @click="reload()">更新</v-btn>
     </div>
   </div>
 </template>
@@ -53,7 +53,15 @@ export default {
       })
         .then(response => {
           this.posts = response.data
+          this.scrollTop()
         })
+    },
+    // 一番上にスクロールする
+    scrollTop: function(){
+      window.scrollTo({
+        top: 0,
+        behavior: "auto"
+      })
     }
   },
   watch: {

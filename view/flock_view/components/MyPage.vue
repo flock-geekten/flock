@@ -69,7 +69,7 @@
           <v-card flat>
             <v-card-text>
               <div v-show="posts.length === 0"><v-card-text>投稿がまだありません</v-card-text></div>
-              <div v-show="postslenth !== 0" v-for="post in posts" :key="post.id">
+              <div v-show="posts.lenth !== 0" v-for="post in posts" :key="post.id">
                 <v-card 
                    flat 
                    color="grey lighten-3" 

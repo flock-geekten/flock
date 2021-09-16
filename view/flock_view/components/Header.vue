@@ -67,17 +67,7 @@
 
 <script>
 import firebase from '~/plugins/firebase'
-import isMobile from 'ismobilejs'
   export default {
-    data(){
-      return{
-        isAny: '',
-      }
-    },
-    mounted(){
-      this.isAny = isMobile.any
-      console.log(this.isAny)
-    },
     methods: {
       logout(){
         firebase.auth().signOut()

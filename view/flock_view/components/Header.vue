@@ -49,6 +49,9 @@
                     <v-list-item to="/friends">
                       <v-list-item-title>友達を探す</v-list-item-title>
                     </v-list-item>
+                    <v-list-item to="/review">
+                      <v-list-item-title>あそびの評価をする</v-list-item-title>
+                    </v-list-item>
                     <v-list-item @click="logout()">
                       <v-list-item-title>ログアウト</v-list-item-title>
                     </v-list-item>

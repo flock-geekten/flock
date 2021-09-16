@@ -11,7 +11,7 @@
     <!-- 要約 -->
     <div v-show="editSummaryFlag === true">
       <h3>要約</h3>
-      <v-card flat class="pa-10">
+      <v-card flat class="pa-5">
       <v-textarea
         v-model="summary"
         height="150"
@@ -33,7 +33,7 @@
     </div>
     <div v-show="editSummaryFlag === false">
       <h3 class="mb-3">要約</h3>
-      <v-card flat class="pa-10" color="#EEEEEE">
+      <v-card flat class="pa-5" color="#EEEEEE">
         <div
           v-show="summary === ''"
           style="text-align:center"
@@ -60,7 +60,7 @@
 
       <!-- タグ -->
       <h3 class="mt-10 mb-3">タグ</h3>
-      <v-card flat color="#EEEEEE">
+      <v-card flat color="#EEEEEE" v-show="this.$device.isDesktopOrMobile">
         <v-container>
           <v-row>
             <v-col v-for="(keyPhrase, index) in keyPhrases" :key="index">
@@ -75,15 +75,23 @@
           </v-row>
         </v-container>
       </v-card>
+      <v-card flat color="#EEEEEE" v-show="this.$device.isMobile" class="pa-3">
+        <v-container>
+            <v-row v-for="(keyPhrase, index) in keyPhrases" :key="index">
+              <v-text-field
+                v-model="keyPhrases[index]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+          </v-row>
+        </v-container>
+      </v-card>
     </div>
 
-    <!-- タグ編集ダイアログ -->
-    <v-dialog>
-
-    </v-dialog>
-
     <!-- 記事 -->
-    <v-card flat class="pa-15 my-15">
+    <v-card flat class="pa-5 my-15">
       <h1>{{ title }}</h1>
       <br>
       <v-divider />

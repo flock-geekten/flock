@@ -16,7 +16,7 @@
           :ripple="false"
           >
           <v-row>
-            <v-card-title><h2>{{ post.post.title | omittedText35 }}</h2></v-card-title>
+            <v-card-title><h2>{{ post.post.title | omittedText28 }}</h2></v-card-title>
           </v-row>
           <v-row>
             <v-col cols="3">
@@ -67,9 +67,9 @@ export default{
      // 80文字目以降は"…"
      return text.length > 80 ? text.slice(0, 80) + "…" : text;
     },
-    omittedText35(text) {
+    omittedText28(text) {
      // 80文字目以降は"…"
-     return text.length > 35 ? text.slice(0, 35) + "…" : text;
+     return text.length > 28 ? text.slice(0, 28) + "…" : text;
     },
   },
 }

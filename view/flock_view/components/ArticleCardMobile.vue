@@ -16,7 +16,8 @@
 		   :ripple="false"
 		  >
 		   <v-row>
-			 <v-card-title><h2>{{ post.post.title | omittedText8 }}</h2><v-spacer /><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-title>
+			 <v-card-title><h2>{{ post.post.title | omittedText8 }}</h2><v-spacer /></v-card-title>
+			 <v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
 		   </v-row>
 
 		   <v-row>

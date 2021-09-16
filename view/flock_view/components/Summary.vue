@@ -10,7 +10,7 @@
     
     <!-- 要約 -->
     <div v-show="editSummaryFlag === true">
-      <h3>要約</h3>
+      <h2>要約</h2>
       <v-card flat class="pa-5">
       <v-textarea
         v-model="summary"
@@ -32,7 +32,7 @@
       </v-card>
     </div>
     <div v-show="editSummaryFlag === false">
-      <h3 class="mb-3">要約</h3>
+      <h2 class="mb-3">要約</h2>
       <v-card flat class="pa-5" color="#EEEEEE">
         <div
           v-show="summary === ''"
@@ -59,7 +59,7 @@
       </v-card>
 
       <!-- タグ -->
-      <h3 class="mt-10 mb-3">タグ</h3>
+      <h2 class="mt-10 mb-3">タグ</h2>
       <v-card flat color="#EEEEEE" class="py-3" v-show="this.$device.isDesktop">
         <v-container>
           <v-row>
@@ -91,12 +91,9 @@
     </div>
 
     <!-- 記事 -->
-    <v-card flat class="pa-5 my-15">
-      <h1>{{ title }}</h1>
-      <br>
-      <v-divider />
-      <br>
-      <p>{{ body }}</p>
+    <v-card flat class="pa-15 my-5">
+			<div class="post-title">{{ title }}</div>
+			<div v-html="$md.render(body)"></div>
     </v-card>
     <div v-show="mode===1" class="text-center">
       <v-btn
@@ -154,7 +151,10 @@
       mode: Number, // 1: 新規投稿, 2: 投稿編集
       id: Number, // 0: 新規作成時, それ以外: postのid
       title: String,
-      body: String,
+			body: {
+				type: String,
+				default: () => ('')
+			},
       summary: String,
       keyPhrases: Object,
     },
@@ -252,5 +252,11 @@
 <style>
 p {
   white-space: pre-wrap;
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

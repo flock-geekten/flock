@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="pt-5">計画をたてる</h1>
+    <div class="post-title">計画をたてる</div>
     <v-text-field
       v-model="title"
       label="タイトル"
@@ -17,7 +17,6 @@
         placeholder="日時：2021年9月19日 13:00～
 場所：渋谷
 人数：3人募集
-わいわい楽しくやりたいです！ぜひぜひ参加してください！
                    "
         hint="時間や場所、人数を明確に記載してください。"
         flat
@@ -46,7 +45,7 @@ import axios from 'axios'
     data () {
       return {
         title: '',
-        body: '',
+        body: "日時：2021年9月19日 13:00～\n場所：渋谷\n人数：3人募集"
       }
     },
     methods: {
@@ -64,3 +63,12 @@ import axios from 'axios'
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

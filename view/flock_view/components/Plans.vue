@@ -9,7 +9,7 @@
         max-width="100%">
         
         <v-list-item v-show="plans.length === 0">
-          <h3>現在予定されているあそびはありません</h3>
+          <h2>現在予定されているあそびはありません</h2>
         </v-list-item>
         <v-list-item
             v-show="plans.length !== 0"

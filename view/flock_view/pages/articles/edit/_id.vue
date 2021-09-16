@@ -82,7 +82,7 @@
       <v-card>
         <v-card-text>
           <div class="pt-10">
-            <h3><font font-color="#ffffff">本当に削除してよろしいですか？</font></h3>
+            <h2><font font-color="#ffffff">本当に削除してよろしいですか？</font></h2>
           </div>
         </v-card-text>
         <v-card-actions>

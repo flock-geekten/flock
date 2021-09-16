@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>あそびを評価する</h1>	
+		<div class="post-title">あそびを評価する</div>	
 		<v-card flat class="pa-10 my-5">
 			<v-row>
 				<v-col cols="5">
@@ -84,3 +84,12 @@ export default{
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

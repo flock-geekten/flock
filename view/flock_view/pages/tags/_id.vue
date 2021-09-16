@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="py-5">{{ tag.name }}に関する記事</h1>
+    <div class="post-title">{{ tag.name }}に関する記事</div>
     <v-row align="center" class="justify-center">
       <v-col cols="12" v-for="post in posts" :key="post.id">
         <ArticleCard :post="post" v-show="$device.isDesktopOrTablet" />
@@ -38,3 +38,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

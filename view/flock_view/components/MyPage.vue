@@ -12,9 +12,9 @@
       />
     </div>
     <div v-show="userEditFlag===false">
-    <h1 class="my-5">
+    <div class="post-title">
       {{ currentUser.name }}
-    </h1>
+    </div>
     <p>{{ currentUser.profile }}</p>
     <v-btn
       rounded
@@ -254,3 +254,11 @@ export default {
 }
 </script>
 
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

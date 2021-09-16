@@ -79,7 +79,7 @@ export default {
     locales: ['ja']
   },
   markdownit: {
-    preset: 'default',
+		preset: 'default',
     injected: true, 
     breaks: true, 
     html: true, 

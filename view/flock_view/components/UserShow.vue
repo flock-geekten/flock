@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1 class="my-5">
+    <div class="post-title">
       {{ user.name }}
-    </h1>
+    </div>
     <p>{{ user.profile }}</p>
     <div v-show="this.user.id !== this.$store.state.user.userId && this.$store.state.user.loggedIn">
       <v-btn
@@ -250,3 +250,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

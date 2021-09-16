@@ -2,7 +2,7 @@
   <div>
       <v-row>
         <v-layout align-center justify-center>
-          <h1 class="my-15" style="font-size:40px">{{ post.title }}</h1>
+          <div class="post-title" style="font-size:40px">{{ post.title }}</div>
         </v-layout>
       </v-row>
       <v-row>
@@ -13,7 +13,7 @@
 
       <v-row>
         <v-card flat color="grey lighten-4" rouded="lg" class="ma-3 pa-6" width="100%" max-width="100%">
-          <h3>要約</h3>
+          <h2>要約</h2>
           <br>
           <p style="font-size:20px; line-height:36px">{{ summary.content }}</p>
         </v-card>
@@ -244,3 +244,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

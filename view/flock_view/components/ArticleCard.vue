@@ -37,7 +37,7 @@
                 <v-chip-group class="ml-3"><v-chip>{{ post.tags[0].name | omittedText5 }}</v-chip><v-chip>{{ post.tags[1].name | omittedText5 }}</v-chip><v-chip>{{ post.tags[2].name | omittedText5 }}</v-chip><v-chip>{{ post.tags[3].name | omittedText5 }}</v-chip><v-chip>{{ post.tags[4].name | omittedText5 }}</v-chip></v-chip-group>
               </v-row>
               <v-row>
-                <v-card-text><p style="font-size:20px; line-height:28px">{{ post.summary.content | omittedText200 }}</p></v-card-text>
+                <v-card-text><div style="font-size:20px; line-height:28px">{{ post.summary.content | omittedText200 }}</div></v-card-text>
               </v-row>
             </v-col>
           </v-row>

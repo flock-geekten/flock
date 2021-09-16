@@ -60,7 +60,7 @@
 
       <!-- タグ -->
       <h3 class="mt-10 mb-3">タグ</h3>
-      <v-card flat color="#EEEEEE" v-show="this.$device.isDesktopOrMobile">
+      <v-card flat color="#EEEEEE" class="py-3" v-show="this.$device.isDesktop">
         <v-container>
           <v-row>
             <v-col v-for="(keyPhrase, index) in keyPhrases" :key="index">
@@ -75,7 +75,7 @@
           </v-row>
         </v-container>
       </v-card>
-      <v-card flat color="#EEEEEE" v-show="this.$device.isMobile" class="pa-3">
+      <v-card flat color="#EEEEEE" v-show="this.$device.isMobileOrTablet" class="pa-3">
         <v-container>
             <v-row v-for="(keyPhrase, index) in keyPhrases" :key="index">
               <v-text-field
@@ -204,6 +204,15 @@
         params.append('tag_name', tag_name);
         axios.post(createTagUrl, params)
       },
+      // タグの編集
+      updateTag: function(id, tag_name){
+        const updateTagUrl = this.$apiBaseUrl + '/post_tags/' + id
+        axios.defaults.headers.common['Content-Type'] = 'application/json';
+        var params = {
+          tag_name: tag_name
+        }
+        axios.put(updateTagUrl, params)
+      },
       // 要約文の作成
       createSummary: function(id, summary){
         const createSummaryUrl = this.$apiBaseUrl + '/posts/' + id + '/summaries'
@@ -221,7 +230,11 @@
         }
         this.$axios.defaults.headers.common['Content-Type'] = 'application/json';
         this.$axios.put(updatePostUrl, updateParams).then(
-          response => {
+          (response) => {
+            var tagList = response.data
+            for( var i=0; i<tagList.length; i++){
+              this.updateTag(tagList[i], this.keyPhrases[i])
+            } 
             const updateSummaryUrl = '/posts/' + this.id + '/summaries'
             var updateSummaryParams = {
               content: this.summary,

@@ -27,8 +27,8 @@
         <h3 class="py-5">あそんでみてはいかがですか？</h3>
       </v-card>
       <br>
-      <p>おすすめされたあそびに満足を評価すると精度が向上します</p>
-      <v-btn @click="evaluationFlag = true" rounded depressed :ripple="false" dark color="red lighten-1">評価</v-btn>
+      <!-- <p>おすすめされたあそびに満足を評価すると精度が向上します</p>
+      <v-btn @click="evaluationFlag = true" rounded depressed :ripple="false" dark color="red lighten-1">評価</v-btn> -->
     </div>
     <div v-show="flag === true && evaluationFlag === true">
       <v-card flat class="pa-5">

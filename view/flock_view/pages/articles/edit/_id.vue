@@ -45,7 +45,7 @@
           :to="{
             name: 'articles-id',
             params: {
-              id: this.id
+              id: id
             }
           }"
           >

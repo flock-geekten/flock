@@ -40,14 +40,17 @@
                     <v-list-item to="/articles/new">
                       <v-list-item-title>記事を投稿する</v-list-item-title>
                     </v-list-item>
-                    <v-list-item to="/plans/new">
-                      <v-list-item-title>計画をたてる</v-list-item-title>
-                    </v-list-item>
                     <v-list-item to="/hangouts/recommend">
                       <v-list-item-title>あそびを探す</v-list-item-title>
                     </v-list-item>
+                    <v-list-item to="/plans/new">
+                      <v-list-item-title>計画をたてる</v-list-item-title>
+                    </v-list-item>
                     <v-list-item to="/friends">
                       <v-list-item-title>友達を探す</v-list-item-title>
+                    </v-list-item>
+                    <v-list-item to="/review">
+                      <v-list-item-title>あそびの評価をする</v-list-item-title>
                     </v-list-item>
                     <v-list-item @click="logout()">
                       <v-list-item-title>ログアウト</v-list-item-title>

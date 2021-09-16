@@ -3,30 +3,44 @@
     <v-main>
       <div v-show="this.$route.path === '/'" class="top">
         <div style="text-align:center">
-          <h1 class="top-message">Fun! Fun!! Fun!!!</h1>
+          <h1 class="top-message" v-show="this.$device.isDesktop">興味の0→1、そして1→∞</h1>
+          <h1 class="top-message" v-show="this.$device.isMobileOrTablet">興味の0→1<br>そして1→∞</h1>
           <div class="pa-1">
+            <v-btn-toggle rounded>
             <v-btn
-              v-show="this.$store.state.user.loggedIn && this.$device.isDesktopOrTablet"
+              v-show="this.$store.state.user.loggedIn && this.$device.isDesktop"
               to="/hangouts/recommend"
               color="white"
               depressed
               rounded
-              class="pa-6 mr-3"
+              class="pa-6"
               :ripple="false"
               >
-              あそびを探す
+              <b>あそびを探す</b>
             </v-btn>
             <v-btn
-              v-show="this.$store.state.user.loggedIn && this.$device.isDesktopOrTablet"
-              to="/friends"
+              v-show="this.$store.state.user.loggedIn && this.$device.isDesktop"
+              to="/plans/new"
               color="white"
               depressed
               rounded
-              class="pa-6 ml-3"
+              class="pa-6"
               :ripple="false"
               >
-              ともだちを探す
+              <b>計画を立てる</b>
             </v-btn>
+            <v-btn
+              v-show="this.$store.state.user.loggedIn && this.$device.isDesktop"
+              to="/articles/new"
+              color="white"
+              depressed
+              rounded
+              class="pa-6"
+              :ripple="false"
+              >
+              <b>記事を書く</b>
+            </v-btn>
+            </v-btn-toggle>
           </div>
         </div>
       </div>

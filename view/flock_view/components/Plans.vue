@@ -4,9 +4,9 @@
         class="overflow-y-auto mx-auto"
         color="grey lighten-3"
         width="100%"
-        height="400"
-        max-height="1500"
-        max-width="8000">
+        height="300"
+        max-height="300"
+        max-width="100%">
         
         <v-list-item v-show="plans.length === 0">
           <h3>現在予定されているあそびはありません</h3>
@@ -16,7 +16,7 @@
             v-for="plan in plans"
             :key="plan.plan.id">
             <v-card 
-              class="pa-3 my-3" 
+              class="pa-3 my-1" 
               width="100%"
               flat
               :ripple="false"

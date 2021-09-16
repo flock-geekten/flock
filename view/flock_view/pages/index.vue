@@ -4,9 +4,12 @@
       <h2 class="my-3">あそびの予定</h2>
       <Plans :plans="plans" />
     </div>
-    <h2 class="pt-15 pb-5">おすすめ記事</h2>
+    <h2 class="pt-15 pb-5">みんなの投稿</h2>
     <TopArticles :posts="posts" v-show="this.$device.isDesktopOrTablet" />
     <TopArticlesMobile :posts="posts" v-show="this.$device.isMobile" />
+    <div style="text-align:center">
+      <v-btn depressed rounded color="blue ligthen-1" dark @click="reload()">更新</v-btn>
+    </div>
   </div>
 </template>
 
@@ -40,6 +43,16 @@ export default {
       this.$axios.get(url)
         .then((res) => {
           this.posts = res.data
+        })
+    },
+    reload: function(){
+      this.$axios.get('/api/v1/posts', {
+        headers: { 
+          "Content-Type": "application/json", 
+        }
+      })
+        .then(response => {
+          this.posts = response.data
         })
     }
   },

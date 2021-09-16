@@ -26,6 +26,17 @@
         v-model="body"
         height="1200"
         label="本文"
+				placeholder="# タイトル
+
+## サブタイトル
+
+- 箇条書き
+- 箇条書き
+
+1. 数字
+2. 数字
+
+				"
         flat
         solo
         counter

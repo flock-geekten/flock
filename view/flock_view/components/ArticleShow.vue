@@ -2,10 +2,10 @@
   <div>
       <v-row>
         <v-layout align-center justify-center>
-          <h1 class="my-15" style="font-size:40px">{{ post.title }}</h1>
+          <div class="post-title">{{ post.title }}</div>
         </v-layout>
         <v-card flat color="grey lighten-4" rouded="lg" class="ma-3 pa-6" width="1000px" max-width="1000px">
-          <h3>要約</h3>
+          <h2>要約</h2>
           <br>
           <p style="font-size:20px; line-height:36px">{{ summary.content}}</p>
         </v-card>
@@ -17,7 +17,7 @@
             <!-- 記事画面 -->
             <div v-show="editFlag===false && summaryFlag===false">
               <v-col>
-                <Article :post="post" />
+                <Article :post="post" :body="post.body" />
               </v-col>
             </div>
           </v-card>
@@ -136,6 +136,7 @@ export default {
       summaryFlag: false,
       like: '',
       tags:'',
+			flag: false
     }
   },
   mounted() {
@@ -151,6 +152,7 @@ export default {
         this.summary = response.data.summary
         this.comments = response.data.comments
         this.tags = response.data.tags
+				this.flag = true
         this.isLike()
     })
   },
@@ -230,3 +232,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

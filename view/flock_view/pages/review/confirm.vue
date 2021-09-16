@@ -2,8 +2,8 @@
   <div>
     <v-card flat class="pa-15">
       <div style="text-align:center">
-        <h1>評価していただきありがとうございます👍</h1>
-				<h1>あそんだことの記事を書いてみませんか？</h1>
+        <div class="post-title">評価していただきありがとうございます👍</div>
+				<div class="post-title">あそんだことの記事を書いてみませんか？</div>
 				<v-btn depressed rounded outlined color="blue ligthen-1" dark to="/" class="my-3">TOPに戻る</v-btn>
 				<v-btn depressed rounded color="blue ligthen-1" dark to="/articles/new" class="my-3">記事を書く</v-btn>
       </div>
@@ -62,3 +62,11 @@ export default {
 }
 </script>
 
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

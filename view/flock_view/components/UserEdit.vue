@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>プロフィールを編集する</h1>
+    <div class="post-title">プロフィールを編集する</div>
       <v-row>
         <v-col cols="12">
           <v-text-field
@@ -95,5 +95,11 @@ export default {
 <style scoped>
 .w-100 {
   width: 100%;
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

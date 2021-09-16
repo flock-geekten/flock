@@ -1,7 +1,7 @@
 <template>
   <div> 
   <div style="text-align:center">
-    <h1 class="py-3">新規登録</h1>
+    <div class="post-title">新規登録</div>
   </div>
   <v-card v-show="detailFlag === true" flat max-width="500" class="p-4 mt-10 mx-auto">
     <v-snackbar
@@ -230,5 +230,11 @@ export default {
 <style scoped>
 .w-100 {
   width: 100%;
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

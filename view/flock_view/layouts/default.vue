@@ -3,8 +3,8 @@
     <v-main>
       <div v-show="this.$route.path === '/'" class="top">
         <div style="text-align:center">
-          <h1 class="top-message" v-show="this.$device.isDesktop">興味の0→1、そして1→∞</h1>
-          <h1 class="top-message" v-show="this.$device.isMobileOrTablet">興味の0→1<br>そして1→∞</h1>
+          <div class="top-message" v-show="this.$device.isDesktop">興味の0→1、そして1→∞</div>
+          <div class="top-message" v-show="this.$device.isMobileOrTablet">興味の0→1<br>そして1→∞</div>
           <div class="pa-1">
             <v-btn-toggle rounded>
             <v-btn
@@ -148,6 +148,7 @@ export default {
   width: 100%
 }
 .top-message {
+	font-weight: bolder;
   padding-top: 100px;
   font-size: 80px;
   color: #FFFFFF; 

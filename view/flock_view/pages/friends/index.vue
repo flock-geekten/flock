@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="py-5">友達レコメンド</h1>
-    <h3>相性のいい友達</h3>
+    <div class="post-title">友達レコメンド</div>
+    <h2>相性のいい友達</h2>
     <div v-show="users.length === 0" style="text-align:center">
       <v-progress-circular
         indeterminate
@@ -85,3 +85,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

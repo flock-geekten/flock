@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="py-5">管理者ページ</h1>
+    <div class="post-title">管理者ページ</div>
     <div v-show="flag===false">
       <v-text-field
         v-model="password"
@@ -429,5 +429,11 @@ export default {
 .v-data-table > .v-data-table__wrapper > table {
   width: 2500px;
   text-align: center
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

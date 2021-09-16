@@ -12,9 +12,9 @@
       />
     </div>
     <div v-show="userEditFlag===false">
-    <h1 class="my-5">
+    <div class="post-title">
       {{ currentUser.name }}
-    </h1>
+    </div>
     <p>{{ currentUser.profile }}</p>
     <v-btn
       rounded
@@ -42,7 +42,7 @@
     <br><br>
 
     <!-- 投稿情報 -->
-      <h3>投稿情報</h3>
+      <h2>投稿情報</h2>
       <v-list
           class="overflow-y-auto mx-auto"
           color="grey lighten-3"
@@ -51,7 +51,7 @@
           max-height="1500"
           max-width="8000">
         <v-list-item v-show="posts.length === 0">
-          <h3>投稿がまだありません</h3>
+          <h2>投稿がまだありません</h2>
         </v-list-item>
         <v-list-item
             v-show="posts.length !== 0"
@@ -77,7 +77,7 @@
 
     <!-- いいね -->
     <br><br>
-      <h3>いいね</h3>
+      <h2>いいね</h2>
       <v-list
           class="overflow-y-auto mx-auto"
           color="grey lighten-3"
@@ -86,7 +86,7 @@
           max-height="1500"
           max-width="8000">
         <v-list-item v-show="likes.length === 0">
-          <h3>いいねした記事がまだありません</h3>
+          <h2>いいねした記事がまだありません</h2>
         </v-list-item>
         <v-list-item
             v-show="likes.length !== 0"
@@ -112,7 +112,7 @@
 
     <!-- フォロー情報 -->
     <br><br>
-      <h3>フォロー</h3>
+      <h2>フォロー</h2>
       <v-list
           class="overflow-y-auto mx-auto"
           color="grey lighten-3"
@@ -121,7 +121,7 @@
           max-height="1500"
           max-width="8000">
         <v-list-item v-show="followings.length === 0">
-          <h3>フォローしている人はいません</h3>
+          <h2>フォローしている人はいません</h2>
         </v-list-item>
         <v-list-item
             v-show="followings.length !== 0"
@@ -133,7 +133,7 @@
 
     <!-- フォロワー情報 -->
     <br><br>
-      <h3>フォロワー</h3>
+      <h2>フォロワー</h2>
       <v-list
           class="overflow-y-auto mx-auto"
           color="grey lighten-3"
@@ -142,7 +142,7 @@
           max-height="1500"
           max-width="8000">
         <v-list-item v-show="followers.length === 0">
-          <h3>フォローされている人はいません</h3>
+          <h2>フォローされている人はいません</h2>
         </v-list-item>
         <v-list-item
             v-show="followers.length !== 0"
@@ -154,7 +154,7 @@
 
     <!-- 予定情報 -->
     <br><br>
-      <h3>予定情報</h3>
+      <h2>予定情報</h2>
       <v-list
           class="overflow-y-auto mx-auto"
           color="grey lighten-3"
@@ -163,7 +163,7 @@
           max-height="1500"
           max-width="8000">
         <v-list-item v-show="plans.length === 0">
-          <h3>まだ予定はありません</h3>
+          <h2>まだ予定はありません</h2>
         </v-list-item>
         <v-list-item
             v-show="plans.length !== 0"
@@ -190,7 +190,7 @@
 
     <!-- 参加情報 -->
     <br><br>
-      <h3>参加情報</h3>
+      <h2>参加情報</h2>
       <v-list
           class="overflow-y-auto mx-auto"
           color="grey lighten-3"
@@ -199,7 +199,7 @@
           max-height="1500"
           max-width="8000">
         <v-list-item v-show="participations.length === 0">
-          <h3>参加予定はありません</h3>
+          <h2>参加予定はありません</h2>
         </v-list-item>
         <v-list-item
             v-show="participations.length !== 0"
@@ -279,3 +279,11 @@ export default {
 }
 </script>
 
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

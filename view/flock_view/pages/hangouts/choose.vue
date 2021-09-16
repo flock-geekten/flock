@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="py-5">以下のあそびの好き度を入力してください</h1>
+    <div class="post-title">以下のあそびの好き度を入力してください</div>
     <p>ハートが多い方が好きになるように入力してください</p>
     <br>
 
@@ -84,3 +84,12 @@ import axios from 'axios'
     }
   }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

@@ -2,7 +2,7 @@
   <div>
     <v-card flat class="pa-15">
       <div style="text-align:center">
-        <h1>設定中です</h1>
+        <div class="post-title">設定中です</div>
         <v-progress-circular
           indeterminate
           color="blue lighten-1"
@@ -64,3 +64,11 @@ export default {
 }
 </script>
 
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

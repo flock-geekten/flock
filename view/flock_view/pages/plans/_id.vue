@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="py-5" v-show="editFlag === false">{{ plan.title }}</h1>
-    <h1 class="py-5" v-show="editFlag === true">
+    <div class="post-title" v-show="editFlag === false">{{ plan.title }}</div>
+    <div class="post-title" v-show="editFlag === true">
       <v-text-field
         v-model="editedTitle"
         label="タイトル"
@@ -10,7 +10,7 @@
         clearable
         class="mt-5"
         />
-    </h1>
+    </div>
     <p><nuxt-link :to="{ name: 'users-id', params: { id: user.id } }">{{ user.name }}</nuxt-link> さんのあそびの予定</p>
       <div v-show="this.$store.state.user.userId === plan.user_id">
         <v-btn
@@ -126,7 +126,7 @@
         </v-btn>
       </div>
       <br>
-      <h3 class=py-3>参加者</h3>
+      <h2 class=py-3>参加者</h2>
       <v-card flat class="pa-5">
         <div v-show="participations.length === 0"><h5>参加者がいません</h5></div>
         <div v-for="p in participations" :key="p.id" v-show="participations.length !== 0">
@@ -270,5 +270,11 @@ export default {
 <style>
 p {
   white-space: pre-wrap;
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

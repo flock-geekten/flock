@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="py-5">{{ this.$store.state.user.userName }} さんにおすすめのあそび</h1>
+    <div class="post-title">{{ this.$store.state.user.userName }} さんにおすすめのあそび</div>
     <div v-show="flag === false">
       <div style="text-align:center">
         <v-progress-circular
@@ -23,8 +23,8 @@
             {{ r.fun_name }}
           </v-btn>
         </div>
-        <h3 class="py-5">がおすすめされました</h3>
-        <h3 class="py-5">あそんでみてはいかがですか？</h3>
+        <h2 class="py-5">がおすすめされました</h2>
+        <h2 class="py-5">あそんでみてはいかがですか？</h2>
       </v-card>
       <br>
       <!-- <p>おすすめされたあそびに満足を評価すると精度が向上します</p>
@@ -127,3 +127,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="pt-5">計画をたてる</h1>
+    <div class="post-title">計画をたてる</div>
     <v-text-field
       v-model="title"
       label="タイトル"
@@ -64,3 +64,12 @@ import axios from 'axios'
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

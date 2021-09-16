@@ -46,7 +46,7 @@
           <v-card flat class="my-5" :ripple="false">
             <p v-show="currentUserId === comment.user.id">{{ comment.user.name }}</p>
             <p v-show="currentUserId !== comment.user.id"><nuxt-link :to="{ name: 'users-id', params: { id: comment.user.id } }">{{ comment.user.name }}</nuxt-link></p>
-            <v-card-text>{{ comment.comment.body }}</v-card-text>
+            <v-card-text><p style="font-size:20px">{{ comment.comment.body }}</p></v-card-text>
             <div style="text-align:right">
               <v-card-text>{{ dateFormat(comment.comment.created_at) }}</v-card-text>
             </div>

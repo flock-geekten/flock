@@ -1,42 +1,42 @@
-<template>
+<template>   
   <div>
-    <h3 v-show="plans.length === 0">現在予定されているあそびはありません</h3>
-    <v-card
-      flat
-      v-show="plans.length !== 0"
-      class="mx-auto"
-      width="1000"
-      max-width="1000"
-      >
-      <v-slide-group
-        class="pa-4"
-        show-arrows
-        >
-        <v-slide-item
-          v-for="plan in plans" 
-          :key="plan.plan.id"
-          v-slot="{ active, toggle }"
-          >
-          <v-card 
-          class="ma-3 pa-3"
-          flat
-          color="blue-grey lighten-5"
-          :ripple="false"
-          height="200"
-          width="300"
-          :to="{
-                 name: 'plans-id',
-                 params: {
-                 id: plan.plan.id
-                 }
-                 }"
-          >
-          <v-card-title>{{ plan.plan.title | omittedText11 }}<v-spacer /><v-icon class="mr-1" color="green">mdi-account-group-outline</v-icon>{{ plan.participations }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ plan.comments_count }}</v-card-title>
-          <v-card-text><p>{{ plan.plan.body | omittedText80 }}</p></v-card-text>
-          </v-card>
-        </v-slide-item>
-      </v-slide-group>
-    </v-card>
+    <v-list
+        class="overflow-y-auto mx-auto"
+        color="grey lighten-3"
+        width="100%"
+        height="400"
+        max-height="1500"
+        max-width="8000">
+        
+        <v-list-item v-show="plans.length === 0">
+          <h3>現在予定されているあそびはありません</h3>
+        </v-list-item>
+        <v-list-item
+            v-show="plans.length !== 0"
+            v-for="plan in plans"
+            :key="plan.plan.id">
+            <v-card 
+              class="pa-3 my-3" 
+              width="100%"
+              flat
+              :ripple="false"
+              :to="{
+                name: 'plans-id',
+                params: {
+                  id: plan.plan.id
+                }
+              }"
+              >
+              <v-card-text>
+                <v-row>
+                  <h2>{{ plan.plan.title | omittedText25 }}</h2>
+                  <v-spacer />
+                    <v-icon class="mr-1" color="green">mdi-account-group-outline</v-icon>{{ plan.participations }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ plan.comments_count }}
+                </v-row>
+              </v-card-text>
+            </v-card>
+        </v-list-item>
+    </v-list>
   </div>
 </template>
 
@@ -46,13 +46,8 @@
       plans: Array,
     },
     filters: {
-      omittedText80(text) {
-       // 80文字目以降は"…"
-       return text.length > 60 ? text.slice(0, 60) + "…" : text;
-      },
-      omittedText11(text) {
-       // 11文字目以降は"…"
-       return text.length > 11 ? text.slice(0, 11) + "…" : text;
+      omittedText25(text) {
+       return text.length > 25 ? text.slice(0, 25) + "…" : text;
       },
     },
   }

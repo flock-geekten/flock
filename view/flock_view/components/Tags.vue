@@ -11,7 +11,7 @@
             }
           }"
           >
-          # {{ tag.name | omittedText15 }}
+          # {{ tag.name | omittedText8 }}
         </v-chip>
       </div>
     </v-card>
@@ -24,9 +24,9 @@ export default {
     tags: Object
   },
   filters: {
-    omittedText15(text) {
+    omittedText8(text) {
      // 15文字目以降は"…"
-     return text.length > 15 ? text.slice(0, 15) + "…" : text;
+     return text.length > 8 ? text.slice(0, 8) + "…" : text;
     },
   },
 }

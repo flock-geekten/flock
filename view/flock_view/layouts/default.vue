@@ -6,7 +6,7 @@
           <h1 class="top-message">Fun! Fun!! Fun!!!</h1>
           <div class="pa-1">
             <v-btn
-              v-show="this.$store.state.user.loggedIn"
+              v-show="this.$store.state.user.loggedIn && this.$device.isDesktopOrTablet"
               to="/hangouts/recommend"
               color="white"
               depressed
@@ -17,7 +17,7 @@
               あそびを探す
             </v-btn>
             <v-btn
-              v-show="this.$store.state.user.loggedIn"
+              v-show="this.$store.state.user.loggedIn && this.$device.isDesktopOrTablet"
               to="/friends"
               color="white"
               depressed
@@ -32,8 +32,15 @@
       </div>
       <v-container>
         <Header />
-          <v-layout align-center justify-center>
+          <v-layout v-show="this.$device.isDesktopOrTablet" align-center justify-center>
             <div style="width:1000px">
+              <transition mode='in-out'>
+              <Nuxt />
+              </transition>
+            </div>
+          </v-layout>
+          <v-layout v-show="this.$device.isMobile" align-center justify-center>
+            <div style="width:100%">
               <transition mode='in-out'>
               <Nuxt />
               </transition>
@@ -121,9 +128,10 @@ export default {
   transition: all 5s 0s ease;
 }
 .top {
-  /* background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=180a805e-7f24-428f-addd-de7fefcc1506'); */
-  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/IMG_20200607_164538.jpg?alt=media&token=aa8532be-d6e7-4004-ae17-ac6ea1ff5424');
-  height: 400px
+  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=180a805e-7f24-428f-addd-de7fefcc1506');
+  /* background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/IMG_20200607_164538.jpg?alt=media&token=aa8532be-d6e7-4004-ae17-ac6ea1ff5424'); */
+  height: 400px;
+  width: 100%
 }
 .top-message {
   padding-top: 100px;

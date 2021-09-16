@@ -86,7 +86,7 @@
           class="mt-5 pa-5"
           height="300px"
         >
-          <p>{{ plan.body }}</p>
+          <p style="font-size:20px">{{ plan.body }}</p>
         </v-card>
       </div>
       <div v-show="editFlag === true">

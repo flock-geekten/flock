@@ -1,49 +1,12 @@
 <template>
   <div>
     <div v-show="this.$store.state.user.loggedIn === true">
-      <h2 class="py-5">あそびの予定</h2>
-      <v-row align="center" class="justify-center">
-        <Plans :plans="plans" />
-      </v-row>
+      <h2 class="my-3">あそびの予定</h2>
+      <Plans :plans="plans" />
     </div>
     <h2 class="pt-15 pb-5">おすすめ記事</h2>
-    <v-row align="center" class="justify-center">
-      <v-col cols="12" v-for="post in posts" :key="post.id">
-        <v-card 
-          color="white" 
-          flat
-          height="350"
-          max-height="800"
-          :to="{
-               name: 'articles-id',
-               params: {
-               id: post.post.id
-               }
-               }"
-          class="pa-5" 
-          :ripple="false"
-          >
-          <v-row>
-            <v-col cols="3">
-              <v-img
-                max-height="300"
-                max-width="300"
-                src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-                ></v-img>
-            </v-col>
-            <v-col cols="9">
-              <v-card-title>{{ post.post.title | omittedText20 }}</v-card-title>
-              <v-card-text>{{ post.summary.content | omittedText200 }}</v-card-text>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12">
-              <v-chip>{{ post.tags[0].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[1].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[2].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[3].name | omittedText20 }}</v-chip> <v-chip>{{ post.tags[4].name | omittedText20 }}</v-chip><v-spacer /><v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
-            </v-col>
-          </v-row>
-        </v-card>
-      </v-col>
-    </v-row>
+    <TopArticles :posts="posts" v-show="this.$device.isDesktopOrTablet" />
+    <TopArticlesMobile :posts="posts" v-show="this.$device.isMobile" />
   </div>
 </template>
 
@@ -51,10 +14,14 @@
 import axios from 'axios'
 import Menu from '../components/Menu.vue'
 import Plans from '../components/Plans.vue'
+import TopArticles from '../components/TopArticles.vue'
+import TopArticlesMobile from '../components/TopArticlesMobile.vue'
 export default {
   components: {
     Menu,
-    Plans
+    Plans,
+    TopArticles,
+    TopArticlesMobile,
   },
   data () {
     return {
@@ -82,24 +49,6 @@ export default {
         this.fetchContents()
       }
     }
-  },
-  filters: {
-    omittedText200(text) {
-     // 200文字目以降は"…"
-     return text.length > 200 ? text.slice(0, 200) + "…" : text;
-    },
-    omittedText20(text) {
-     // 20文字目以降は"…"
-     return text.length > 20 ? text.slice(0, 20) + "…" : text;
-    },
-    omittedText80(text) {
-     // 80文字目以降は"…"
-     return text.length > 80 ? text.slice(0, 80) + "…" : text;
-    },
-    omittedText11(text) {
-     // 11文字目以降は"…"
-     return text.length > 11 ? text.slice(0, 11) + "…" : text;
-    },
   },
   mounted() {
     if (this.$store.state.user.uid !== ''){

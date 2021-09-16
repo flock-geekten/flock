@@ -14,6 +14,7 @@ RUN npm install firebase@9.0.0
 RUN npm install -g firebase-tools
 RUN npm install vuex-persistedstate
 RUN npm install @nuxtjs/markdownit
+RUN npm install @nuxtjs/device
 RUN yarn add firebase
 RUN yarn add @nuxtjs/dotenv
 RUN yarn add @nuxtjs/markdownit

@@ -15,27 +15,25 @@
          />
     </div>
     <div v-show="summaryFlag===false">
-      <v-card flat class="pa-15">
-        <v-text-field
-          v-model="title"
-          label="タイトル"
+      <v-text-field
+        v-model="title"
+        label="タイトル"
+        flat
+        solo
+        clearable
+        class="mt-5"
+        />
+        <v-textarea
+          v-model="body"
+          height="1200"
+          label="本文"
+          value="自動生成された文章を入れる"
           flat
           solo
-          clearable
-          class="mt-15"
+          counter
+          class="mt-5"
           />
-          <v-textarea
-            v-model="body"
-            height="1200"
-            label="本文"
-            value="自動生成された文章を入れる"
-            flat
-            solo
-            counter
-            class="mt-5"
-            />
-      </v-card>
-      <div class="text-center py-5">
+          <div class="text-center py-5">
         <v-btn
           rounded
           depressed
@@ -56,6 +54,17 @@
         <v-btn
           rounded
           depressed
+          color="red"
+          class="pa-6"
+          dark
+          :ripple="false"
+          @click="deleteDialog = true"
+          >
+          削除
+        </v-btn>
+        <v-btn
+          rounded
+          depressed
           color="blue lighten-1"
           class="pa-6"
           dark
@@ -66,6 +75,41 @@
         </v-btn>
       </div>
     </div>
+    <v-dialog
+      v-model="deleteDialog"
+      width="500"
+      >
+      <v-card>
+        <v-card-text>
+          <div class="pt-10">
+            <h3><font font-color="#ffffff">本当に削除してよろしいですか？</font></h3>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue"
+            rounded
+            depressed
+            dark
+            :ripple="false"
+            @click="deleteDialog = false"
+            >
+            いいえ
+          </v-btn>
+          <v-btn
+            color="red"
+            rounded
+            depressed
+            dark
+            :ripple="false"
+            @click="destroyPost()"
+            >
+            はい
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -86,6 +130,7 @@ export default {
       select: [],
       summary: '',
       keyPhrases: '',
+      deleteDialog: false
     }
   },
   mounted() {
@@ -143,6 +188,13 @@ export default {
         top: 0,
         behavior: "auto"
       })
+    },
+    // 削除
+    destroyPost: function(){
+      const destroyUrl = this.$apiBaseUrl + '/posts/' + this.$route.params.id
+      axios.delete(destroyUrl).then(
+        this.$router.push("/")
+      )
     }
   }
 }

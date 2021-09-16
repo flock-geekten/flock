@@ -3,7 +3,8 @@
     <h1 class="py-5">{{ tag.name }}に関する記事</h1>
     <v-row align="center" class="justify-center">
       <v-col cols="12" v-for="post in posts" :key="post.id">
-        <ArticleCard :post="post" />
+        <ArticleCard :post="post" v-show="$device.isDesktopOrTablet" />
+        <ArticleCardMobile :post="post" v-show="$device.isMobile" />
       </v-col>
     </v-row>
   </div>
@@ -12,9 +13,11 @@
 <script>
 import axios from 'axios'
 import ArticleCard from '../../components/ArticleCard.vue'
+import ArticleCardMobile from '../../components/ArticleCardMobile.vue'
 export default {
   components: {
-    ArticleCard
+    ArticleCard,
+    ArticleCardMobile,
   },
   data () {
     return {

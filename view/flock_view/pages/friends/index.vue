@@ -57,9 +57,9 @@
               readonly
               ></v-rating>
           </v-card-text>
-          <v-btn to="/plans/new" color="blue lighten-1" dark depressed rounded :ripple="false">一緒に遊ぶ</v-btn>
         </v-card>
       </div>
+      <v-btn to="/plans/new" color="blue lighten-1" dark depressed rounded :ripple="false">計画を立てる</v-btn>
     </div>
   </div>
 </template>

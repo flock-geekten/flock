@@ -1,7 +1,7 @@
 <template>
   <div>
-    <MyPage v-show="this.$device.isDesktopOrTablet" />
-    <MyPageMobile v-show="this.$device.isMobile" />
+    <MyPage v-show="this.$device.isDesktop" />
+    <MyPageMobile v-show="this.$device.isMobileOrTablet" />
   </div>
 </template>
 

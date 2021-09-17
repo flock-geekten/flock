@@ -4,6 +4,13 @@
         <v-layout align-center justify-center>
           <div class="post-title">{{ post.title }}</div>
         </v-layout>
+			</v-row>
+      <v-row>
+        <v-layout align-center justify-center>
+          <div class="flock">{{ post.flock }} flock</div>
+        </v-layout>
+			</v-row>
+			<v-row>
         <v-card flat color="grey lighten-4" rouded="lg" class="ma-3 pa-6" width="1000px" max-width="1000px">
           <h2>要約</h2>
           <br>
@@ -54,12 +61,24 @@
               </v-btn>
             </div>
           </v-card>
+          <v-btn
+            v-show="this.$store.state.user.loggedIn === true"
+            rounded
+            depressed
+            dark
+						block
+            color="blue lighten-1"
+            :ripple="false"
+						@click="flock()"
+            >flock
+          </v-btn>
           <div v-show="this.$store.state.user.userId === this.user.id">
             <v-btn
               rounded
               depressed
               outlined
               dark
+							block
               color="blue"
               class="my-5"
               :ripple="false"
@@ -124,7 +143,7 @@ export default {
     Comments,
     Summary,
     UserInfo,
-    Tags
+    Tags,
   },
   data () {
     return {
@@ -198,6 +217,17 @@ export default {
           this.like = res.data
       })
     },
+		flock: function(){
+			const flockUrl = this.$apiBaseUrl + '/api/v1/flock' 
+			var params = {
+				post_id: this.post.id 
+			}
+			localStorage.setItem('title', this.post.title)
+			localStorage.setItem('link', this.$route.path)
+			axios.post(flockUrl, params).then(
+				this.$router.push('/plans/new')
+			)
+		},
     onEditFlag: function(){
       this.editFlag = true
     },
@@ -239,5 +269,10 @@ export default {
 	font-size: 40px;
   margin-top: 50px;	
   margin-bottom: 50px;	
+}
+.flock{
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 20px; 
 }
 </style>

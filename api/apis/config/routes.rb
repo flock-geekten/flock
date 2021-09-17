@@ -31,10 +31,11 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     namespace 'v1' do
-      get 'posts' => 'posts_api#index'
-      get 'posts/:post_id' => 'posts_api#show'
-      post 'current_user' => 'users#current_user'
-      get 'tags/:tag_id/posts' => 'tags_api#index'
+      get '/posts' => 'posts_api#index'
+      get '/posts/:post_id' => 'posts_api#show'
+      post '/flock' => 'posts_api#add_flock'
+      post '/current_user' => 'users#current_user'
+      get '/tags/:tag_id/posts' => 'tags_api#index'
       # あそびを選択したときまわり
       get '/score/:user_id', to: 'scores_api#show'
       post '/score', to: 'scores_api#create'

@@ -84,7 +84,7 @@ import Summary from '../../components/Summary.vue'
         dialog: false,
         select: [],
         summary: '',
-        keyPhrases: '',
+        keyPhrases: ['カテゴリなし', 'カテゴリなし', 'カテゴリなし', 'カテゴリなし', 'カテゴリなし'],
       }
     },
     methods: {

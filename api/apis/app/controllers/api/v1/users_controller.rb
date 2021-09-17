@@ -15,7 +15,8 @@ class Api::V1::UsersController < ApplicationController
       summary = post.summary
       likes_count = post.likes.count
       comments_count = post.comments.count
-      @post_summary_dict << { post: post, summary: summary, likes_count: likes_count, comments_count: comments_count }
+			flock = post.flock
+      @post_summary_dict << { post: post, summary: summary, likes_count: likes_count, comments_count: comments_count, flock: flock }
     end
     @likes = @user.likes
     @likes_post_summary_dict = []

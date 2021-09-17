@@ -86,7 +86,7 @@
           class="mt-5 pa-5"
           height="300px"
         >
-          <p style="font-size:20px">{{ plan.body }}</p>
+					<div v-html="$md.render(body)"></div>
         </v-card>
       </div>
       <div v-show="editFlag === true">
@@ -152,6 +152,7 @@ export default {
   data () {
     return {
       plan: '',
+			body: '',
       user: '',
       comments: '',
       participation: '',
@@ -169,6 +170,7 @@ export default {
     })
       .then(response => {
         this.plan = response.data.plan
+        this.body = response.data.plan.body
         this.user = response.data.user
         this.comments = response.data.comments
         this.participations = response.data.participations

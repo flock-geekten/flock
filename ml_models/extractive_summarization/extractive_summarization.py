@@ -27,14 +27,16 @@ def preprocessed_lexrank(text, sum_count):
         num, stock = 2, 0
         while 1:
             targ = sum_text(sentences, sentence_words, sum_count=num)
-            if (len(targ) > 140) and (num == 2) :
+            if len(targ) == 0: # 『あ』みたいな文に対応させる
+                return text
+            elif (len(targ) > 140) and (num == 2) : # 2文の時点で140字を超えた場合
                 return sum_text(sentences, sentence_words, sum_count=1)
-            elif len(targ) < 140 : 
+            elif len(targ) < 140 : # ある時点で140字未満の場合
                 stock = targ
                 num += 1
-            elif len(targ) > 140:
+            elif len(targ) > 140: # ある時点で140字を超えた場合
                 return stock
-            elif num > 10:
+            elif num > 10 # 10回以上ループしたら強制終了
                 return stock
             else:
                 return "unanticipated process"

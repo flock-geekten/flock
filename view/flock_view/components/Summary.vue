@@ -35,7 +35,7 @@
       <h2 class="mb-3">要約</h2>
       <v-card flat class="pa-5" color="#EEEEEE">
         <div
-          v-show="summary === ''"
+          v-show="summary.length === 0"
           style="text-align:center"
           >
         <v-progress-circular
@@ -43,19 +43,19 @@
           color="blue lighten-1"
          />
         </div>
-        <div v-show="summary !== ''">
+        <div v-show="summary.length !== 0">
           <p>{{ summary }}</p>
-          <v-btn
-            rounded
-            depressed
-            color="blue lighten-1"
-            dark
-            :ripple="false"
-            @click="editSummaryFlag = true"
-          >
-            編集
-          </v-btn>
         </div>
+				<v-btn
+					rounded
+					depressed
+					color="blue lighten-1"
+					dark
+					:ripple="false"
+					@click="editSummaryFlag = true"
+				>
+					編集
+				</v-btn>
       </v-card>
 
       <!-- タグ -->
@@ -63,9 +63,45 @@
       <v-card flat color="#EEEEEE" class="py-3" v-show="this.$device.isDesktop">
         <v-container>
           <v-row>
-            <v-col v-for="(keyPhrase, index) in keyPhrases" :key="index">
+            <v-col>
               <v-text-field
-                v-model="keyPhrases[index]"
+                v-model="keyPhrases[0]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+            </v-col>
+						<v-col>
+              <v-text-field
+                v-model="keyPhrases[1]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+						</v-col>
+						<v-col>
+              <v-text-field
+                v-model="keyPhrases[2]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+						</v-col>
+						<v-col>
+              <v-text-field
+                v-model="keyPhrases[3]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+						</v-col>
+						<v-col>
+              <v-text-field
+                v-model="keyPhrases[4]"
                 outlined
                 rounded
                 dense
@@ -77,9 +113,37 @@
       </v-card>
       <v-card flat color="#EEEEEE" v-show="this.$device.isMobileOrTablet" class="pa-3">
         <v-container>
-            <v-row v-for="(keyPhrase, index) in keyPhrases" :key="index">
+            <v-row>
               <v-text-field
-                v-model="keyPhrases[index]"
+                v-model="keyPhrases[0]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+              <v-text-field
+                v-model="keyPhrases[1]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+              <v-text-field
+                v-model="keyPhrases[2]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+              <v-text-field
+                v-model="keyPhrases[3]"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+              <v-text-field
+                v-model="keyPhrases[4]"
                 outlined
                 rounded
                 dense
@@ -108,12 +172,22 @@
         戻る
       </v-btn>
       <v-btn
+				v-show="title.length !== 0 && body.length !== 0 && summary.length !== 0"
         rounded
         depressed
         color="blue lighten-1"
         dark
         :ripple="false"
         @click="createPost()"
+      >
+        投稿
+      </v-btn>
+      <v-btn
+				v-show="title.length === 0 || body.length === 0 || summary.length === 0"
+        rounded
+        depressed
+        color="blue lighten-1"
+				disabled
       >
         投稿
       </v-btn>
@@ -131,11 +205,22 @@
         戻る
       </v-btn>
       <v-btn
+				v-show="title.length !== 0 && body.length !== 0 && summary.length !== 0"
         rounded
         depressed
         color="blue lighten-1"
         dark
         :ripple="false"
+        @click="updatePost()"
+      >
+        完了
+      </v-btn>
+      <v-btn
+				v-show="title.length === 0 || body.length === 0 || summary.length === 0"
+        rounded
+        depressed
+        color="blue lighten-1"
+				disabled
         @click="updatePost()"
       >
         完了

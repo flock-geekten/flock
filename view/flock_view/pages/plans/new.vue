@@ -25,6 +25,7 @@
         />
         <div class="text-center py-5">
           <v-btn
+						v-show="title.length !== 0 && body.length !== 0"
             rounded
             depressed
             color="blue lighten-1"
@@ -32,6 +33,16 @@
             dark
             :ripple="false"
             @click="createPlan()"
+            >
+            投稿
+          </v-btn>
+          <v-btn
+						v-show="title.length === 0 || body.length === 0"
+            rounded
+            depressed
+						disabled
+            color="blue lighten-1"
+            class="pa-6"
             >
             投稿
           </v-btn>

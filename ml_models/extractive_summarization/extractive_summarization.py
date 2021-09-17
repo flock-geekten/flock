@@ -34,6 +34,8 @@ def preprocessed_lexrank(text, sum_count):
                 num += 1
             elif len(targ) > 140:
                 return stock
+            elif num > 10:
+                return stock
             else:
                 return "unanticipated process"
 

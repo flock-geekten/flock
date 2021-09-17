@@ -2,6 +2,12 @@ class Api::V1::UsersController < ApplicationController
 
   # 現在ログインしているユーザーの情報
   def current_user
+		# googleログインでユーザー登録がなされていない場合の対応
+		first_flag = 0
+		if User.where(uid: params[:uid]).empty?
+			@user = User.create(email: params[:email], name: params[:name], uid: params[:uid])
+			first_flag = 1
+		end
     @user = User.where(uid: params[:uid]).first
     @posts = @user.posts
     @post_summary_dict = []
@@ -28,7 +34,7 @@ class Api::V1::UsersController < ApplicationController
     for participation in @participations
       participation_plan_list << participation.plan
     end
-    render json: { user: @user, posts: @post_summary_dict, likes: @likes_post_summary_dict, followings: @followings, followers: @followers, plans: @plans, participations: participation_plan_list }
+    render json: { user: @user, posts: @post_summary_dict, likes: @likes_post_summary_dict, followings: @followings, followers: @followers, plans: @plans, participations: participation_plan_list, first_flag: first_flag }
   end
 
 end

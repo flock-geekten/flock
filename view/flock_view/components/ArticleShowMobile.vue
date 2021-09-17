@@ -6,6 +6,11 @@
         </v-layout>
       </v-row>
       <v-row>
+        <v-layout align-center justify-center>
+          <div class="flock">{{ post.flock }} flock</div>
+        </v-layout>
+			</v-row>
+      <v-row>
         <v-col cols="12">
           <UserInfo :user="user" />
         </v-col>
@@ -66,6 +71,22 @@
         </v-col>
       </v-row>
 
+			<v-row>
+				<v-col cols="12">
+          <v-btn
+            v-show="this.$store.state.user.userId !== this.user.id && this.$store.state.user.loggedIn === true"
+            rounded
+            depressed
+            dark
+						block
+            color="blue lighten-1"
+            :ripple="false"
+						@click="flock()"
+            >flock
+          </v-btn>
+				</v-col>
+			</v-row>
+
       <v-row>
         <v-col cols="12">
           <div v-show="this.$store.state.user.userId === this.user.id">
@@ -74,6 +95,7 @@
               depressed
               outlined
               dark
+							block
               color="blue"
               class="my-5"
               :ripple="false"
@@ -210,6 +232,17 @@ export default {
           this.like = res.data
       })
     },
+		flock: function(){
+			const flockUrl = this.$apiBaseUrl + '/api/v1/flock' 
+			var params = {
+				post_id: this.post.id 
+			}
+			localStorage.setItem('title', this.post.title)
+			localStorage.setItem('link', this.$route.path)
+			axios.post(flockUrl, params).then(
+				this.$router.push('/plans/new')
+			)
+		},
     onEditFlag: function(){
       this.editFlag = true
     },

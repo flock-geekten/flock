@@ -59,6 +59,17 @@ import axios from 'axios'
         body: "日時：2021年9月19日 13:00～\n場所：渋谷\n人数：3人募集"
       }
     },
+		mounted(){
+			var title = localStorage.getItem("title");
+			var link = localStorage.getItem("link");
+			console.log(typeof(title))
+			console.log(typeof(link))
+			if (title !== null && link !== null){
+				this.body = "[" + title + "](" + link + ")を読んであそびたくなりました！\n\n日時：2021年9月19日 13:00～\n場所：渋谷\n人数：3人募集"
+			}
+			localStorage.removeItem("title")
+			localStorage.removeItem("link")
+		},
     methods: {
       createPlan: function(){
       const createPlanUrl = this.$apiBaseUrl + '/plans'

@@ -80,7 +80,7 @@ export default {
       }
     })
       .then(response => {
-        this.users = response.data.slice(0, 10)
+        this.users = response.data.slice(0, 5)
       })
   }
 }

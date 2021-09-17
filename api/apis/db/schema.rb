@@ -22,6 +22,11 @@ ActiveRecord::Schema.define(version: 2021_09_09_115757) do
 
   create_table "hangouts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name"
+    t.integer "knowledge_rule"
+    t.integer "time_to1"
+    t.integer "time_from1_to2"
+    t.integer "time_from2_to3"
+    t.integer "time_from3"
     t.integer "easy_week"
     t.integer "small_group"
     t.integer "large_group"
@@ -43,9 +48,7 @@ ActiveRecord::Schema.define(version: 2021_09_09_115757) do
     t.integer "to_2000yen"
     t.integer "to_4000yen"
     t.integer "to_6000yen"
-    t.integer "to_8000yen"
-    t.integer "to_10000yen"
-    t.integer "over_10000yen"
+    t.integer "over_6000yen"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

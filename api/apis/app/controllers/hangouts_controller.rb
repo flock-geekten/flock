@@ -41,11 +41,11 @@ class HangoutsController < ApplicationController
     def hangout_params
       params.permit(
         :name, 
-        :knowledge_rule
-        :time_to1
-        :time_from1_to2
-        :time_from2_to3
-        :time_from3
+        :knowledge_rule,
+        :time_to1,
+        :time_from1_to2,
+        :time_from2_to3,
+        :time_from3,
         :easy_week,
         :small_group,
         :large_group,

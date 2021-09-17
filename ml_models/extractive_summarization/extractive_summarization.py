@@ -24,22 +24,25 @@ def preprocessed_lexrank(text, sum_count):
     if sum_count != 0:
         return sum_text(sentences, sentence_words, sum_count=sum_count)
     if sum_count == 0:
+        count = 0
         num, stock = 2, 0
-        while 1:
+        while count < 10:
             targ = sum_text(sentences, sentence_words, sum_count=num)
-            if len(targ) == 0: # 『あ』みたいな文に対応させる
-                return text
-            elif (len(targ) > 140) and (num == 2) : # 2文の時点で140字を超えた場合
+            if (len(targ) > 140) and (num == 2) : # 2文の時点で140字を超えた場合
                 return sum_text(sentences, sentence_words, sum_count=1)
             elif len(targ) < 140 : # ある時点で140字未満の場合
                 stock = targ
                 num += 1
             elif len(targ) > 140: # ある時点で140字を超えた場合
                 return stock
-            elif num > 10 # 10回以上ループしたら強制終了
+            elif num == 10 # MAX10文まで
                 return stock
-            else:
-                return "unanticipated process"
+            elif len(targ) == 0: # 『あ』みたいな文に対応させる
+                return "要約を手動で編集してください！ごめんなさい！"
+            else: # 予期せぬ事態に備えて
+                return "要約を手動で編集してください！ごめんなさい！"
+            count += 1
+        return "要約を手動で編集してください！ごめんなさい！" # 予期せぬ事態に備えて
 
 
 # 文区切り

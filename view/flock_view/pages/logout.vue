@@ -2,7 +2,7 @@
   <div>
     <v-card flat class="pa-15">
       <div style="text-align:center">
-        <div post-title>ログアウトしました</div>
+        <div class="post-title">ログアウトしました</div>
         <br>
         <v-btn
           rounded

@@ -19,7 +19,7 @@
 						:ripple="false"
 						>
 						<v-row>
-							<v-card-title><h2>{{ post.post.title | omittedText28 }}</h2></v-card-title>
+							<v-card-title><v-avatar size="36" color="blue ligthen-1" dark class="mr-2"><span class="white--text text-h5">{{ post.flock }}</span></v-avatar><h2>{{ post.post.title | omittedText28 }}</h2></v-card-title>
 						</v-row>
 						<v-row>
 							<v-col cols="3">
@@ -32,7 +32,10 @@
 										></v-img>
 								</v-row>
 								<v-row>
-	<v-card-text><v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}</v-card-text>
+									<v-card-text>
+										<v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}
+										<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}
+									</v-card-text>
 								</v-row>
 							</v-col>
 							<v-col cols="9">
@@ -85,3 +88,11 @@ export default{
   },
 }
 </script>
+
+<style>
+.flock{
+	font-weight: bold;
+	font-size: 18px;
+	margin-bottom: 20px; 
+}
+</style>

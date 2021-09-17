@@ -61,19 +61,27 @@
               </v-btn>
             </div>
           </v-card>
-          <v-btn
-            v-show="this.$store.state.user.userId !== this.user.id && this.$store.state.user.loggedIn === true"
-            rounded
-            depressed
-            dark
-						block
-            color="blue lighten-1"
-            :ripple="false"
-						@click="flock()"
-            >flock
-          </v-btn>
+					<div v-show="this.$store.state.user.userId !== this.user.id && this.$store.state.user.loggedIn === true">
+						<v-tooltip bottom>
+						<template v-slot:activator="{ on, attrs }">
+						<v-btn
+							rounded
+							depressed
+							dark
+							block
+							color="blue lighten-1"
+							v-bind="attrs"
+							v-on="on"
+							:ripple="false"
+							@click="flock()"
+							>flock
+						</v-btn>
+						</template>
+						<span>あそんでみよう！</span>
+						</v-tooltip>
+					</div>
+					<div v-show="this.$store.state.user.userId === this.user.id">
 					<v-btn
-						v-show="this.$store.state.user.userId === this.user.id"
 						rounded
 						depressed
 						outlined
@@ -90,6 +98,7 @@
 						}"
 						>編集
 					</v-btn>
+					</div>
         </v-col>
       </v-row>
       <v-row>

@@ -1,4 +1,7 @@
 class User < ApplicationRecord 
+	validates :uid, presence: true
+	validates :name, presence: true
+	validates :email, presence: true
   has_many :posts
   has_many :comments
   has_many :user_hangout_funs

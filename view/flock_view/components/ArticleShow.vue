@@ -62,7 +62,7 @@
             </div>
           </v-card>
           <v-btn
-            v-show="this.$store.state.user.loggedIn === true"
+            v-show="this.$store.state.user.userId !== this.user.id && this.$store.state.user.loggedIn === true"
             rounded
             depressed
             dark
@@ -72,25 +72,24 @@
 						@click="flock()"
             >flock
           </v-btn>
-          <div v-show="this.$store.state.user.userId === this.user.id">
-            <v-btn
-              rounded
-              depressed
-              outlined
-              dark
-							block
-              color="blue"
-              class="my-5"
-              :ripple="false"
-              :to="{
-                name: 'articles-edit-id',
-                params: {
-                  id: this.$route.params.id
-                }
-              }"
-              >編集
-            </v-btn>
-          </div>
+					<v-btn
+						v-show="this.$store.state.user.userId === this.user.id"
+						rounded
+						depressed
+						outlined
+						dark
+						block
+						color="blue"
+						class="my-5"
+						:ripple="false"
+						:to="{
+							name: 'articles-edit-id',
+							params: {
+								id: this.$route.params.id
+							}
+						}"
+						>編集
+					</v-btn>
         </v-col>
       </v-row>
       <v-row>

@@ -150,7 +150,7 @@ export default {
 .top-message {
 	font-weight: bolder;
   padding-top: 100px;
-  font-size: 80px;
+  font-size: 60px;
   color: #FFFFFF; 
 }
 </style>

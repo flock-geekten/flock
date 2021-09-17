@@ -74,7 +74,7 @@
 			<v-row>
 				<v-col cols="12">
           <v-btn
-            v-show="this.$store.state.user.loggedIn === true"
+            v-show="this.$store.state.user.userId !== this.user.id && this.$store.state.user.loggedIn === true"
             rounded
             depressed
             dark

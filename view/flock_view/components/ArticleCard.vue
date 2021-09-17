@@ -19,7 +19,13 @@
 						:ripple="false"
 						>
 						<v-row>
-							<v-card-title><v-avatar size="36" color="blue ligthen-1" dark class="mr-2"><span class="white--text text-h5">{{ post.flock }}</span></v-avatar><h2>{{ post.post.title | omittedText28 }}</h2></v-card-title>
+							<v-card-title>
+								<v-avatar size="36" color="blue ligthen-1" dark class="mr-2">
+									<span class="white--text text-h5">{{ post.flock }}</span>
+								</v-avatar>
+								<h2>{{ post.post.title | omittedText28 }}</h2>
+								<v-spacer />
+							</v-card-title>
 						</v-row>
 						<v-row>
 							<v-col cols="3">
@@ -31,12 +37,6 @@
 										src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
 										></v-img>
 								</v-row>
-								<v-row>
-									<v-card-text>
-										<v-icon class="mr-1" color="pink">mdi-heart-outline</v-icon>{{ post.likes_count }}
-										<v-icon class="ml-3 mr-1" color="orange">mdi-comment-outline</v-icon>{{ post.comments_count }}
-									</v-card-text>
-								</v-row>
 							</v-col>
 							<v-col cols="9">
 								<v-row>
@@ -46,15 +46,13 @@
 										<v-chip :to="{name: 'tags-id', params: { id:post.tags[2].id }}">{{ post.tags[2].name | omittedText5 }}</v-chip>
 										<v-chip :to="{name: 'tags-id', params: { id:post.tags[3].id }}">{{ post.tags[3].name | omittedText5 }}</v-chip>
 										<v-chip :to="{name: 'tags-id', params: { id:post.tags[4].id }}">{{ post.tags[4].name | omittedText5 }}</v-chip>
+										<v-icon class="mr-1" color="pink">mdi-heart</v-icon>{{ post.likes_count }}
+										<v-icon class="ml-3 mr-1" color="orange">mdi-comment</v-icon>{{ post.comments_count }}
 										</v-chip-group>
 								</v-row>
 								<v-row>
 									<v-card-text><div style="font-size:20px; line-height:28px">{{ post.summary.content | omittedText200 }}</div></v-card-text>
 								</v-row>
-							</v-col>
-						</v-row>
-						<v-row>
-							<v-col cols="12">
 							</v-col>
 						</v-row>
 					</v-card>

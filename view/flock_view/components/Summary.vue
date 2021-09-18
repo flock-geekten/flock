@@ -65,7 +65,7 @@
           <v-row>
             <v-col>
               <v-text-field
-                v-model="keyPhrases[0]"
+                v-model="keyPhrases0"
                 outlined
                 rounded
                 dense
@@ -74,7 +74,7 @@
             </v-col>
 						<v-col>
               <v-text-field
-                v-model="keyPhrases[1]"
+                v-model="keyPhrases1"
                 outlined
                 rounded
                 dense
@@ -83,7 +83,7 @@
 						</v-col>
 						<v-col>
               <v-text-field
-                v-model="keyPhrases[2]"
+                v-model="keyPhrases2"
                 outlined
                 rounded
                 dense
@@ -92,7 +92,7 @@
 						</v-col>
 						<v-col>
               <v-text-field
-                v-model="keyPhrases[3]"
+                v-model="keyPhrases3"
                 outlined
                 rounded
                 dense
@@ -101,7 +101,7 @@
 						</v-col>
 						<v-col>
               <v-text-field
-                v-model="keyPhrases[4]"
+                v-model="keyPhrases4"
                 outlined
                 rounded
                 dense
@@ -115,35 +115,35 @@
         <v-container>
             <v-row>
               <v-text-field
-                v-model="keyPhrases[0]"
+                v-model="keyPhrases0"
                 outlined
                 rounded
                 dense
                 prefix="# "
                 ></v-text-field>
               <v-text-field
-                v-model="keyPhrases[1]"
+                v-model="keyPhrases1"
                 outlined
                 rounded
                 dense
                 prefix="# "
                 ></v-text-field>
               <v-text-field
-                v-model="keyPhrases[2]"
+                v-model="keyPhrases2"
                 outlined
                 rounded
                 dense
                 prefix="# "
                 ></v-text-field>
               <v-text-field
-                v-model="keyPhrases[3]"
+                v-model="keyPhrases3"
                 outlined
                 rounded
                 dense
                 prefix="# "
                 ></v-text-field>
               <v-text-field
-                v-model="keyPhrases[4]"
+                v-model="keyPhrases4"
                 outlined
                 rounded
                 dense
@@ -242,7 +242,11 @@
 				default: () => ('')
 			},
       summary: String,
-      keyPhrases: Object,
+      keyPhrases0: String,
+      keyPhrases1: String,
+      keyPhrases2: String,
+      keyPhrases3: String,
+      keyPhrases4: String,
     },
     data () {
       return {
@@ -273,9 +277,10 @@
         axios.post(createPostUrl, params).then(
           response => {
             var id = response.data.id
+						var keyPhrases = [this.keyPhrases0, this.keyPhrases1, this.keyPhrases2, this.keyPhrases3, this.keyPhrases4]
             this.createSummary(id, this.summary)
             for (let i=0; i < 5; i++){
-              this.createTag(id, this.keyPhrases[i])
+              this.createTag(id, keyPhrases[i])
             }
             this.$router.push('/articles/confirm')
           }
@@ -318,8 +323,9 @@
         this.$axios.put(updatePostUrl, updateParams).then(
           (response) => {
             var tagList = response.data
+						var keyPhrases = [this.keyPhrases0, this.keyPhrases1, this.keyPhrases2, this.keyPhrases3, this.keyPhrases4]
             for( var i=0; i<tagList.length; i++){
-              this.updateTag(tagList[i], this.keyPhrases[i])
+              this.updateTag(tagList[i], keyPhrases[i])
             } 
             const updateSummaryUrl = '/posts/' + this.id + '/summaries'
             var updateSummaryParams = {

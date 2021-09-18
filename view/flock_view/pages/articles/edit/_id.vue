@@ -11,7 +11,11 @@
          @onSummaryFlag="onSummaryFlag"
          @offSummaryFlag="offSummaryFlag"
          :summary="summary"
-         :keyPhrases="keyPhrases"
+         :keyPhrases0="keyPhrases0"
+         :keyPhrases1="keyPhrases1"
+         :keyPhrases2="keyPhrases2"
+         :keyPhrases3="keyPhrases3"
+         :keyPhrases4="keyPhrases4"
          />
     </div>
     <div v-show="summaryFlag===false">
@@ -129,7 +133,11 @@ export default {
       dialog: false,
       select: [],
       summary: '',
-      keyPhrases: '',
+			keyPhrases0: '', 
+			keyPhrases1: '', 
+			keyPhrases2: '', 
+			keyPhrases3: '', 
+			keyPhrases4: '', 
       deleteDialog: false
     }
   },
@@ -173,7 +181,11 @@ export default {
       }
       axios.post(keyPhraseUrl, keyPhraseParams)
         .then(response => {
-          this.keyPhrases = response.data.keyphrase
+					this.keyPhrases0 = response.data.keyphrase[0]
+					this.keyPhrases1 = response.data.keyphrase[1]
+					this.keyPhrases2 = response.data.keyphrase[2]
+					this.keyPhrases3 = response.data.keyphrase[3]
+					this.keyPhrases4 = response.data.keyphrase[4]
         })
       // 要約のレスポンスが返ってきたら画面遷移する
       this.scrollTop()

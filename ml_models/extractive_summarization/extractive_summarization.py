@@ -21,7 +21,8 @@ def preprocessed_lexrank(text, sum_count):
     sentences = separate_sentences(text)
     sentences_dc = dc.data_cleaning(sentences)
     sentence_words = separate_words(sentences_dc)
-    return get_sum_text(sentences, sentence_words, sum_count)
+    summary_text =  get_sum_text(sentences, sentence_words, sum_count)
+    return summary_text_cleaning(summary_text)
 
 # 文区切り
 def separate_sentences(text):
@@ -96,7 +97,7 @@ def get_sum_text(sentences, sentence_words, sum_count):
             elif (len(targ) > 140) or (num > 15) or (stock.count('\n') == targ.count('\n')):
                 # 要約文が140字を超えた場合 or 要約が15文以上の場合 or 前回と今回で要約文の文数が増えない場合
                 return stock
-            elif len(targ) <= 140 : 
+            elif len(targ) <= 140 :
                 # 要約文が140字以下の場合
                 stock = targ
                 num += 1
@@ -105,3 +106,15 @@ def get_sum_text(sentences, sentence_words, sum_count):
                 return "予期せぬ文章です！要約を手動で編集してください！ごめんなさい！"
             counter += 1
         return "要約を手動で編集してください！ごめんなさい！" 
+
+
+# 要約文をきれいにする
+def summary_text_cleaning(targ):
+    targ = targ.replace('．', '').replace('。', '').replace('.', '')
+    targ = re.sub(r'#*', '', targ)
+    targ = re.sub(r'-*', '', targ)
+    targ = re.sub(r'~*', '', targ)
+    targ = re.sub(r'_*', '', targ)
+    targ = re.sub(r'>*', '', targ)
+    targ = targ.replace('<b>', '').replace('*', '').replace('\n', '。')
+    return targ

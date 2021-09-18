@@ -23,8 +23,10 @@
             {{ r.fun_name }}
           </v-btn>
         </div>
-        <h2 class="py-5">がおすすめされました</h2>
-        <h2 class="py-5">あそんでみてはいかがですか？</h2>
+        <h2 class="py-2">がおすすめされました</h2>
+        <h2 class="py-2">あそんでみてはいかがですか？</h2>
+				<h2 class="py-2">実際にあそんでみましたか？あそびを評価するとそれをもとにさらに学習されます。評価とともに記事を書いてみましょう。</h2>
+      <v-btn to="/review" rounded depressed :ripple="false" dark color="red lighten-1">評価する</v-btn>
       </v-card>
       <br>
       <!-- <p>おすすめされたあそびに満足を評価すると精度が向上します</p>

@@ -112,5 +112,9 @@ def get_sum_text(sentences, sentence_words, sum_count):
 def summary_text_cleaning(targ):
     targ = targ.replace('．', '').replace('。', '').replace('.', '')
     targ = re.sub(r'#*', '', targ)
-    targ = targ.replace('\n', '。')
+    targ = re.sub(r'-*', '', targ)
+    targ = re.sub(r'~*', '', targ)
+    targ = re.sub(r'_*', '', targ)
+    targ = re.sub(r'>*', '', targ)
+    targ = targ.replace('<b>', '').replace('*', '').replace('\n', '。')
     return targ

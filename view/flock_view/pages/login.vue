@@ -99,6 +99,8 @@ export default {
 		googleLogin() {
 			var provider = new firebase.auth.GoogleAuthProvider()
 			firebase.auth().signInWithPopup(provider).then((result) => {
+				this.$store.commit('user/setUserImg', result.user.photoURL)
+				this.$store.commit('user/googleLoggedIn')
 				const url = this.$apiBaseUrl + '/api/v1/current_user'
 				var params = new URLSearchParams();
 				var firstFlag

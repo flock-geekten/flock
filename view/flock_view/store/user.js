@@ -2,10 +2,12 @@ import axios from 'axios'
 
 export const state = () => ({
   loggedIn: false,
+	googleLoggedIn: false,
   uid: '',
   user: '',
   userId: '',
   userName: '',
+	userImg: '',
 })
 
 export const mutations = {
@@ -14,6 +16,12 @@ export const mutations = {
   },
   logout(state) {
     state.loggedIn = false
+  },
+  googleLoggedIn(state) {
+    state.googleLoggedIn = true
+  },
+  googleLoggedOut(state) {
+    state.googleLoggedIn = false
   },
   setUid(state, uid) {
     state.uid = uid
@@ -38,5 +46,11 @@ export const mutations = {
   },
   removeUserName(state) {
     state.userName = ''
+  },
+	setUserImg(state, userImg){
+		state.userImg = userImg
+	},
+  removeUserImg(state) {
+    state.userImg = ''
   },
 }

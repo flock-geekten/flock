@@ -30,7 +30,8 @@
                       v-on="on"
                       :ripple="false"
                       >
-                      <v-icon>mdi-account-circle</v-icon>
+											<v-icon v-show="googleLoggedIn===false">mdi-account-circle</v-icon>
+											<v-avatar v-show="googleLoggedIn===true"><v-img :src="img" /></v-avatar>
                     </v-btn>
                   </template>
                   <v-list>
@@ -71,11 +72,23 @@
 <script>
 import firebase from '~/plugins/firebase'
   export default {
+		data(){
+			return{
+				img: '',
+				googleLoggedIn: false,
+			}
+		},
+		mounted(){
+			this.img = this.$store.state.user.userImg	
+			this.googleLoggedIn = this.$store.state.user.googleLoggedIn
+		},
     methods: {
       logout(){
         firebase.auth().signOut()
           .then(() => {
             this.$store.commit('user/logout')
+            this.$store.commit('user/googleLoggedOut')
+						this.$store.commit('user/removeUserImg')
             this.$store.commit('user/removeUid')
             this.$store.commit('user/removeUser')
             this.$store.commit('user/removeUserId')

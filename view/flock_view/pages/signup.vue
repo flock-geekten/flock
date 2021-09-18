@@ -1,7 +1,7 @@
 <template>
   <div> 
   <div style="text-align:center">
-    <h1 class="py-3">新規登録</h1>
+    <div class="post-title">新規登録</div>
   </div>
   <v-card v-show="detailFlag === true" flat max-width="500" class="p-4 mt-10 mx-auto">
     <v-snackbar
@@ -22,12 +22,12 @@
             />
           </v-col>
           <v-col cols="12">
-            <v-text-field
-              v-model="age"
-              type="number"
-              label="年齢"
-              required
-            />
+						<v-select
+							label="年齢"
+							:items="ageList"
+							v-model="age"
+							required
+						></v-select>	
           </v-col>
           <v-col cols="12">
             <v-select
@@ -119,7 +119,7 @@
       <v-spacer></v-spacer>
       <div class="w-100 px-4" style="text-align:center">
         <v-btn
-          v-show="password === passwordConfirm"
+          v-show="password.length !==0 && passwordConfirm.length !== 0 && password === passwordConfirm"
           rounded
           depressed
           outlined
@@ -132,16 +132,13 @@
           次へ
         </v-btn>
         <v-btn
-          v-show="password !== passwordConfirm"
+          v-show="password.length ===0 || passwordConfirm.length === 0 || password !== passwordConfirm"
           disabled
           rounded
           depressed
           outlined
-          dark
           color="blue"
           class="mx-auto mb-5"
-          :ripple="false"
-          @click="detailFlag = true"
         >
           次へ
         </v-btn>
@@ -177,6 +174,7 @@ export default {
         { text: '女性', value: 2 },
         { text: 'その他', value: 3 }
       ],
+			ageList: [...Array(100).keys()].map(i => ++i),
       detailFlag: false
     }
   },
@@ -230,5 +228,11 @@ export default {
 <style scoped>
 .w-100 {
   width: 100%;
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

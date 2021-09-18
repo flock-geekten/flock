@@ -10,8 +10,8 @@
     
     <!-- 要約 -->
     <div v-show="editSummaryFlag === true">
-      <h3>要約</h3>
-      <v-sheet class="pa-10">
+      <h2>要約</h2>
+      <v-card flat class="pa-5">
       <v-textarea
         v-model="summary"
         height="150"
@@ -29,13 +29,13 @@
       >
         完了
       </v-btn>
-      </v-sheet>
+      </v-card>
     </div>
     <div v-show="editSummaryFlag === false">
-      <h3 class="mb-3">要約</h3>
-      <v-sheet class="pa-10" color="#EEEEEE">
+      <h2 class="mb-3">要約</h2>
+      <v-card flat class="pa-5" color="#EEEEEE">
         <div
-          v-show="summary === ''"
+          v-show="summary.length === 0"
           style="text-align:center"
           >
         <v-progress-circular
@@ -43,29 +43,65 @@
           color="blue lighten-1"
          />
         </div>
-        <div v-show="summary !== ''">
+        <div v-show="summary.length !== 0">
           <p>{{ summary }}</p>
-          <v-btn
-            rounded
-            depressed
-            color="blue lighten-1"
-            dark
-            :ripple="false"
-            @click="editSummaryFlag = true"
-          >
-            編集
-          </v-btn>
         </div>
-      </v-sheet>
+				<v-btn
+					rounded
+					depressed
+					color="blue lighten-1"
+					dark
+					:ripple="false"
+					@click="editSummaryFlag = true"
+				>
+					編集
+				</v-btn>
+      </v-card>
 
       <!-- タグ -->
-      <h3 class="mt-10 mb-3">タグ</h3>
-      <v-sheet color="#EEEEEE">
+      <h2 class="mt-10 mb-3">タグ</h2>
+      <v-card flat color="#EEEEEE" class="py-3" v-show="this.$device.isDesktop">
         <v-container>
           <v-row>
-            <v-col v-for="(keyPhrase, index) in keyPhrases" :key="index">
+            <v-col>
               <v-text-field
-                v-model="keyPhrases[index]"
+                v-model="keyPhrases0"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+            </v-col>
+						<v-col>
+              <v-text-field
+                v-model="keyPhrases1"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+						</v-col>
+						<v-col>
+              <v-text-field
+                v-model="keyPhrases2"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+						</v-col>
+						<v-col>
+              <v-text-field
+                v-model="keyPhrases3"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+						</v-col>
+						<v-col>
+              <v-text-field
+                v-model="keyPhrases4"
                 outlined
                 rounded
                 dense
@@ -74,22 +110,56 @@
             </v-col>
           </v-row>
         </v-container>
-      </v-sheet>
+      </v-card>
+      <v-card flat color="#EEEEEE" v-show="this.$device.isMobileOrTablet" class="pa-3">
+        <v-container>
+            <v-row>
+              <v-text-field
+                v-model="keyPhrases0"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+              <v-text-field
+                v-model="keyPhrases1"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+              <v-text-field
+                v-model="keyPhrases2"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+              <v-text-field
+                v-model="keyPhrases3"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+              <v-text-field
+                v-model="keyPhrases4"
+                outlined
+                rounded
+                dense
+                prefix="# "
+                ></v-text-field>
+          </v-row>
+        </v-container>
+      </v-card>
     </div>
 
-    <!-- タグ編集ダイアログ -->
-    <v-dialog>
-
-    </v-dialog>
-
     <!-- 記事 -->
-    <v-sheet class="pa-15 my-15">
-      <h1>{{ title }}</h1>
-      <br>
-      <v-divider />
-      <br>
-      <p>{{ body }}</p>
-    </v-sheet>
+    <v-card flat class="pa-15 my-5">
+			<div class="post-title">{{ title }}</div>
+			<p v-show="this.$device.isMobileOrTablet" style="font-size:20px; line-height:36px">{{ body }}</p>
+			<div v-show="this.$device.isDesktop" v-html="$md.render(body)"></div>
+    </v-card>
     <div v-show="mode===1" class="text-center">
       <v-btn
         rounded
@@ -103,12 +173,22 @@
         戻る
       </v-btn>
       <v-btn
+				v-show="title.length !== 0 && body.length !== 0 && summary.length !== 0"
         rounded
         depressed
         color="blue lighten-1"
         dark
         :ripple="false"
         @click="createPost()"
+      >
+        投稿
+      </v-btn>
+      <v-btn
+				v-show="title.length === 0 || body.length === 0 || summary.length === 0"
+        rounded
+        depressed
+        color="blue lighten-1"
+				disabled
       >
         投稿
       </v-btn>
@@ -126,11 +206,22 @@
         戻る
       </v-btn>
       <v-btn
+				v-show="title.length !== 0 && body.length !== 0 && summary.length !== 0"
         rounded
         depressed
         color="blue lighten-1"
         dark
         :ripple="false"
+        @click="updatePost()"
+      >
+        完了
+      </v-btn>
+      <v-btn
+				v-show="title.length === 0 || body.length === 0 || summary.length === 0"
+        rounded
+        depressed
+        color="blue lighten-1"
+				disabled
         @click="updatePost()"
       >
         完了
@@ -146,9 +237,16 @@
       mode: Number, // 1: 新規投稿, 2: 投稿編集
       id: Number, // 0: 新規作成時, それ以外: postのid
       title: String,
-      body: String,
+			body: {
+				type: String,
+				default: () => ('')
+			},
       summary: String,
-      keyPhrases: Object,
+      keyPhrases0: String,
+      keyPhrases1: String,
+      keyPhrases2: String,
+      keyPhrases3: String,
+      keyPhrases4: String,
     },
     data () {
       return {
@@ -179,9 +277,12 @@
         axios.post(createPostUrl, params).then(
           response => {
             var id = response.data.id
+						var keyPhrases = [this.keyPhrases0, this.keyPhrases1, this.keyPhrases2, this.keyPhrases3, this.keyPhrases4]
             this.createSummary(id, this.summary)
             for (let i=0; i < 5; i++){
-              this.createTag(id, this.keyPhrases[i])
+							if (keyPhrases[i].length !== 0){
+								this.createTag(id, keyPhrases[i])
+							}
             }
             this.$router.push('/articles/confirm')
           }
@@ -195,6 +296,15 @@
         params.append('post_id', post_id);
         params.append('tag_name', tag_name);
         axios.post(createTagUrl, params)
+      },
+      // タグの編集
+      updateTag: function(id, tag_name){
+        const updateTagUrl = this.$apiBaseUrl + '/post_tags/' + id
+        axios.defaults.headers.common['Content-Type'] = 'application/json';
+        var params = {
+          tag_name: tag_name
+        }
+        axios.put(updateTagUrl, params)
       },
       // 要約文の作成
       createSummary: function(id, summary){
@@ -213,7 +323,14 @@
         }
         this.$axios.defaults.headers.common['Content-Type'] = 'application/json';
         this.$axios.put(updatePostUrl, updateParams).then(
-          response => {
+          (response) => {
+            var tagList = response.data
+						var keyPhrases = [this.keyPhrases0, this.keyPhrases1, this.keyPhrases2, this.keyPhrases3, this.keyPhrases4]
+            for( var i=0; i<tagList.length; i++){
+							if (keyPhrases[i].length !== 0){
+								this.updateTag(tagList[i], keyPhrases[i])
+							}
+            } 
             const updateSummaryUrl = '/posts/' + this.id + '/summaries'
             var updateSummaryParams = {
               content: this.summary,
@@ -231,5 +348,11 @@
 <style>
 p {
   white-space: pre-wrap;
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

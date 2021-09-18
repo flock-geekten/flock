@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   # POST /posts
   def create
     @user_id = User.where(uid: params[:uid]).first.id
-    @post = Post.new(title: params[:title], body: params[:body], user_id: @user_id)
+    @post = Post.new(title: params[:title], body: params[:body], user_id: @user_id, flock: 0)
 
     if @post.save
       render json: @post, status: :created, location: @post
@@ -27,7 +27,11 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   def update
     if @post.update(post_params)
-      render json: @post
+      tag_ids = []
+      for post_tag in @post.post_tags
+        tag_ids << post_tag.id
+      end
+      render json: tag_ids
     else
       render json: @post.errors, status: :unprocessable_entity
     end

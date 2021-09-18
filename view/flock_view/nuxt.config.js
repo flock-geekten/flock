@@ -50,7 +50,8 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    '@nuxtjs/device',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -78,7 +79,7 @@ export default {
     locales: ['ja']
   },
   markdownit: {
-    preset: 'default',
+		preset: 'default',
     injected: true, 
     breaks: true, 
     html: true, 

@@ -29,12 +29,15 @@ class PostTagsController < ApplicationController
 
   # PATCH/PUT /post_tags/1
   def update
-    if @post_tag.update(post_tag_params)
-    p tag_name
-      render json: @post_tag
+    tag_name = params[:tag_name]
+    # タグが無い場合はタグを作成
+    if Tag.where(name: tag_name).empty?
+      tag = Tag.create(name: tag_name)
     else
-      render json: @post_tag.errors, status: :unprocessable_entity
+      tag = Tag.where(name: tag_name).first
     end
+    @post_tag = @post_tag.update(tag_id: tag.id)
+    render json: @post_tag
   end
 
   # DELETE /post_tags/1
@@ -50,6 +53,6 @@ class PostTagsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_tag_params
-      params..permit(:post_id, :tag_id)
+      params.permit(:post_id, :tag_id)
     end
 end

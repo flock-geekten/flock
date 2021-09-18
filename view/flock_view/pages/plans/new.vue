@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="pt-5">計画をたてる</h1>
+    <div class="post-title">計画をたてる</div>
     <v-text-field
       v-model="title"
       label="タイトル"
@@ -17,7 +17,6 @@
         placeholder="日時：2021年9月19日 13:00～
 場所：渋谷
 人数：3人募集
-わいわい楽しくやりたいです！ぜひぜひ参加してください！
                    "
         hint="時間や場所、人数を明確に記載してください。"
         flat
@@ -26,6 +25,7 @@
         />
         <div class="text-center py-5">
           <v-btn
+						v-show="title.length !== 0 && body.length !== 0"
             rounded
             depressed
             color="blue lighten-1"
@@ -33,6 +33,16 @@
             dark
             :ripple="false"
             @click="createPlan()"
+            >
+            投稿
+          </v-btn>
+          <v-btn
+						v-show="title.length === 0 || body.length === 0"
+            rounded
+            depressed
+						disabled
+            color="blue lighten-1"
+            class="pa-6"
             >
             投稿
           </v-btn>
@@ -46,9 +56,20 @@ import axios from 'axios'
     data () {
       return {
         title: '',
-        body: '',
+        body: "日時：2021年9月19日 13:00～\n場所：渋谷\n人数：3人募集"
       }
     },
+		mounted(){
+			var title = localStorage.getItem("title");
+			var link = localStorage.getItem("link");
+			console.log(typeof(title))
+			console.log(typeof(link))
+			if (title !== null && link !== null){
+				this.body = "[" + title + "](" + link + ")を読んであそびたくなりました！\n\n日時：2021年9月19日 13:00～\n場所：渋谷\n人数：3人募集"
+			}
+			localStorage.removeItem("title")
+			localStorage.removeItem("link")
+		},
     methods: {
       createPlan: function(){
       const createPlanUrl = this.$apiBaseUrl + '/plans'
@@ -64,3 +85,12 @@ import axios from 'axios'
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

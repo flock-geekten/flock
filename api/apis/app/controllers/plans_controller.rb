@@ -3,9 +3,13 @@ class PlansController < ApplicationController
 
   # GET /plans
   def index
-    @plans = Plan.all
+    @plans = Plan.where(is_done: 1).order(id: "DESC")
+    plans_list = []
+    for plan in @plans
+      plans_list << { plan: plan, comments_count: plan.plan_comments.count, participations: plan.participations.count }
+    end
     # 終了していないものを取得
-    render json: @plans.where(is_done: 1)
+    render json: plans_list
   end
 
   # GET /plans/1

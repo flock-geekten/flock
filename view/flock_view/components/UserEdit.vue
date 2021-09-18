@@ -1,22 +1,25 @@
 <template>
   <div>
-    <h1>プロフィールを編集する</h1>
+    <div class="post-title">プロフィールを編集する</div>
       <v-row>
-        <v-col cols="12">
+        <v-col cols="4">
           <v-text-field
+						outlined
             v-model="name"
             label="名前"
           />
         </v-col>
-        <v-col cols="12">
-          <v-text-field
-            v-model="age"
-            type="number"
-            label="年齢"
-          />
+        <v-col cols="4">
+				<v-select
+					outlined
+					label="年齢"
+          :items="ageList"
+					v-model="age"
+        ></v-select>	
         </v-col>
-        <v-col cols="12">
+        <v-col cols="4">
           <v-select
+						outlined
             v-model="sex"
             :items="sexList"
             item-text="text"
@@ -27,6 +30,7 @@
         <v-col cols="12">
           <v-textarea
             v-model="profile"
+						outlined
             label="プロフィール"
           />
         </v-col>
@@ -73,6 +77,7 @@ export default {
         { text: '男', value: 1 },
         { text: '女', value: 2 }
       ],
+			ageList: [...Array(100).keys()].map(i => ++i)
     }
   },
   methods: {
@@ -95,5 +100,11 @@ export default {
 <style scoped>
 .w-100 {
   width: 100%;
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

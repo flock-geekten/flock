@@ -21,22 +21,8 @@ def preprocessed_lexrank(text, sum_count):
     sentences = separate_sentences(text)
     sentences_dc = dc.data_cleaning(sentences)
     sentence_words = separate_words(sentences_dc)
-    if sum_count != 0:
-        return sum_text(sentences, sentence_words, sum_count=sum_count)
-    if sum_count == 0:
-        num, stock = 2, 0
-        while 1:
-            targ = sum_text(sentences, sentence_words, sum_count=num)
-            if (len(targ) > 140) and (num == 2) :
-                return sum_text(sentences, sentence_words, sum_count=1)
-            elif len(targ) < 140 : 
-                stock = targ
-                num += 1
-            elif len(targ) > 140:
-                return stock
-            else:
-                return "unanticipated process"
-
+    summary_text =  get_sum_text(sentences, sentence_words, sum_count)
+    return summary_text_cleaning(summary_text)
 
 # 文区切り
 def separate_sentences(text):
@@ -94,3 +80,37 @@ def sum_text(sentences_org, corpus, sum_count):
         b.append(sentences_org[sentences.index("{}".format(sentence.__str__()))])
         b.append("\n")
     return "".join(b)
+
+
+# 文字数制限付きの文章要約
+def get_sum_text(sentences, sentence_words, sum_count):
+    if sum_count != 0:
+        return sum_text(sentences, sentence_words, sum_count=sum_count)
+    if sum_count == 0:
+        counter = 0
+        num, stock = 1, ''
+        while counter < 20:
+            targ = sum_text(sentences, sentence_words, sum_count=num)
+            if (len(targ) >= 140) and (num == 1) : 
+                # 要約文が1文の時点で140字以上250字未満の場合
+                return targ if (len(targ) < 250) else "要約文(1文)が長すぎました！手動で編集してください！ごめんなさい！"
+            elif (len(targ) > 140) or (num > 15) or (stock.count('\n') == targ.count('\n')):
+                # 要約文が140字を超えた場合 or 要約が15文以上の場合 or 前回と今回で要約文の文数が増えない場合
+                return stock
+            elif len(targ) <= 140 :
+                # 要約文が140字以下の場合
+                stock = targ
+                num += 1
+            else: 
+                # 予期せぬ事態に備えて
+                return "予期せぬ文章です！要約を手動で編集してください！ごめんなさい！"
+            counter += 1
+        return "要約を手動で編集してください！ごめんなさい！" 
+
+
+# 要約文をきれいにする
+def summary_text_cleaning(targ):
+    targ = targ.replace('．', '').replace('。', '').replace('.', '')
+    targ = re.sub(r'#*', '', targ)
+    targ = targ.replace('\n', '。')
+    return targ

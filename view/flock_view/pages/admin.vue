@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="py-5">管理者ページ</h1>
+    <div class="post-title">管理者ページ</div>
     <div v-show="flag===false">
       <v-text-field
         v-model="password"
@@ -28,6 +28,11 @@
             <tr>
               <th class="text-center">ID</th>
               <th class="text-center">名前</th>
+              <th class="text-center">ルールの有無</th>
+              <th class="text-center">所要時間 1時間以下</th>
+              <th class="text-center">所要時間 1~2時間</th>
+              <th class="text-center">所要時間 2~3時間</th>
+              <th class="text-center">所要時間 3時間~</th>
               <th class="text-center">手軽さ</th>
               <th class="text-center">少人数</th>
               <th class="text-center">大人数</th>
@@ -49,15 +54,18 @@
               <th class="text-center">0~2000円</th>
               <th class="text-center">2000~4000円</th>
               <th class="text-center">4000~6000円</th>
-              <th class="text-center">6000~8000円</th>
-              <th class="text-center">8000~10000円</th>
-              <th class="text-center">10000円~</th>
+              <th class="text-center">6000円~</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="hangout in hangouts" :key=hangout.id>
               <td>{{ hangout.id }}</td>
               <td>{{ hangout.name }}</td>
+              <td>{{ hangout.knowledge_rule }}</td>
+              <td>{{ hangout.time_to1 }}</td>
+              <td>{{ hangout.time_from1_to2 }}</td>
+              <td>{{ hangout.time_from2_to3 }}</td>
+              <td>{{ hangout.time_from3 }}</td>
               <td>{{ hangout.easy_week }}</td>
               <td>{{ hangout.small_group }}</td>
               <td>{{ hangout.large_group }}</td>
@@ -79,9 +87,7 @@
               <td>{{ hangout.to_2000yen }}</td>
               <td>{{ hangout.to_4000yen }}</td>
               <td>{{ hangout.to_6000yen }}</td>
-              <td>{{ hangout.to_8000yen }}</td>
-              <td>{{ hangout.to_10000yen }}</td>
-              <td>{{ hangout.over_10000yen }}</td>
+              <td>{{ hangout.over_6000yen }}</td>
             </tr>
             </tbody>
           </template>
@@ -94,6 +100,31 @@
           label="あそび名"
           outlined
         ></v-text-field>
+        <v-switch
+          v-model="knowledge_rule"
+          label="ルールの有無"
+          inset
+        ></v-switch>
+        <v-switch
+          v-model="time_to1"
+          label="所要時間 1時間以下"
+          inset
+        ></v-switch>
+        <v-switch
+          v-model="time_from1_to2"
+          label="所要時間 1~2時間"
+          inset
+        ></v-switch>
+        <v-switch
+          v-model="time_from2_to3"
+          label="所要時間 2~3時間"
+          inset
+        ></v-switch>
+        <v-switch
+          v-model="time_from3"
+          label="所要時間 3時間~"
+          inset
+        ></v-switch>
         <v-switch
           v-model="easy_week"
           label="手軽さ(週1以上可)"
@@ -200,13 +231,8 @@
           inset
         ></v-switch>
         <v-switch
-          v-model="to_8000yen"
-          label="6000円~8000円"
-          inset
-        ></v-switch>
-        <v-switch
-          v-model="over_10000yen"
-          label="10000円~"
+          v-model="over_6000yen"
+          label="6000円~"
           inset
         ></v-switch>
         <v-btn @click="createHangoutFlag = false" depressed >やっぱやめとく</v-btn>
@@ -229,6 +255,11 @@ export default {
       flag: false,
       createHangoutFlag: false,
       name: '',
+			knowledge_rule: false,
+			time_to1: false,
+			time_from1_to2: false,
+			time_from2_to3: false,
+			time_from3: false,
       easy_week: false,
       small_group: false,
       large_group: false,
@@ -250,9 +281,7 @@ export default {
       to_2000yen: false,
       to_4000yen: false,
       to_6000yen: false,
-      to_8000yen: false,
-      to_10000yen: false,
-      over_10000yen: false,
+      over_6000yen: false,
       recommendsAll: '',
       addMessage: '',
     }
@@ -328,6 +357,11 @@ export default {
       const createHangoutUrl = this.$apiBaseUrl + '/hangouts'
       var params = new URLSearchParams();
       params.append('name', this.name);
+      params.append('knowledge_rule', this.knowledge_rule | this.to01);
+      params.append('time_to1', this.time_to1 | this.to01);
+      params.append('time_from1_to2', this.time_from1_to2 | this.to01);
+      params.append('time_from2_to3', this.time_from2_to3 | this.to01);
+      params.append('time_from3', this.time_from3 | this.to01);
       params.append('easy_week', this.easy_week | this.to01);
       params.append('small_group', this.small_group | this.to01);
       params.append('large_group', this.large_group | this.to01);
@@ -349,9 +383,7 @@ export default {
       params.append('to_2000yen', this.to_2000yen | this.to01);
       params.append('to_4000yen', this.to_4000yen | this.to01);
       params.append('to_6000yen', this.to_6000yen | this.to01);
-      params.append('to_8000yen', this.to_8000yen | this.to01);
-      params.append('to_10000yen', this.to_10000yen | this.to01);
-      params.append('over_10000yen', this.over_10000yen | this.to01);
+      params.append('over_6000yen', this.over_6000yen | this.to01);
       axios.post(createHangoutUrl, params).then((res) => {
         this.hangouts = res.data
         this.addMessage = this.name + "を追加したったで，意外としんどいねんから頼むわー",
@@ -429,5 +461,11 @@ export default {
 .v-data-table > .v-data-table__wrapper > table {
   width: 2500px;
   text-align: center
+}
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
 }
 </style>

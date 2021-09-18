@@ -41,6 +41,11 @@ class HangoutsController < ApplicationController
     def hangout_params
       params.permit(
         :name, 
+        :knowledge_rule,
+        :time_to1,
+        :time_from1_to2,
+        :time_from2_to3,
+        :time_from3,
         :easy_week,
         :small_group,
         :large_group,
@@ -62,9 +67,7 @@ class HangoutsController < ApplicationController
         :to_2000yen,
         :to_4000yen,
         :to_6000yen,
-        :to_8000yen,
-        :to_10000yen,
-        :over_10000yen,
+        :over_6000yen
       )
     end
 end

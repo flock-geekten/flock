@@ -11,31 +11,33 @@
          @onSummaryFlag="onSummaryFlag"
          @offSummaryFlag="offSummaryFlag"
          :summary="summary"
-         :keyPhrases="keyPhrases"
+         :keyPhrases0="keyPhrases0"
+         :keyPhrases1="keyPhrases1"
+         :keyPhrases2="keyPhrases2"
+         :keyPhrases3="keyPhrases3"
+         :keyPhrases4="keyPhrases4"
          />
     </div>
     <div v-show="summaryFlag===false">
-      <v-sheet class="pa-15">
-        <v-text-field
-          v-model="title"
-          label="タイトル"
+      <v-text-field
+        v-model="title"
+        label="タイトル"
+        flat
+        solo
+        clearable
+        class="mt-5"
+        />
+        <v-textarea
+          v-model="body"
+          height="1200"
+          label="本文"
+          value="自動生成された文章を入れる"
           flat
           solo
-          clearable
-          class="mt-15"
+          counter
+          class="mt-5"
           />
-          <v-textarea
-            v-model="body"
-            height="1200"
-            label="本文"
-            value="自動生成された文章を入れる"
-            flat
-            solo
-            counter
-            class="mt-5"
-            />
-      </v-sheet>
-      <div class="text-center py-5">
+          <div class="text-center py-5">
         <v-btn
           rounded
           depressed
@@ -47,11 +49,22 @@
           :to="{
             name: 'articles-id',
             params: {
-              id: this.id
+              id: id
             }
           }"
           >
           戻る
+        </v-btn>
+        <v-btn
+          rounded
+          depressed
+          color="red"
+          class="pa-6"
+          dark
+          :ripple="false"
+          @click="deleteDialog = true"
+          >
+          削除
         </v-btn>
         <v-btn
           rounded
@@ -66,6 +79,41 @@
         </v-btn>
       </div>
     </div>
+    <v-dialog
+      v-model="deleteDialog"
+      width="500"
+      >
+      <v-card>
+        <v-card-text>
+          <div class="pt-10">
+            <h2><font font-color="#ffffff">本当に削除してよろしいですか？</font></h2>
+          </div>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            color="blue"
+            rounded
+            depressed
+            dark
+            :ripple="false"
+            @click="deleteDialog = false"
+            >
+            いいえ
+          </v-btn>
+          <v-btn
+            color="red"
+            rounded
+            depressed
+            dark
+            :ripple="false"
+            @click="destroyPost()"
+            >
+            はい
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -85,7 +133,12 @@ export default {
       dialog: false,
       select: [],
       summary: '',
-      keyPhrases: '',
+			keyPhrases0: '', 
+			keyPhrases1: '', 
+			keyPhrases2: '', 
+			keyPhrases3: '', 
+			keyPhrases4: '', 
+      deleteDialog: false
     }
   },
   mounted() {
@@ -128,7 +181,11 @@ export default {
       }
       axios.post(keyPhraseUrl, keyPhraseParams)
         .then(response => {
-          this.keyPhrases = response.data.keyphrase
+					this.keyPhrases0 = response.data.keyphrase[0]
+					this.keyPhrases1 = response.data.keyphrase[1]
+					this.keyPhrases2 = response.data.keyphrase[2]
+					this.keyPhrases3 = response.data.keyphrase[3]
+					this.keyPhrases4 = response.data.keyphrase[4]
         })
       // 要約のレスポンスが返ってきたら画面遷移する
       this.scrollTop()
@@ -143,6 +200,13 @@ export default {
         top: 0,
         behavior: "auto"
       })
+    },
+    // 削除
+    destroyPost: function(){
+      const destroyUrl = this.$apiBaseUrl + '/posts/' + this.$route.params.id
+      axios.delete(destroyUrl).then(
+        this.$router.push("/")
+      )
     }
   }
 }

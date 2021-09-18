@@ -52,25 +52,25 @@ def _calc_gpr(fun_features, x_train, y_train):
     dim = len(x_train.columns)
     #kernel = GPy.kern.Matern32(dim) + GPy.kern.Linear(dim) + GPy.kern.Bias(dim) + GPy.kern.White(dim)
     #kernel = GPy.kern.RBF(dim) + GPy.kern.Linear(dim) + GPy.kern.Bias(dim) + GPy.kern.White(dim)
-    kernel = GPy.kern.RBF(dim) + GPy.kern.Bias(dim) + GPy.kern.White(dim)
+    kernel = GPy.kern.Matern32(dim) + GPy.kern.Bias(dim) + GPy.kern.White(dim)
     # モデルの学習
     model = GPy.models.GPRegression(x_train, y_train, kernel)
     model.optimize()
     # 予測結果
-    y_qua_pred = model.predict_quantiles(fun_features.values, quantiles=(5, 50, 95))
+    y_qua_pred = model.predict_quantiles(fun_features.values, quantiles=(2.5, 50, 97.5))
     y_pred = pd.DataFrame(np.array(y_qua_pred).reshape(3,len(y_qua_pred[0])).T)
     y_pred.index = fun_features.index
-    y_pred.columns = ["5%","expected value","95%"]
+    y_pred.columns = ["2.5%","expected value","97.5%"]
     return y_pred
 
 
 def _calc_eval_vals(y_pred):
     expected_value = y_pred["expected value"]
     expected_value_mm = _calc_minmaxscaler(expected_value)
-    variation = y_pred["95%"] - y_pred["5%"]
+    variation = y_pred["97.5%"] - y_pred["2.5%"]
     variation_mm = _calc_minmaxscaler(variation)
     
-    A = 0.4
+    A = 0.5
     B = 1 - A
     # 期待値が高く,ばらつきが大きい(今までに経験してない)遊びをレコメンドしたい気持ちが込められてる
     eval_vals = A * expected_value_mm + B * variation_mm

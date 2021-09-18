@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="py-5">{{ this.$store.state.user.userName }} さんにおすすめのあそび</h1>
+    <div class="post-title">{{ this.$store.state.user.userName }} さんにおすすめのあそび</div>
     <div v-show="flag === false">
       <div style="text-align:center">
         <v-progress-circular
@@ -23,15 +23,18 @@
             {{ r.fun_name }}
           </v-btn>
         </div>
-        <h3 class="py-5">がおすすめされました</h3>
-        <h3 class="py-5">あそんでみてはいかがですか？</h3>
+        <!-- <h2 class="py-2">がおすすめされました</h2>
+        <h2 class="py-2">あそんでみてはいかがですか？</h2> -->
+				<h2 class="py-5">実際にあそんでみましたか？あそびを評価するとそれをもとにさらに学習されます。<br>評価とともに記事を書いてみましょう。</h2>
+      <v-btn to="/review" rounded depressed :ripple="false" dark color="red lighten-1">評価する</v-btn>
       </v-card>
       <br>
-      <p>おすすめされたあそびに満足を評価すると精度が向上します</p>
-      <v-btn @click="evaluationFlag = true" rounded depressed :ripple="false" dark color="red lighten-1">評価</v-btn>
+      <v-btn to="/" rounded depressed :ripple="false" dark color="blue lighten-1">TOPに戻る</v-btn>
+      <!-- <p>おすすめされたあそびに満足を評価すると精度が向上します</p>
+      <v-btn @click="evaluationFlag = true" rounded depressed :ripple="false" dark color="red lighten-1">評価</v-btn> -->
     </div>
     <div v-show="flag === true && evaluationFlag === true">
-      <v-sheet class="pa-5">
+      <v-card flat class="pa-5">
         <v-container>
           <v-row v-for="(r, index) in recommend" :key="r.hangout_id">
             <v-col cols="3">
@@ -49,7 +52,7 @@
             </v-col>
           </v-row>
         </v-container>
-      </v-sheet>
+      </v-card>
       <br>
       <div style="text-align:center">
       <v-btn rounded depressed dark color="blue lighten-1" :ripple="false" @click="submit()">再評価</v-btn>
@@ -127,3 +130,12 @@ export default {
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

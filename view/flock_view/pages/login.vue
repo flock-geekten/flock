@@ -1,6 +1,6 @@
 <template>
   <div>
-  <v-card flat max-width="500" class="mt-10 mx-auto">
+  <v-card flat color="white" max-width="500" class="mt-10 mx-auto">
     <v-snackbar
       v-model="snackbar"
       color="error"
@@ -38,16 +38,21 @@
           depressed
           dark
           color="blue"
-          class="mx-auto mb-5"
+          class="mx-auto mb-1"
           @click="login()"
         >
           ログイン
         </v-btn>
       </div>
     </v-card-actions>
+		<div style="text-align:center">
+			<v-btn class="mb-5" @click="googleLogin()" width="180px" height="100%" color="white" depressed dark :ripple="false">
+				<v-img class="text-center" width="180px" height="100%" src="https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/btn_google_signin_light_normal_web%402x.png?alt=media&token=fe67956a-0718-44ff-b6c4-5a91dd4d0517"></v-img>
+			</v-btn>
+		</div>
     <div class="mx-auto text-center pb-5">
       <nuxt-link to="/signup">
-        新規登録はこちら
+        メールアドレスで新規登録はこちら
       </nuxt-link>
     </div>
   </v-card>
@@ -66,6 +71,7 @@ export default {
       isPasswordShow: false,
       message: '',
       snackbar: false,
+			result: '',
     }
   },
   methods: {
@@ -90,6 +96,34 @@ export default {
           this.snackbar = true
         });
     },
+		googleLogin() {
+			var provider = new firebase.auth.GoogleAuthProvider()
+			firebase.auth().signInWithPopup(provider).then((result) => {
+				this.$store.commit('user/setUserImg', result.user.photoURL)
+				this.$store.commit('user/googleLoggedIn')
+				const url = this.$apiBaseUrl + '/api/v1/current_user'
+				var params = new URLSearchParams();
+				var firstFlag
+				params.append('email', result.user.email);
+				params.append('name', result.user.displayName);
+				params.append('uid', result.user.uid);
+				axios.post(url, params).then((response) => {
+					this.$store.commit('user/setUser', response.data.user)
+					this.$store.commit('user/setUid', response.data.user.uid)
+					this.$store.commit('user/setUserId', response.data.user.id)
+					this.$store.commit('user/setUserName', response.data.user.name)
+					firstFlag = response.data.first_flag
+					this.$store.commit('user/login')
+					if (firstFlag == 1){
+						this.$router.push('/hangouts/first')
+					}else{
+						this.$router.push('/')
+					}
+				})
+			}).catch(function (error) {
+				console.log(error)
+			})
+		},
   }
 }
 </script>

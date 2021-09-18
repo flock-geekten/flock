@@ -3,37 +3,58 @@
     <v-main>
       <div v-show="this.$route.path === '/'" class="top">
         <div style="text-align:center">
-          <h1 class="top-message">Fun! Fun!! Fun!!!</h1>
+          <div class="top-message" v-show="this.$device.isDesktop">興味の0→1、そして1→∞</div>
+          <div class="top-message" v-show="this.$device.isMobileOrTablet">興味の0→1<br>そして1→∞</div>
           <div class="pa-1">
+            <v-btn-toggle rounded>
             <v-btn
-              v-show="this.$store.state.user.loggedIn"
+              v-show="this.$store.state.user.loggedIn && this.$device.isDesktop"
               to="/hangouts/recommend"
               color="white"
               depressed
               rounded
-              class="pa-6 mr-3"
+              class="pa-6"
               :ripple="false"
               >
-              あそびを探す
+              <b>あそびを探す</b>
             </v-btn>
             <v-btn
-              v-show="this.$store.state.user.loggedIn"
-              to="/friends"
+              v-show="this.$store.state.user.loggedIn && this.$device.isDesktop"
+              to="/plans/new"
               color="white"
               depressed
               rounded
-              class="pa-6 ml-3"
+              class="pa-6"
               :ripple="false"
               >
-              ともだちを探す
+              <b>計画を立てる</b>
             </v-btn>
+            <v-btn
+              v-show="this.$store.state.user.loggedIn && this.$device.isDesktop"
+              to="/articles/new"
+              color="white"
+              depressed
+              rounded
+              class="pa-6"
+              :ripple="false"
+              >
+              <b>記事を書く</b>
+            </v-btn>
+            </v-btn-toggle>
           </div>
         </div>
       </div>
       <v-container>
         <Header />
-          <v-layout align-center justify-center>
+          <v-layout v-show="this.$device.isDesktopOrTablet" align-center justify-center>
             <div style="width:1000px">
+              <transition mode='in-out'>
+              <Nuxt />
+              </transition>
+            </div>
+          </v-layout>
+          <v-layout v-show="this.$device.isMobile" align-center justify-center>
+            <div style="width:100%">
               <transition mode='in-out'>
               <Nuxt />
               </transition>
@@ -121,13 +142,15 @@ export default {
   transition: all 5s 0s ease;
 }
 .top {
-  /* background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=180a805e-7f24-428f-addd-de7fefcc1506'); */
-  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/IMG_20200607_164538.jpg?alt=media&token=aa8532be-d6e7-4004-ae17-ac6ea1ff5424');
-  height: 400px
+  background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/sky.jpg?alt=media&token=180a805e-7f24-428f-addd-de7fefcc1506');
+  /* background-image:url('https://firebasestorage.googleapis.com/v0/b/flock-geekten.appspot.com/o/IMG_20200607_164538.jpg?alt=media&token=aa8532be-d6e7-4004-ae17-ac6ea1ff5424'); */
+  height: 400px;
+  width: 100%
 }
 .top-message {
+	font-weight: bolder;
   padding-top: 100px;
-  font-size: 80px;
+  font-size: 60px;
   color: #FFFFFF; 
 }
 </style>

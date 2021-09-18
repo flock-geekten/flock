@@ -11,32 +11,43 @@
          @onSummaryFlag="onSummaryFlag"
          @offSummaryFlag="offSummaryFlag"
          :summary="summary"
-         :keyPhrases="keyPhrases"
+         :keyPhrases0="keyPhrases0"
+         :keyPhrases1="keyPhrases1"
+         :keyPhrases2="keyPhrases2"
+         :keyPhrases3="keyPhrases3"
+         :keyPhrases4="keyPhrases4"
          />
     </div>
     <div v-show="summaryFlag===false">
-      <v-sheet class="pa-15">
-        <v-text-field
-          v-model="title"
-          label="タイトル"
-          flat
-          solo
-          clearable
-          class="mt-15"
-          />
-        <v-textarea
-          v-model="body"
-          height="1200"
-          label="本文"
-          value="自動生成された文章を入れる"
-          flat
-          solo
-          counter
-          class="mt-5"
-          />
-      </v-sheet>
+      <v-text-field
+        v-model="title"
+        label="タイトル"
+        flat
+        solo
+        class="my-5"
+        />
+      <v-textarea
+        v-model="body"
+        height="1200"
+        label="本文"
+				placeholder="# タイトル
+
+## サブタイトル
+
+- 箇条書き
+- 箇条書き
+
+1. 数字
+2. 数字
+
+				"
+        flat
+        solo
+        counter
+        />
       <div class="text-center py-5">
         <v-btn
+					v-show="title.length !== 0 && body.length !== 0"
           rounded
           depressed
           color="blue lighten-1"
@@ -44,6 +55,16 @@
           dark
           :ripple="false"
           @click="onSummaryFlag()"
+          >
+          投稿
+        </v-btn>
+        <v-btn
+					v-show="title.length === 0 || body.length === 0"
+          rounded
+          depressed
+					disabled
+          color="blue lighten-1"
+          class="pa-6"
           >
           投稿
         </v-btn>
@@ -67,7 +88,11 @@ import Summary from '../../components/Summary.vue'
         dialog: false,
         select: [],
         summary: '',
-        keyPhrases: '',
+        keyPhrases0: '', 
+        keyPhrases1: '', 
+        keyPhrases2: '', 
+        keyPhrases3: '', 
+        keyPhrases4: '', 
       }
     },
     methods: {
@@ -96,7 +121,11 @@ import Summary from '../../components/Summary.vue'
         }
         axios.post(keyPhraseUrl, keyPhraseParams)
           .then(response => {
-            this.keyPhrases = response.data.keyphrase
+            this.keyPhrases0 = response.data.keyphrase[0]
+            this.keyPhrases1 = response.data.keyphrase[1]
+            this.keyPhrases2 = response.data.keyphrase[2]
+            this.keyPhrases3 = response.data.keyphrase[3]
+            this.keyPhrases4 = response.data.keyphrase[4]
         })
         // 要約のレスポンスが返ってきたら画面遷移する
        this.scrollTop()

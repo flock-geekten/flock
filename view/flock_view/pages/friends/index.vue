@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h1 class="py-5">友達レコメンド</h1>
-    <h3>相性のいい友達</h3>
+    <div class="post-title">友達レコメンド</div>
+    <h2>相性のいい友達</h2>
     <div v-show="users.length === 0" style="text-align:center">
       <v-progress-circular
         indeterminate
@@ -57,9 +57,9 @@
               readonly
               ></v-rating>
           </v-card-text>
-          <v-btn to="/plans/new" color="blue lighten-1" dark depressed rounded :ripple="false">一緒に遊ぶ</v-btn>
         </v-card>
       </div>
+      <v-btn to="/plans/new" color="blue lighten-1" dark depressed rounded :ripple="false">計画を立てる</v-btn>
     </div>
   </div>
 </template>
@@ -80,8 +80,17 @@ export default {
       }
     })
       .then(response => {
-        this.users = response.data.slice(0, 10)
+        this.users = response.data.slice(0, 5)
       })
   }
 }
 </script>
+
+<style>
+.post-title{
+	font-weight: bolder;
+	font-size: 40px;
+  margin-top: 50px;	
+  margin-bottom: 50px;	
+}
+</style>

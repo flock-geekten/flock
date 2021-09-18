@@ -157,7 +157,8 @@
     <!-- 記事 -->
     <v-card flat class="pa-15 my-5">
 			<div class="post-title">{{ title }}</div>
-			<div v-html="$md.render(body)"></div>
+			<p v-show="this.$device.isMobileOrTablet" style="font-size:20px; line-height:36px">{{ body }}</p>
+			<div v-show="this.$device.isDesktop" v-html="$md.render(body)"></div>
     </v-card>
     <div v-show="mode===1" class="text-center">
       <v-btn

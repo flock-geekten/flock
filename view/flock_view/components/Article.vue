@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- <p style="font-size:20px; line-height:36px">{{ post.body }}</p> -->
-		<div v-html="$md.render(body)"></div>
+    <p v-show="this.$device.isMobileOrTablet" style="font-size:20px; line-height:36px">{{ post.body }}</p>
+		<div v-show="this.$device.isDesktop" v-html="$md.render(body)"></div>
   </div>
 </template>
 

@@ -41,11 +41,7 @@
 							<v-col cols="9">
 								<v-row>
 									<v-chip-group class="ml-3">
-										<v-chip :to="{name: 'tags-id', params: { id:post.tags[0].id }}">{{ post.tags[0].name | omittedText5 }}</v-chip>
-										<v-chip :to="{name: 'tags-id', params: { id:post.tags[1].id }}">{{ post.tags[1].name | omittedText5 }}</v-chip>
-										<v-chip :to="{name: 'tags-id', params: { id:post.tags[2].id }}">{{ post.tags[2].name | omittedText5 }}</v-chip>
-										<v-chip :to="{name: 'tags-id', params: { id:post.tags[3].id }}">{{ post.tags[3].name | omittedText5 }}</v-chip>
-										<v-chip :to="{name: 'tags-id', params: { id:post.tags[4].id }}">{{ post.tags[4].name | omittedText5 }}</v-chip>
+										<v-chip v-for="(tag, index) in post.tags" :key="index" :to="{name: 'tags-id', params: { id: tag.id }}">{{ tag.name | omittedText5 }}</v-chip>
 										<v-icon class="mr-1" color="pink">mdi-heart</v-icon>{{ post.likes_count }}
 										<v-icon class="ml-3 mr-1" color="orange">mdi-comment</v-icon>{{ post.comments_count }}
 										</v-chip-group>

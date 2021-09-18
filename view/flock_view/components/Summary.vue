@@ -280,7 +280,9 @@
 						var keyPhrases = [this.keyPhrases0, this.keyPhrases1, this.keyPhrases2, this.keyPhrases3, this.keyPhrases4]
             this.createSummary(id, this.summary)
             for (let i=0; i < 5; i++){
-              this.createTag(id, keyPhrases[i])
+							if (keyPhrases[i].length !== 0){
+								this.createTag(id, keyPhrases[i])
+							}
             }
             this.$router.push('/articles/confirm')
           }
@@ -325,7 +327,9 @@
             var tagList = response.data
 						var keyPhrases = [this.keyPhrases0, this.keyPhrases1, this.keyPhrases2, this.keyPhrases3, this.keyPhrases4]
             for( var i=0; i<tagList.length; i++){
-              this.updateTag(tagList[i], keyPhrases[i])
+							if (keyPhrases[i].length !== 0){
+								this.updateTag(tagList[i], keyPhrases[i])
+							}
             } 
             const updateSummaryUrl = '/posts/' + this.id + '/summaries'
             var updateSummaryParams = {

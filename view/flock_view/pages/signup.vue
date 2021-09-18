@@ -22,12 +22,12 @@
             />
           </v-col>
           <v-col cols="12">
-            <v-text-field
-              v-model="age"
-              type="number"
-              label="年齢"
-              required
-            />
+						<v-select
+							label="年齢"
+							:items="ageList"
+							v-model="age"
+							required
+						></v-select>	
           </v-col>
           <v-col cols="12">
             <v-select
@@ -119,7 +119,7 @@
       <v-spacer></v-spacer>
       <div class="w-100 px-4" style="text-align:center">
         <v-btn
-          v-show="password === passwordConfirm"
+          v-show="password.length !==0 && passwordConfirm.length !== 0 && password === passwordConfirm"
           rounded
           depressed
           outlined
@@ -132,16 +132,13 @@
           次へ
         </v-btn>
         <v-btn
-          v-show="password !== passwordConfirm"
+          v-show="password.length ===0 || passwordConfirm.length === 0 || password !== passwordConfirm"
           disabled
           rounded
           depressed
           outlined
-          dark
           color="blue"
           class="mx-auto mb-5"
-          :ripple="false"
-          @click="detailFlag = true"
         >
           次へ
         </v-btn>
@@ -177,6 +174,7 @@ export default {
         { text: '女性', value: 2 },
         { text: 'その他', value: 3 }
       ],
+			ageList: [...Array(100).keys()].map(i => ++i),
       detailFlag: false
     }
   },

@@ -58,7 +58,10 @@ import axios from 'axios'
         }
       })
         .then(response => {
-          this.hangouts = [response.data[53], response.data[14], response.data[19], response.data[11]]
+          this.hangouts = [response.data[7], response.data[9], response.data[57], response.data[54], response.data[53]]
+					for (var i=0; i < this.hangouts.length; i++){
+						this.createFun(this.hangouts[i].id, this.funScore[i])
+					}
         })
     },
     methods: {
@@ -70,9 +73,18 @@ import axios from 'axios'
         params.append('fun_score', score);
         axios.post(createFunUrl, params)
       },
+      updateFun: function(hangoutId, score){
+        const updateFunUrl = this.$apiBaseUrl + '/api/v1/score'
+				var params = {
+					user_id: this.$store.state.user.userId,
+					hangout_id: hangoutId,
+					fun_score: score 
+				}
+        axios.put(updateFunUrl, params)
+      },
       submit: function(){
         for (var i=0; i < this.hangouts.length; i++){
-          this.createFun(this.hangouts[i].id, this.funScore[i])
+          this.updateFun(this.hangouts[i].id, this.funScore[i])
         }
         this.$router.push("/hangouts/ready")
       }
